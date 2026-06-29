@@ -10,7 +10,7 @@
 <link rel="icon" type="image/png" href="favicon.png" />
 <meta property="og:title" content="Ziad Ahmed Rabie — Computer Engineering & AI" />
 <meta property="og:description" content="Computer Engineering student at Egypt University of Informatics building end-to-end AI, data science, and embedded systems." />
-<meta property="og:image" content="https://Ziad-7.github.io/og-image.jpg" />
+<meta property="og:image" content="https://Ziad-7.github.io/og-image.png" />
 <meta property="og:url" content="https://Ziad-7.github.io" />
 <meta name="twitter:card" content="summary_large_image" />
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -19,15 +19,15 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"/>
 <style>
 :root{
-  --bg:#1a1612;
-  --bg2:#201c17;
-  --card:#252018;
-  --card2:#2b2419;
-  --border:#3a3028;
-  --accent:#f97316;
-  --amber:#f59e0b;
-  --text:#e8dcc8;
-  --muted:#7a6a52;
+  --bg:#0a0b10;
+  --bg2:#0f111a;
+  --card:#151824;
+  --card2:#1b1e2e;
+  --border:#25293d;
+  --accent:#06b6d4;
+  --amber:#38bdf8;
+  --text:#f1f5f9;
+  --muted:#64748b;
   --radius:4px;
   --nav-h:64px;
 }
@@ -56,7 +56,7 @@ section,nav,footer{position:relative;z-index:1}
 /* ─── NAV ─────────────────────────────────── */
 nav{
   position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:100;
-  background:rgba(26,22,18,.92);backdrop-filter:blur(12px);
+  background:rgba(10,11,16,.92);backdrop-filter:blur(12px);
   border-bottom:1px solid var(--border);
   display:flex;align-items:center;justify-content:space-between;padding:0 5%;
 }
@@ -73,7 +73,7 @@ nav{
 /* ─── HERO ────────────────────────────────── */
 #hero{
   min-height:100vh;display:flex;align-items:center;padding:calc(var(--nav-h)+4rem) 5% 4rem;
-  background:radial-gradient(ellipse 80% 60% at 70% 30%,rgba(249,115,22,.08) 0%,transparent 70%);
+  background:radial-gradient(ellipse 80% 60% at 70% 30%,rgba(6,182,212,.08) 0%,transparent 70%);
   overflow:hidden;
 }
 #hero-particles{position:absolute;inset:0;z-index:0;pointer-events:none}
@@ -87,10 +87,10 @@ nav{
 .hero-ctas{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:3.5rem;opacity:0;animation:riseIn .7s .7s ease forwards}
 @keyframes riseIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
 @keyframes riseInOp{from{opacity:0;transform:translateY(18px)}to{opacity:.88;transform:none}}
-.btn-primary{background:var(--accent);color:#1a1612;font-family:'Space Mono',monospace;font-size:.82rem;font-weight:700;padding:.7rem 1.6rem;border-radius:var(--radius);border:none;cursor:pointer;text-decoration:none;letter-spacing:.05em;transition:background .2s,transform .15s;display:inline-flex;align-items:center;gap:.5rem}
+.btn-primary{background:var(--accent);color:var(--bg);font-family:'Space Mono',monospace;font-size:.82rem;font-weight:700;padding:.7rem 1.6rem;border-radius:var(--radius);border:none;cursor:pointer;text-decoration:none;letter-spacing:.05em;transition:background .2s,transform .15s;display:inline-flex;align-items:center;gap:.5rem}
 .btn-primary:hover{background:var(--amber);transform:translateY(-2px)}
 .btn-outline{background:transparent;color:var(--accent);font-family:'Space Mono',monospace;font-size:.82rem;font-weight:700;padding:.7rem 1.6rem;border-radius:var(--radius);border:1.5px solid var(--accent);cursor:pointer;text-decoration:none;letter-spacing:.05em;transition:background .2s,color .2s,transform .15s;display:inline-flex;align-items:center;gap:.5rem}
-.btn-outline:hover{background:rgba(249,115,22,.1);transform:translateY(-2px)}
+.btn-outline:hover{background:rgba(6,182,212,.1);transform:translateY(-2px)}
 .hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;max-width:720px;opacity:0;animation:riseIn .7s .85s ease forwards}
 .stat-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.2rem 1rem;text-align:center;transition:border-color .25s,transform .25s}
 .stat-card:hover{border-color:var(--accent);transform:translateY(-3px)}
@@ -132,7 +132,7 @@ section{padding:6rem 5%}
 .tl-item{position:relative;padding-bottom:2.4rem;padding-left:1.8rem}
 .tl-item:last-child{padding-bottom:0}
 .tl-dot{position:absolute;left:-2.45rem;top:.3rem;width:13px;height:13px;border-radius:50%;background:var(--bg);border:2px solid var(--border);transition:border-color .3s,background .3s,box-shadow .3s}
-.tl-item.in-view .tl-dot{border-color:var(--accent);background:var(--accent);box-shadow:0 0 0 4px rgba(249,115,22,.18)}
+.tl-item.in-view .tl-dot{border-color:var(--accent);background:var(--accent);box-shadow:0 0 0 4px rgba(6,182,212,.18)}
 .tl-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.4rem 1.6rem;transition:border-color .25s,transform .25s}
 .tl-item.in-view .tl-card{border-color:var(--accent)}
 .tl-date{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--accent);letter-spacing:.06em;margin-bottom:.4rem}
@@ -140,7 +140,7 @@ section{padding:6rem 5%}
 .tl-sub{font-size:.85rem;color:var(--muted);margin-bottom:.6rem;font-family:'Space Mono',monospace;letter-spacing:.02em}
 .tl-body{font-size:.92rem;color:var(--text);opacity:.82;line-height:1.7}
 .tl-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.8rem}
-.tag{font-family:'Space Mono',monospace;font-size:.68rem;padding:.28rem .65rem;background:rgba(249,115,22,.1);border:1px solid rgba(249,115,22,.3);border-radius:var(--radius);color:var(--amber);letter-spacing:.04em}
+.tag{font-family:'Space Mono',monospace;font-size:.68rem;padding:.28rem .65rem;background:rgba(6,182,212,.1);border:1px solid rgba(6,182,212,.3);border-radius:var(--radius);color:var(--amber);letter-spacing:.04em}
 
 /* ─── SKILLS ──────────────────────────────── */
 #skills{background:var(--bg2)}
@@ -156,7 +156,7 @@ section{padding:6rem 5%}
 .projects-filter{display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:2.4rem}
 .filter-btn{font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.05em;padding:.45rem 1rem;border-radius:99px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;transition:all .2s}
 .filter-btn:hover{border-color:var(--accent);color:var(--accent)}
-.filter-btn.active{background:var(--accent);border-color:var(--accent);color:#1a1612;font-weight:700}
+.filter-btn.active{background:var(--accent);border-color:var(--accent);color:var(--bg);font-weight:700}
 .projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.6rem}
 .project-card{background:var(--card);border:1px solid var(--border);border-radius:8px;overflow:hidden;transition:border-color .25s,transform .25s,box-shadow .25s;display:flex;flex-direction:column}
 .project-card:hover{border-color:var(--accent);transform:translateY(-5px);box-shadow:0 12px 32px -12px rgba(0,0,0,.5)}
@@ -172,8 +172,8 @@ section{padding:6rem 5%}
 .project-header{display:flex;justify-content:space-between;align-items:flex-start;gap:.6rem}
 .project-title{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:600;color:var(--text)}
 .badge{font-family:'Space Mono',monospace;font-size:.64rem;padding:.22rem .55rem;border-radius:var(--radius);letter-spacing:.06em;white-space:nowrap}
-.badge-done{background:rgba(249,115,22,.15);color:var(--accent);border:1px solid rgba(249,115,22,.4)}
-.badge-wip{background:rgba(245,158,11,.12);color:var(--amber);border:1px solid rgba(245,158,11,.35)}
+.badge-done{background:rgba(6,182,212,.15);color:var(--accent);border:1px solid rgba(6,182,212,.4)}
+.badge-wip{background:rgba(56,189,248,.12);color:var(--amber);border:1px solid rgba(56,189,248,.35)}
 .project-desc{font-size:.92rem;color:var(--text);opacity:.78;line-height:1.65}
 .project-tags{display:flex;flex-wrap:wrap;gap:.4rem}
 .project-detail{display:grid;gap:.5rem;margin-top:.3rem;padding-top:.9rem;border-top:1px solid var(--border)}
@@ -214,7 +214,7 @@ section{padding:6rem 5%}
 .explore-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
 .explore-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;transition:border-color .2s,transform .2s;position:relative;overflow:hidden}
 .explore-card:hover{border-color:var(--accent);transform:translateY(-3px)}
-.explore-status{position:absolute;top:0;right:0;font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.06em;padding:.3rem .7rem;background:rgba(249,115,22,.12);color:var(--accent);border-bottom-left-radius:var(--radius)}
+.explore-status{position:absolute;top:0;right:0;font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.06em;padding:.3rem .7rem;background:rgba(6,182,212,.12);color:var(--accent);border-bottom-left-radius:var(--radius)}
 .explore-icon{font-size:1.4rem;color:var(--accent);margin-bottom:.8rem}
 .explore-title{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:600;color:var(--text);margin-bottom:.5rem}
 .explore-body{font-size:.88rem;color:var(--text);opacity:.75;line-height:1.65}
@@ -224,7 +224,7 @@ section{padding:6rem 5%}
 .contact-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:3rem;align-items:start}
 .contact-links{display:flex;flex-direction:column;gap:.8rem;margin-top:.5rem}
 .contact-link{display:flex;align-items:center;gap:.9rem;color:var(--text);text-decoration:none;padding:.8rem 1rem;border:1px solid var(--border);border-radius:var(--radius);background:var(--card);transition:border-color .2s,background .2s}
-.contact-link:hover{border-color:var(--accent);background:rgba(249,115,22,.06)}
+.contact-link:hover{border-color:var(--accent);background:rgba(6,182,212,.06)}
 .contact-link i{font-size:1.15rem;color:var(--accent)}
 .contact-link-label{font-family:'Space Mono',monospace;font-size:.68rem;color:var(--muted);letter-spacing:.08em;display:block}
 .contact-link-value{font-size:.9rem;color:var(--text)}
@@ -817,7 +817,7 @@ document.querySelectorAll('#navLinks a').forEach(a=>a.addEventListener('click',(
     c.setAttribute('r',r);
     c.setAttribute('cx',cx+'%');
     c.setAttribute('cy',cy+'%');
-    c.setAttribute('fill','#f97316');
+    c.setAttribute('fill','#06b6d4');
     c.setAttribute('opacity', (Math.random()*0.25+0.08).toFixed(2));
     const anim=document.createElementNS(NS,'animate');
     anim.setAttribute('attributeName','cy');
@@ -906,8 +906,8 @@ filterBtns.forEach(btn=>{
       cell.className='activity-cell';
       const r=Math.random();
       let bg='var(--border)';
-      if(r>0.55 && r<=0.75) bg='rgba(249,115,22,.3)';
-      else if(r>0.75 && r<=0.9) bg='rgba(249,115,22,.6)';
+      if(r>0.55 && r<=0.75) bg='rgba(6,182,212,.3)';
+      else if(r>0.75 && r<=0.9) bg='rgba(6,182,212,.6)';
       else if(r>0.9) bg='var(--accent)';
       cell.style.background=bg;
       grid.appendChild(cell);
