@@ -665,6 +665,87 @@
       line-height: 1.7;
     }
 
+    /* ─── CREDENTIALS, FELLOWSHIPS & EXPERIENCE ─── */
+    .cred-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.2rem;
+      margin-top: 1.5rem;
+    }
+
+    .cred-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .cred-card:hover {
+      border-color: var(--border-focus);
+      transform: translateY(-2px);
+    }
+
+    .cred-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.75rem;
+      gap: 0.5rem;
+    }
+
+    .cred-badge {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 0.25rem 0.65rem;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .badge-fellowship {
+      background: rgba(56, 189, 248, 0.12);
+      color: var(--blue);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+    }
+
+    .badge-hackathon {
+      background: rgba(245, 158, 11, 0.12);
+      color: #f59e0b;
+      border: 1px solid rgba(245, 158, 11, 0.25);
+    }
+
+    .badge-leadership {
+      background: rgba(16, 185, 129, 0.12);
+      color: var(--accent);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+    }
+
+    .cred-title {
+      font-family: var(--font-heading);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.25rem;
+    }
+
+    .cred-org {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      margin-bottom: 0.75rem;
+    }
+
+    .cred-desc {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
     /* ─── CONTACT SECTION ─── */
     .contact-cta {
       background: var(--bg-elevated);
@@ -787,8 +868,9 @@
       </a>
 
       <ul class="nav-menu">
-        <li><a href="#lab">Interactive Lab</a></li>
+        <li><a href="#lab">Sandbox</a></li>
         <li><a href="#work">Projects</a></li>
+        <li><a href="#experience">Experience &amp; Honors</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
@@ -1074,6 +1156,105 @@
           </div>
         </article>
 
+      </div>
+    </section>
+
+    <!-- ─── EXPERIENCE, FELLOWSHIPS & HONORS ─── -->
+    <section id="experience">
+      <div class="section-header">
+        <div>
+          <div class="section-label"><i class="ti ti-award"></i> Track Record</div>
+          <h2 class="section-title">Fellowships, Experience &amp; Honors</h2>
+        </div>
+        <p class="section-desc">
+          Professional programs, hackathons, and leadership initiatives that shaped my engineering background.
+        </p>
+      </div>
+
+      <div class="cred-grid">
+        <!-- Item 1: DEPI -->
+        <div class="cred-card">
+          <div>
+            <div class="cred-header">
+              <div class="cred-title">Machine Learning Engineering Fellow</div>
+              <span class="cred-badge badge-fellowship">Fellowship</span>
+            </div>
+            <div class="cred-org"><i class="ti ti-building"></i> Microsoft DEPI • MCIT (2024–Present)</div>
+            <p class="cred-desc">
+              Selected for the national Digital Egypt Pioneers Initiative. Completed rigorous practical training in end-to-end ML lifecycles, deep learning with PyTorch, feature engineering, and cloud deployment pipelines.
+            </p>
+          </div>
+        </div>
+
+        <!-- Item 2: ITI -->
+        <div class="cred-card">
+          <div>
+            <div class="cred-header">
+              <div class="cred-title">AI &amp; Data Science Trainee</div>
+              <span class="cred-badge badge-fellowship">Specialization</span>
+            </div>
+            <div class="cred-org"><i class="ti ti-school"></i> Information Technology Institute (ITI)</div>
+            <p class="cred-desc">
+              Hands-on technical specialization covering exploratory data analysis, predictive statistical modeling, classical machine learning algorithms, and real-world dataset preprocessing.
+            </p>
+          </div>
+        </div>
+
+        <!-- Item 3: NAID Internship -->
+        <div class="cred-card">
+          <div>
+            <div class="cred-header">
+              <div class="cred-title">Assistive Tech Software Intern</div>
+              <span class="cred-badge badge-fellowship">Internship</span>
+            </div>
+            <div class="cred-org"><i class="ti ti-briefcase"></i> NAID (Summer 2024)</div>
+            <p class="cred-desc">
+              Engineered software prototypes and assistive technology utilities focused on human-computer interaction and accessible digital interfaces at the National Academy of Information Tech for PWD.
+            </p>
+          </div>
+        </div>
+
+        <!-- Item 4: AI Sprint Hackathon -->
+        <div class="cred-card">
+          <div>
+            <div class="cred-header">
+              <div class="cred-title">AI Systems Builder</div>
+              <span class="cred-badge badge-hackathon">Hackathon</span>
+            </div>
+            <div class="cred-org"><i class="ti ti-bolt"></i> AI Sprint National Hackathon</div>
+            <p class="cred-desc">
+              Built and demoed an applied AI system within a rapid 48-hour sprint. Handled architectural design, model integration, and live deployment under intense judging criteria.
+            </p>
+          </div>
+        </div>
+
+        <!-- Item 5: ECPC Finalist -->
+        <div class="cred-card">
+          <div>
+            <div class="cred-header">
+              <div class="cred-title">National Finalist &amp; Competitor</div>
+              <span class="cred-badge badge-hackathon">Contest</span>
+            </div>
+            <div class="cred-org"><i class="ti ti-trophy"></i> Egyptian Collegiate Programming Contest (2024 &amp; 2025)</div>
+            <p class="cred-desc">
+              Qualified for national finals two consecutive years with Team <em>O(1)</em>. Solved high-complexity algorithmic challenges in dynamic programming, graph theory, and number theory under strict 1s time limits.
+            </p>
+          </div>
+        </div>
+
+        <!-- Item 6: Leadership & iMath -->
+        <div class="cred-card">
+          <div>
+            <div class="cred-header">
+              <div class="cred-title">Co-Founder &amp; Algorithmic Mentor</div>
+              <span class="cred-badge badge-leadership">Leadership</span>
+            </div>
+            <div class="cred-org"><i class="ti ti-users"></i> iMath Club &amp; ICPC Club @ EUI</div>
+            <p class="cred-desc">
+              Co-founded iMath Club to bridge mathematics intuition with engineering code. Mentored junior engineering peers in calculus, linear algebra, and competitive coding problem solving.
+            </p>
+          </div>
+        </div>
       </div>
     </section>
 
