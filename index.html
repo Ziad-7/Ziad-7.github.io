@@ -1672,23 +1672,18 @@
 
     /* ── Theme Switcher ── */
     const themeBtn = document.getElementById('themeToggle');
-    const themeSun = document.getElementById('themeSun');
-    const themeMoon = document.getElementById('themeMoon');
     const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
     const savedTheme = localStorage.getItem('ziad_theme');
 
     function setTheme(isLight) {
       document.body.classList.toggle('light', isLight);
+      const themeSun = document.getElementById('themeSun');
+      const themeMoon = document.getElementById('themeMoon');
       if (themeSun) themeSun.style.display = isLight ? 'block' : 'none';
       if (themeMoon) themeMoon.style.display = isLight ? 'none' : 'block';
       localStorage.setItem('ziad_theme', isLight ? 'light' : 'dark');
-      drawGraph();
-      redrawMathCanvas();
-    }
-
-    if (themeBtn) {
-      setTheme(savedTheme === 'light' || (!savedTheme && prefersLight));
-      themeBtn.addEventListener('click', () => setTheme(!document.body.classList.contains('light')));
+      if (typeof drawGraph === 'function' && ctx) drawGraph();
+      if (typeof redrawMathCanvas === 'function' && mathCtx) redrawMathCanvas();
     }
 
     /* ── 1-Click Copy Email ── */
@@ -2415,6 +2410,12 @@
     graphLoop();
     pickEquation(0);
     applyStockPreset('ai');
+
+    // Theme initialization after canvas objects are ready
+    setTheme(savedTheme === 'light' || (!savedTheme && prefersLight));
+    if (themeBtn) {
+      themeBtn.addEventListener('click', () => setTheme(!document.body.classList.contains('light')));
+    }
   </script>
 </body>
 
