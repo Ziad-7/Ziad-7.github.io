@@ -1792,6 +1792,7 @@
         if (d < n.r + 6) {
           draggedNode = n;
           draggedNode._idx = idx;
+          wakeGraph();
         }
       });
     }
@@ -1804,6 +1805,7 @@
         }
         draggedNode.x = Math.max(draggedNode.r, Math.min(width - draggedNode.r, pos.x));
         draggedNode.y = Math.max(draggedNode.r, Math.min(height - draggedNode.r, pos.y));
+        wakeGraph();
       }
     }
 
@@ -1811,6 +1813,9 @@
       if (draggedNode && !didDrag) {
         // Was a clean click on a node! Trigger BFS pathfinder
         handleNodeClick(draggedNode._idx);
+      }
+      if (draggedNode) {
+        wakeGraph();
       }
       draggedNode = null;
     }
@@ -1937,6 +1942,7 @@
         setGraphStatus('Maximum demo network capacity reached. Click "Reset Network" to restart.');
         return;
       }
+      wakeGraph();
       const name = extraUsers[extraCount++];
       const newIdx = nodes.length;
       nodes.push({
@@ -1944,8 +1950,8 @@
         label: name,
         x: width / 2 + (Math.random() - 0.5) * 80,
         y: height / 2 + (Math.random() - 0.5) * 80,
-        vx: (Math.random() - 0.5) * 2,
-        vy: (Math.random() - 0.5) * 2,
+        vx: (Math.random() - 0.5) * 1.5,
+        vy: (Math.random() - 0.5) * 1.5,
         r: 13,
         color: '#38bdf8'
       });
@@ -1959,6 +1965,7 @@
 
     function resetGraph() {
       initDefaultGraph();
+      wakeGraph();
       selectedNodeIndices = [];
       highlightedPath = [];
       suggestedEdge = null;
@@ -1966,13 +1973,20 @@
       setGraphStatus('Network reset to default state. Click any 2 users to trace BFS shortest path.');
     }
 
-    function updatePhysics() {
-      if (!width || !height) return;
-      const k = 0.035;
-      const restLen = 115;
-      const repulse = 1900;
-      const damping = 0.83;
+    let isGraphSleeping = false;
+    function wakeGraph() {
+      isGraphSleeping = false;
+    }
 
+    function updatePhysics() {
+      if (!width || !height || isGraphSleeping) return;
+      const k = 0.03;
+      const restLen = 115;
+      const repulse = 1600;
+      const damping = 0.76;
+      let totalEnergy = 0;
+
+      // Spring forces (Hooke's Law between connected edges)
       edges.forEach(([i, j]) => {
         const ni = nodes[i];
         const nj = nodes[j];
@@ -1988,6 +2002,7 @@
         if (nj !== draggedNode) { nj.vx -= fx; nj.vy -= fy; }
       });
 
+      // Coulomb repulsion between all pairs (softened to prevent singularity)
       for (let i = 0; i < nodes.length; i++) {
         for (let j = i + 1; j < nodes.length; j++) {
           const ni = nodes[i];
@@ -1995,29 +2010,48 @@
           const dx = nj.x - ni.x;
           const dy = nj.y - ni.y;
           const dist = Math.hypot(dx, dy) || 1;
-          if (dist < 190) {
-            const force = repulse / (dist * dist);
+          if (dist < 210) {
+            const force = repulse / (dist * dist + 900);
             const fx = (dx / dist) * force;
             const fy = (dy / dist) * force;
-            if (ni !== draggedNode) { ni.vx -= fx; ni.vy += fy; }
-            if (nj !== draggedNode) { nj.vx -= fx; nj.vy -= fy; }
+            if (ni !== draggedNode) { ni.vx -= fx; ni.vy -= fy; }
+            if (nj !== draggedNode) { nj.vx += fx; nj.vy += fy; }
           }
         }
       }
 
+      const cx = width / 2;
+      const cy = height / 2;
+
       nodes.forEach(n => {
         if (n !== draggedNode) {
-          n.x += n.vx;
-          n.y += n.vy;
+          // Gentle centering gravitation
+          n.vx += (cx - n.x) * 0.003;
+          n.vy += (cy - n.y) * 0.003;
+
           n.vx *= damping;
           n.vy *= damping;
 
-          if (n.x < n.r) { n.x = n.r; n.vx *= -0.5; }
-          if (n.x > width - n.r) { n.x = width - n.r; n.vx *= -0.5; }
-          if (n.y < n.r) { n.y = n.r; n.vy *= -0.5; }
-          if (n.y > height - n.r) { n.y = height - n.r; n.vy *= -0.5; }
+          if (Math.abs(n.vx) < 0.04) n.vx = 0;
+          if (Math.abs(n.vy) < 0.04) n.vy = 0;
+
+          n.x += n.vx;
+          n.y += n.vy;
+
+          if (n.x < n.r + 15) { n.x = n.r + 15; n.vx = 0; }
+          if (n.x > width - n.r - 15) { n.x = width - n.r - 15; n.vx = 0; }
+          if (n.y < n.r + 15) { n.y = n.r + 15; n.vy = 0; }
+          if (n.y > height - n.r - 15) { n.y = height - n.r - 15; n.vy = 0; }
+
+          totalEnergy += (n.vx * n.vx + n.vy * n.vy);
         }
       });
+
+      // Freeze when equilibrium is reached
+      if (!draggedNode && totalEnergy < 0.05) {
+        nodes.forEach(n => { n.vx = 0; n.vy = 0; });
+        isGraphSleeping = true;
+      }
     }
 
     function isPathEdge(u, v) {
