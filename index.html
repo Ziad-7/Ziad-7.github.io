@@ -1459,7 +1459,7 @@
         <p class="hero-text">
           I'm an undergraduate at <strong>Egypt University of Informatics</strong> (3.95 GPA, Full Merit Scholarship) 
           and an active competitive programmer in ECPC. 
-          I specialize in applied AI systems, implementing machine learning models from mathematical first principles, and building efficient algorithmic software that runs reliably.
+          I focus on statistical distribution modeling research, neural network implementations from scratch, and building reliable algorithmic software.
         </p>
         <div class="hero-links">
           <a href="#work" class="btn-nav-action" style="color:var(--accent); border-color:var(--accent);">
@@ -1485,20 +1485,20 @@
         </div>
         <div class="status-items">
           <div class="status-row">
+            <i class="ti ti-chart-dots-3"></i>
+            <div><strong>Research:</strong> Statistical distribution modeling &amp; simulation with Dr. Herzallah</div>
+          </div>
+          <div class="status-row">
+            <i class="ti ti-math-symbols"></i>
+            <div><strong>Building:</strong> Expanding <code>ml-from-scratch</code> with neural architectures &amp; backprop</div>
+          </div>
+          <div class="status-row">
             <i class="ti ti-school"></i>
-            <div><strong>Education:</strong> B.Sc. Computer Engineering @ EUI (3.95 CGPA, Full Scholarship)</div>
+            <div><strong>Standing:</strong> Senior (Year 4/5) @ EUI • 3.95 CGPA (Full Merit Scholarship)</div>
           </div>
           <div class="status-row">
-            <i class="ti ti-trophy"></i>
-            <div><strong>Contest:</strong> ECPC Algorithmic Competitor &amp; Problem Solver</div>
-          </div>
-          <div class="status-row">
-            <i class="ti ti-certificate"></i>
-            <div><strong>Initiative:</strong> Microsoft DEPI ML Engineer &amp; ITI AI Track</div>
-          </div>
-          <div class="status-row">
-            <i class="ti ti-terminal"></i>
-            <div><strong>Focus:</strong> Applied AI Systems, Mathematical ML, PyTorch &amp; C++</div>
+            <i class="ti ti-briefcase"></i>
+            <div><strong>Availability:</strong> Open for AI engineering roles, internships &amp; select freelance</div>
           </div>
         </div>
       </aside>
@@ -1506,28 +1506,28 @@
 
     <!-- ─── INTERACTIVE LAB (TACTILE DEMOS & SANDBOXES) ─── -->
     <section id="lab">
-      <div class="section-header">
+      <div class="section-header" style="margin-bottom: 1.2rem;">
         <div>
           <div class="section-label" style="display:inline-flex; align-items:center; gap:0.4rem;">
             <i class="ti ti-flask"></i> Interactive Demos
           </div>
           <h2 class="section-title">Play With My Work</h2>
         </div>
-        <p class="section-desc">
-          Interactive in-browser demos showing what my projects do (not the actual full applications). Click, drag, and test the core logic directly.
-        </p>
+        <div class="demo-disclaimer-pill">
+          <i class="ti ti-info-circle"></i> In-browser simulated demos • Not the full desktop/production apps
+        </div>
       </div>
 
       <div class="lab-box">
         <div class="lab-tabs">
           <button class="lab-tab-btn active" onclick="switchLabTab(0)">
-            <i class="ti ti-binary-tree"></i> 1. Warsha Hub (Spring Graph &amp; BFS)
+            <i class="ti ti-binary-tree"></i> 1. Warsha Hub
           </button>
           <button class="lab-tab-btn" onclick="switchLabTab(1)">
-            <i class="ti ti-math-function"></i> 2. MathGPT (Digital Ink &amp; SymPy)
+            <i class="ti ti-math-function"></i> 2. MathGPT
           </button>
           <button class="lab-tab-btn" onclick="switchLabTab(2)">
-            <i class="ti ti-chart-pie"></i> 3. EGX Stock AI Portfolio (Markowitz)
+            <i class="ti ti-chart-pie"></i> 3. AI Portfolio Optimizer
           </button>
         </div>
 
@@ -1558,10 +1558,6 @@
           <div class="graph-status-text" id="graphStatus">
             <i class="ti ti-info-circle"></i> Click any two users to find their degree of separation via Breadth-First Search (BFS).
           </div>
-
-          <p style="font-size:0.8rem; color:var(--text-dim); margin-top:0.6rem;">
-            Demo simulation of Warsha Hub's graph layout, BFS traversal, and mutual friend recommendation.
-          </p>
         </div>
 
         <!-- Tab 2: MathGPT Simulator (Digital Ink Canvas) -->
@@ -1578,7 +1574,7 @@
               <div class="drawing-pad-wrap">
                 <canvas id="mathDrawCanvas"></canvas>
                 <div class="drawing-tools">
-                  <span style="font-family:var(--font-mono); font-size:0.72rem; color:var(--text-dim);">
+                  <span style="font-family:var(--font-mono); font-size:0.72rem; color:var(--text-dim);" id="mathDrawInfo">
                     <i class="ti ti-pencil"></i> Draw freehand with mouse or finger
                   </span>
                   <div>
@@ -1607,10 +1603,6 @@
               </div>
             </div>
           </div>
-
-          <p style="font-size:0.8rem; color:var(--text-dim); margin-top:0.6rem;">
-            Demo simulation of MathGPT's character segmentation, CNN classification, and SymPy solver.
-          </p>
         </div>
 
         <!-- Tab 3: Egyptian Stock AI Portfolio Optimization Simulator -->
@@ -1622,7 +1614,7 @@
               
               <!-- Quick Presets -->
               <div class="equation-picker" style="margin-bottom:1.2rem;">
-                <button class="eq-chip active" id="chipStockAi" onclick="applyStockPreset('ai')">✨ AI Tangency (Max Sharpe)</button>
+                <button class="eq-chip active" id="chipStockAi" onclick="applyStockPreset('ai')">⭐ AI Tangency (Max Sharpe)</button>
                 <button class="eq-chip" id="chipStockCons" onclick="applyStockPreset('conservative')">🛡️ Capital Preservation</button>
                 <button class="eq-chip" id="chipStockGrowth" onclick="applyStockPreset('growth')">🚀 Aggressive Growth</button>
               </div>
@@ -1708,7 +1700,7 @@
               <!-- Analysis Card -->
               <div class="sim-result-box" id="stockAnalysisBox">
                 <div style="font-weight:600; color:var(--accent); margin-bottom:0.25rem;">
-                  Optimal Tangency Frontier Match
+                  ⭐ Optimal Tangency Frontier Match
                 </div>
                 <div style="font-size:0.78rem; color:var(--text-muted); line-height:1.6;">
                   This division mirrors the unconstrained Markowitz tangency portfolio trained on post-2022 EGX macroeconomic regime data. By balancing EGX100 growth with an Egyptian Gold inflation buffer, it maximizes risk-adjusted return (Sharpe: 1.27).
@@ -1717,10 +1709,6 @@
 
             </div>
           </div>
-
-          <p style="font-size:0.8rem; color:var(--text-dim); margin-top:0.6rem;">
-            Demo simulation of the Egypt Multi-Asset Markowitz portfolio allocation system.
-          </p>
         </div>
 
       </div>
@@ -1733,9 +1721,6 @@
           <div class="section-label"><i class="ti ti-briefcase"></i> Selected Projects</div>
           <h2 class="section-title">Things I've Built</h2>
         </div>
-        <p class="section-desc">
-          Practical tools designed to solve real problems without unnecessary bloat.
-        </p>
       </div>
 
       <div class="work-grid">
@@ -1775,7 +1760,7 @@
         <!-- Project 2: ML-From-Scratch -->
         <article class="work-item">
           <div>
-            <div class="work-tag" style="background: rgba(56, 189, 248, 0.12); color: var(--blue); border: 1px solid rgba(56, 189, 248, 0.25);">
+            <div class="work-tag">
               <i class="ti ti-math-symbols"></i> Mathematical AI Foundations
             </div>
             <h3 class="work-title">ML-From-Scratch: Core Models</h3>
