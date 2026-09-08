@@ -2171,6 +2171,12 @@
 
   <!-- ─── JAVASCRIPT: INTERACTIVE ALGORITHMS & SANDBOXES ─── -->
   <script>
+    // Core canvas references
+    const canvas = document.getElementById('graphCanvas');
+    const ctx = canvas ? canvas.getContext('2d') : null;
+    const mathCanvas = document.getElementById('mathDrawCanvas');
+    const mathCtx = mathCanvas ? mathCanvas.getContext('2d') : null;
+
     /* ── Cairo Local Clock ── */
     function updateCairoTime() {
       const clockEl = document.getElementById('cairoTime');
@@ -2202,6 +2208,7 @@
       localStorage.setItem('ziad_theme', isLight ? 'light' : 'dark');
       if (typeof drawGraph === 'function' && ctx) drawGraph();
       if (typeof redrawMathCanvas === 'function' && mathCtx) redrawMathCanvas();
+      if (typeof updateStockSim === 'function') updateStockSim();
     }
 
     /* ── 1-Click Copy Email ── */
@@ -2234,8 +2241,6 @@
     /* ──────────────────────────────────────────────────────────
        TAB 1: WARSHA HUB SPRING GRAPH, BFS & LINK PREDICTION
        ────────────────────────────────────────────────────────── */
-    const canvas = document.getElementById('graphCanvas');
-    const ctx = canvas ? canvas.getContext('2d') : null;
     let width = 0, height = 0;
 
     let nodes = [];
@@ -2677,8 +2682,6 @@
     /* ──────────────────────────────────────────────────────────
        TAB 2: MATHGPT DIGITAL INK CANVAS & PIPELINE SIMULATOR
        ────────────────────────────────────────────────────────── */
-    const mathCanvas = document.getElementById('mathDrawCanvas');
-    const mathCtx = mathCanvas ? mathCanvas.getContext('2d') : null;
     let isDrawing = false;
     let hasDrawn = false;
     let mathWidth = 0, mathHeight = 0;
