@@ -886,10 +886,23 @@
       letter-spacing: 0.04em;
     }
 
-    .badge-fellowship {
+    .badge-fellowship,
+    .badge-training {
       background: rgba(56, 189, 248, 0.12);
       color: var(--blue);
       border: 1px solid rgba(56, 189, 248, 0.25);
+    }
+
+    .badge-internship {
+      background: rgba(14, 165, 233, 0.12);
+      color: #38bdf8;
+      border: 1px solid rgba(14, 165, 233, 0.25);
+    }
+
+    .badge-cert {
+      background: rgba(168, 85, 247, 0.12);
+      color: #a855f7;
+      border: 1px solid rgba(168, 85, 247, 0.25);
     }
 
     .badge-hackathon {
@@ -1493,15 +1506,15 @@
       </div>
     </section>
 
-    <!-- ─── EXPERIENCE, FELLOWSHIPS & HONORS ─── -->
+    <!-- ─── EXPERIENCE, TRAINING & CERTIFICATIONS ─── -->
     <section id="experience">
       <div class="section-header">
         <div>
-          <div class="section-label"><i class="ti ti-award"></i> Track Record</div>
-          <h2 class="section-title">Fellowships, Experience &amp; Honors</h2>
+          <div class="section-label"><i class="ti ti-award"></i> Verified Credentials</div>
+          <h2 class="section-title">Experience, Training &amp; Certifications</h2>
         </div>
         <p class="section-desc">
-          Professional programs, hackathons, and leadership initiatives that shaped my engineering background.
+          National engineering initiatives, assistive AI internships, professional machine learning certifications, and hackathon prototypes.
         </p>
       </div>
 
@@ -1510,68 +1523,68 @@
         <div class="cred-card">
           <div>
             <div class="cred-header">
-              <div class="cred-title">Machine Learning Engineering Fellow</div>
-              <span class="cred-badge badge-fellowship">Fellowship</span>
+              <div class="cred-title">Machine Learning Engineering Track</div>
+              <span class="cred-badge badge-training">MCIT Initiative</span>
             </div>
-            <div class="cred-org"><i class="ti ti-building"></i> Microsoft DEPI • MCIT (2024–Present)</div>
+            <div class="cred-org"><i class="ti ti-building"></i> Digital Egypt Pioneers Initiative (DEPI) • Microsoft (Round 4)</div>
             <p class="cred-desc">
-              Selected for the national Digital Egypt Pioneers Initiative. Completed rigorous practical training in end-to-end ML lifecycles, deep learning with PyTorch, feature engineering, and cloud deployment pipelines.
+              Competitive national training scholarship by Egypt's Ministry of Communications and Information Technology (MCIT) in partnership with Microsoft. Intensive hands-on specialization in machine learning lifecycles, raw NumPy vectorization, PyTorch deep learning architectures, feature engineering, and model deployment.
             </p>
           </div>
         </div>
 
-        <!-- Item 2: ITI -->
+        <!-- Item 2: NAID Internship -->
         <div class="cred-card">
           <div>
             <div class="cred-header">
-              <div class="cred-title">AI &amp; Data Science Trainee</div>
-              <span class="cred-badge badge-fellowship">Specialization</span>
+              <div class="cred-title">Computer Vision &amp; Assistive AI Intern</div>
+              <span class="cred-badge badge-internship">Internship</span>
+            </div>
+            <div class="cred-org"><i class="ti ti-briefcase"></i> NAID (Summer 2025) • Project InSync</div>
+            <p class="cred-desc">
+              Engineered assistive AI systems for <em>InSync</em> at the National Academy of Information Technology for Persons with Disabilities: implemented DEMUCS + WavBigGAN audio denoising for hearing aids, SpeechT5 text-to-speech for non-verbal users, and computer vision segmentation for smart glasses. Competed in the Graduation Project Proposal Competition.
+            </p>
+          </div>
+        </div>
+
+        <!-- Item 3: DeepLearning.AI / Stanford Online -->
+        <div class="cred-card">
+          <div>
+            <div class="cred-header">
+              <div class="cred-title">Supervised Machine Learning</div>
+              <span class="cred-badge badge-cert">Stanford Online</span>
+            </div>
+            <div class="cred-org"><i class="ti ti-certificate"></i> DeepLearning.AI &amp; Stanford Online • Andrew Ng</div>
+            <p class="cred-desc">
+              Rigorous mathematical and computational foundation in linear &amp; logistic regression, vectorization, gradient descent optimization, cost surface analysis, and polynomial L2 regularization directly under Andrew Ng.
+            </p>
+          </div>
+        </div>
+
+        <!-- Item 4: ITI AI Specialization -->
+        <div class="cred-card">
+          <div>
+            <div class="cred-header">
+              <div class="cred-title">Applied AI, CNNs &amp; Agentic RAG</div>
+              <span class="cred-badge badge-training">Technical Training</span>
             </div>
             <div class="cred-org"><i class="ti ti-school"></i> Information Technology Institute (ITI)</div>
             <p class="cred-desc">
-              Hands-on technical specialization covering exploratory data analysis, predictive statistical modeling, classical machine learning algorithms, and real-world dataset preprocessing.
+              Hands-on specialization encompassing Python data engineering, Convolutional Neural Networks (CNNs) for computer vision, Natural Language Processing (NLP), and modern Large Language Model workflows with Agentic AI and Retrieval-Augmented Generation (RAG).
             </p>
           </div>
         </div>
 
-        <!-- Item 3: NAID Internship -->
+        <!-- Item 5: AI Sprint Hackathon -->
         <div class="cred-card">
           <div>
             <div class="cred-header">
-              <div class="cred-title">Assistive Tech Software Intern</div>
-              <span class="cred-badge badge-fellowship">Internship</span>
-            </div>
-            <div class="cred-org"><i class="ti ti-briefcase"></i> NAID (Summer 2024)</div>
-            <p class="cred-desc">
-              Engineered software prototypes and assistive technology utilities focused on human-computer interaction and accessible digital interfaces at the National Academy of Information Tech for PWD.
-            </p>
-          </div>
-        </div>
-
-        <!-- Item 4: AI Sprint Hackathon -->
-        <div class="cred-card">
-          <div>
-            <div class="cred-header">
-              <div class="cred-title">AI Systems Builder</div>
+              <div class="cred-title">AI Systems Builder &amp; Participant</div>
               <span class="cred-badge badge-hackathon">Hackathon</span>
             </div>
-            <div class="cred-org"><i class="ti ti-bolt"></i> AI Sprint National Hackathon</div>
+            <div class="cred-org"><i class="ti ti-bolt"></i> AI Sprint National Hackathon • Briefly AI</div>
             <p class="cred-desc">
-              Built and demoed an applied AI system within a rapid 48-hour sprint. Handled architectural design, model integration, and live deployment under intense judging criteria.
-            </p>
-          </div>
-        </div>
-
-        <!-- Item 5: ECPC Finalist -->
-        <div class="cred-card">
-          <div>
-            <div class="cred-header">
-              <div class="cred-title">National Finalist &amp; Competitor</div>
-              <span class="cred-badge badge-hackathon">Contest</span>
-            </div>
-            <div class="cred-org"><i class="ti ti-trophy"></i> Egyptian Collegiate Programming Contest (2024 &amp; 2025)</div>
-            <p class="cred-desc">
-              Qualified for national finals two consecutive years with Team <em>O(1)</em>. Solved high-complexity algorithmic challenges in dynamic programming, graph theory, and number theory under strict 1s time limits.
+              Engineered and demoed <em>Briefly AI</em>—an intelligent automated client intake layer—within an intensive 48-hour sprint. Implemented LLM orchestration, structured data parsing, and rapid deployment under strict judging rubrics.
             </p>
           </div>
         </div>
@@ -1583,41 +1596,43 @@
               <div class="cred-title">Co-Founder &amp; Algorithmic Mentor</div>
               <span class="cred-badge badge-leadership">Leadership</span>
             </div>
-            <div class="cred-org"><i class="ti ti-users"></i> iMath Club &amp; ICPC Club @ EUI</div>
+            <div class="cred-org"><i class="ti ti-users"></i> iMath Club &amp; Academic Peer Mentorship @ EUI</div>
             <p class="cred-desc">
-              Co-founded iMath Club to bridge mathematics intuition with engineering code. Mentored junior engineering peers in calculus, linear algebra, and competitive coding problem solving.
+              Co-founded the iMath Club at Egypt University of Informatics to bridge mathematical intuition with practical software implementation. Delivered workshops and mentored peers across calculus, linear algebra, and competitive coding logic.
             </p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ─── ABOUT & FOUNDATIONS ─── -->
+    <!-- ─── ABOUT: EDUCATION & COMPETITIVE PROGRAMMING ─── -->
     <section id="about">
       <div class="section-header">
         <div>
           <div class="section-label"><i class="ti ti-user"></i> Background</div>
-          <h2 class="section-title">Education &amp; Foundations</h2>
+          <h2 class="section-title">Education &amp; Algorithmic Foundations</h2>
         </div>
       </div>
 
       <div class="about-grid">
         <div class="about-card">
-          <h3><i class="ti ti-school"></i> Academic Honors</h3>
+          <h3><i class="ti ti-school"></i> Academic Honors &amp; Degree</h3>
           <p>
             • <strong>Egypt University of Informatics (EUI):</strong> B.Sc. in Computer Engineering (Year 4 of 5).<br />
-            • <strong>3.95 / 4.00 CGPA</strong> across foundational coursework in algorithms, AI systems, and mathematics.<br />
-            • Studying on a <strong>Full Merit Scholarship</strong> awarded for national standing in Thanaweya Amma.<br />
-            • Advanced coursework in Signals &amp; Systems (Purdue ECE 301), AI, and Data Science Methodology.
+            • <strong>3.95 / 4.00 CGPA</strong> with sustained academic excellence across systems, machine learning, and mathematics coursework.<br />
+            • Awarded a <strong>Full Merit Scholarship</strong> recognizing top national standing in Thanaweya Amma.<br />
+            • <strong>Dean's List Certificate of Academic Excellence</strong> (Faculty of Engineering).<br />
+            • Rigorous coursework: Signals &amp; Systems (Purdue ECE 301 curriculum), Artificial Intelligence, Design &amp; Analysis of Algorithms, and Data Science Methodology.
           </p>
         </div>
 
         <div class="about-card">
-          <h3><i class="ti ti-binary-tree"></i> Algorithmic Engineering &amp; Problem Solving</h3>
+          <h3><i class="ti ti-binary-tree"></i> Competitive Programming &amp; Problem Solving</h3>
           <p>
-            • <strong>ECPC Competitor:</strong> Active participant in the Egyptian Collegiate Programming Contest (ECPC) qualifiers in 2024 and 2025.<br />
-            • <strong>Algorithmic Depth:</strong> Rigorous problem solving with Graph Traversal, Dynamic Programming, and Number Theory under strict 1-second limits.<br />
-            • <strong>Mentorship:</strong> Co-Founder of the iMath Club at EUI and mentor at the university ICPC club.
+            • <strong>ECPC Qualifications (2024 &amp; 2025):</strong> Secured <strong>14th Place</strong> in the 2024 ICPC ECPC Qualifications (Day 7) and <strong>14th Place</strong> in the 2025 ECPC Qualifications (Day 1) representing Egypt University of Informatics.<br />
+            • <strong>ACPC Kickoff (2025):</strong> Earned <strong>Honorable Mention</strong> in the ACPC Kickoff Online Individual Contest.<br />
+            • <strong>HackerRank Certified:</strong> Problem Solving (Basic) verified credential.<br />
+            • <strong>Algorithmic Depth:</strong> Rapid problem formulation under tight 1.0s constraints in C++ and Python: Graph Traversal (BFS/DFS, Dijkstra), Dynamic Programming, Number Theory, and Trie Prefix Trees.
           </p>
         </div>
       </div>
