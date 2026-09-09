@@ -4374,7 +4374,7 @@
       // Once wipe reaches bottom:
       setTimeout(() => {
         closeSplash();
-      }, 890);
+      }, 960);
     }
 
     function closeSplash() {
@@ -4438,14 +4438,14 @@
       runMatrixAnimation();
 
       // Show symbols falling, then downward wipe reveals portfolio above
-      setTimeout(startWipeReveal, 450);
+      setTimeout(startWipeReveal, 220);
     }
 
     if (mCanvas && splash) {
       runMatrixAnimation();
 
       // Auto start wipe reveal after initial rainfall
-      setTimeout(startWipeReveal, 450);
+      setTimeout(startWipeReveal, 220);
 
       // Instant skip on click or keypress
       splash.addEventListener('click', closeSplash);
