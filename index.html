@@ -1796,29 +1796,41 @@
       opacity: 0.09;
     }
 
-    /* 1. Hero Section: The Leibniz Integral (∫) — Option D: Definite Integral */
+    /* 1. Hero Section: The Leibniz Integral (∫) */
     .wm-integral {
-      top: -20px;
-      left: -115px;
-      right: auto;
-      font-size: 28rem;
-      transform: rotate(-3.5deg);
+      pointer-events: none;
+      user-select: none;
       opacity: 0.085;
-      filter: drop-shadow(0 0 45px rgba(16, 185, 129, 0.22));
+      filter: drop-shadow(0 0 42px rgba(16, 185, 129, 0.22));
+      transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
     }
-    .wm-limit-inf {
-      font-size: 0.32em;
-      vertical-align: 1.15em;
-      margin-left: -0.06em;
-      font-family: 'Cambria Math', 'Times New Roman', serif;
-      font-style: normal;
+
+    /* Preset 1: Tall Left Guardian (29rem, full headline to button height) */
+    .wm-integral,
+    .wm-integral.opt-tall {
+      top: -20px;
+      left: -110px;
+      right: auto;
+      font-size: 29rem;
+      transform: rotate(-3.5deg);
     }
-    .wm-limit-0 {
-      font-size: 0.32em;
-      vertical-align: -0.45em;
-      margin-left: -0.28em;
-      font-family: 'JetBrains Mono', monospace;
-      font-style: normal;
+
+    /* Preset 2: Compact Monogram (19.5rem, tightly framing name and title) */
+    .wm-integral.opt-compact {
+      top: -10px;
+      left: -70px;
+      right: auto;
+      font-size: 19.5rem;
+      transform: rotate(-3deg);
+    }
+
+    /* Preset 3: Right Flank Balance (29rem, beside the Live Status card) */
+    .wm-integral.opt-right {
+      top: -20px;
+      right: -110px;
+      left: auto;
+      font-size: 29rem;
+      transform: rotate(3.5deg);
     }
 
     /* 2. Projects Section (#work): Aleph Null (ℵ₀) — Flanking Right */
@@ -2180,7 +2192,7 @@
 
     <!-- ─── HERO SECTION (Human & Grounded) ─── -->
     <section class="hero">
-      <div class="math-watermark wm-integral" aria-hidden="true">&int;<sup class="wm-limit-inf">&infin;</sup><sub class="wm-limit-0">0</sub></div>
+      <div class="math-watermark wm-integral opt-compact" id="heroIntegral" aria-hidden="true">&int;</div>
       <div style="position: relative; z-index: 1;">
         <h1 class="hero-title">
           Ziad Ahmed Rabie.<br />
@@ -5045,7 +5057,47 @@
 
     // Run automatically on load
     runMatrixWipe();
+
+    // Live Integral Position Switcher for Ziad
+    function setHeroIntegral(opt) {
+      const el = document.getElementById('heroIntegral');
+      if (!el) return;
+      el.classList.remove('opt-tall', 'opt-compact', 'opt-right');
+
+      const bC = document.getElementById('btnOptCompact');
+      const bT = document.getElementById('btnOptTall');
+      const bR = document.getElementById('btnOptRight');
+
+      [bC, bT, bR].forEach(b => {
+        if (b) {
+          b.style.background = 'transparent';
+          b.style.color = 'var(--text-muted)';
+          b.style.borderColor = 'transparent';
+        }
+      });
+
+      if (opt === 'compact') {
+        el.classList.add('opt-compact');
+        if (bC) { bC.style.background = 'rgba(16,185,129,0.2)'; bC.style.color = '#10b981'; bC.style.borderColor = 'rgba(16,185,129,0.4)'; }
+      } else if (opt === 'tall') {
+        el.classList.add('opt-tall');
+        if (bT) { bT.style.background = 'rgba(16,185,129,0.2)'; bT.style.color = '#10b981'; bT.style.borderColor = 'rgba(16,185,129,0.4)'; }
+      } else if (opt === 'right') {
+        el.classList.add('opt-right');
+        if (bR) { bR.style.background = 'rgba(16,185,129,0.2)'; bR.style.color = '#10b981'; bR.style.borderColor = 'rgba(16,185,129,0.4)'; }
+      }
+    }
+    window.setHeroIntegral = setHeroIntegral;
   </script>
+
+  <!-- Floating Live Switcher to instantly compare Integral positions -->
+  <aside id="integralSwitcherBar" style="position:fixed; bottom:20px; right:20px; z-index:99999; display:flex; align-items:center; gap:0.4rem; background:rgba(15,23,42,0.85); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); border:1px solid rgba(16,185,129,0.35); padding:0.4rem 0.6rem; border-radius:30px; box-shadow:0 8px 30px rgba(0,0,0,0.4); font-family:var(--font-mono); font-size:0.75rem;">
+    <span style="color:var(--accent); font-weight:700; margin-left:0.25rem;">&int; Preview:</span>
+    <button onclick="setHeroIntegral('compact')" id="btnOptCompact" style="background:rgba(16,185,129,0.2); color:#10b981; border:1px solid rgba(16,185,129,0.4); border-radius:20px; padding:0.25rem 0.65rem; cursor:pointer; font-size:0.72rem; font-weight:600; transition:all 0.15s ease;">Compact Monogram (19.5rem)</button>
+    <button onclick="setHeroIntegral('tall')" id="btnOptTall" style="background:transparent; color:var(--text-muted); border:1px solid transparent; border-radius:20px; padding:0.25rem 0.65rem; cursor:pointer; font-size:0.72rem; font-weight:600; transition:all 0.15s ease;">Tall Left (29rem)</button>
+    <button onclick="setHeroIntegral('right')" id="btnOptRight" style="background:transparent; color:var(--text-muted); border:1px solid transparent; border-radius:20px; padding:0.25rem 0.65rem; cursor:pointer; font-size:0.72rem; font-weight:600; transition:all 0.15s ease;">Right Flank (29rem)</button>
+    <button onclick="document.getElementById('integralSwitcherBar').style.display='none'" title="Hide switcher" style="background:none; border:none; color:var(--text-dim); cursor:pointer; padding:0.2rem 0.35rem; font-size:0.85rem;">&times;</button>
+  </aside>
 
 </body>
 
