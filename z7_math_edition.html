@@ -1778,16 +1778,16 @@
       background: var(--bg-elevated);
     }
 
-    /* ─── INTRO MATRIX MATH RAIN LAYER (Transparent 1s Shower) ─── */
+    /* ─── INTRO MATRIX MATH RAIN: BLACK WIPING INTO PORTFOLIO ─── */
     .z7-matrix-canvas-layer {
       position: fixed;
       inset: 0;
       width: 100vw;
       height: 100vh;
       pointer-events: none;
-      z-index: 9999999;
+      z-index: 99999999;
       background: transparent;
-      transition: opacity 0.3s ease;
+      display: block;
     }
   </style>
 </head>
@@ -1882,7 +1882,7 @@
             <div>
               <strong>Current Focus:</strong>
               <div style="margin-top:0.25rem; font-size:0.8rem; color:var(--text-muted); line-height:1.45;">
-                • Statistics &amp; ML Research<br />
+                • Statistics &amp; Machine Learning Research<br />
                 • <code>ml-from-scratch</code> repo expansion (neural architectures &amp; backprop)
               </div>
             </div>
@@ -4245,78 +4245,86 @@
       }, 140);
     }
 
-    /* ─── 4. INTRO MATRIX MATH RAIN (1s Cascade Shower of Math Symbols) ─── */
+    /* ─── 4. INTRO: MATRIX SYMBOLS WIPE BLACK SCREEN INTO PORTFOLIO ─── */
     const mCanvas = document.getElementById('z7MatrixCanvas');
     let mAnimId = null;
 
-    function runMatrixShower() {
+    function runMatrixWipe() {
       if (!mCanvas) return;
       const mctx = mCanvas.getContext('2d');
 
       mCanvas.style.display = 'block';
-      mCanvas.style.opacity = '1';
-      mCanvas.width = window.innerWidth;
-      mCanvas.height = window.innerHeight;
+      const w = mCanvas.width = window.innerWidth;
+      const h = mCanvas.height = window.innerHeight;
 
-      const fontSize = 16;
-      const columns = Math.floor(mCanvas.width / fontSize);
+      const fontSize = 18;
+      const columns = Math.ceil(w / fontSize);
       const mathGlyphs = [
         '\u03C0', '\u2211', '\u222B', '\u2207', '\u03BB', 'Z7', 'e', '\u2202x', 
         'f(x)', '\u221E', 'O(1)', 'dx', '\u03C3', '\u03B8', '\u2248', '\u2200x', '\u2297'
       ];
 
-      // Each column has a drop with staggered start so symbols cascade down across the portfolio
+      // Drops start slightly staggered at top. Black covers from head down to bottom.
       const drops = [];
       for (let i = 0; i < columns; i++) {
         drops.push({
           x: i * fontSize,
-          y: -20 - Math.random() * 200,
-          speed: 18 + Math.random() * 12,
-          tailLength: 7 + Math.floor(Math.random() * 5),
+          y: -Math.random() * 50, // Slight stagger at the very top
+          speed: 15 + Math.random() * 7, // Sweeps down in ~1.0s to 1.2s
+          tailLength: 7 + Math.floor(Math.random() * 4),
           glyphs: []
         });
       }
 
       drops.forEach(d => {
-        for (let j = 0; j < 15; j++) {
+        for (let j = 0; j < 25; j++) {
           d.glyphs.push(mathGlyphs[Math.floor(Math.random() * mathGlyphs.length)]);
         }
       });
 
-      const startTime = performance.now();
-      const maxDuration = 1200; // 1.2s max duration
-
-      function drawMatrixFrame(now) {
-        const elapsed = now - startTime;
-        mctx.clearRect(0, 0, mCanvas.width, mCanvas.height);
+      function drawWipeFrame() {
+        mctx.clearRect(0, 0, w, h);
 
         let anyActive = false;
         mctx.font = '700 ' + fontSize + 'px monospace';
 
-        for (let i = 0; i < drops.length; i++) {
+        // 1. Draw black veil for each column below the falling head
+        mctx.fillStyle = '#06090e';
+        for (let i = 0; i < columns; i++) {
           const d = drops[i];
           d.y += d.speed;
 
-          if (d.y - d.tailLength * fontSize < mCanvas.height) {
+          const topOfBlack = Math.max(0, Math.floor(d.y));
+          if (topOfBlack < h) {
             anyActive = true;
+            // Black fills from the falling symbol down to the bottom
+            mctx.fillRect(d.x, topOfBlack, fontSize + 1, h - topOfBlack);
+          } else {
+            // Drop head reached bottom, check if tail is still clearing
+            if (d.y - d.tailLength * fontSize < h) {
+              anyActive = true;
+            }
           }
+        }
 
-          // Draw trailing glyphs
+        // 2. Draw glowing math symbols at and above the head
+        for (let i = 0; i < columns; i++) {
+          const d = drops[i];
           for (let j = 0; j < d.tailLength; j++) {
             const charY = d.y - j * fontSize;
-            if (charY > 0 && charY < mCanvas.height + fontSize) {
+            if (charY >= 0 && charY <= h + fontSize) {
               const char = d.glyphs[j % d.glyphs.length];
               if (j === 0) {
-                // Bright glowing head
-                mctx.fillStyle = '#a7f3d0';
+                // Leading head wiping the black away: bright glowing emerald white
+                mctx.fillStyle = '#e6fffa';
                 mctx.shadowColor = '#10b981';
-                mctx.shadowBlur = 10;
+                mctx.shadowBlur = 12;
               } else {
-                // Fading tail in emerald & cyan
+                // Trailing glyphs above: fading out into the revealed portfolio
                 const alpha = Math.max(0, 1 - j / d.tailLength);
                 mctx.fillStyle = j % 2 === 0 
-                  ? `rgba(16, 185, 129, ${alpha * 0.85})` 
-                  : `rgba(56, 189, 248, ${alpha * 0.75})`;
+                  ? `rgba(16, 185, 129, ${alpha * 0.95})` 
+                  : `rgba(56, 189, 248, ${alpha * 0.85})`;
                 mctx.shadowBlur = 0;
               }
               mctx.fillText(char, d.x, charY);
@@ -4326,29 +4334,26 @@
 
         mctx.shadowBlur = 0;
 
-        if (anyActive && elapsed < maxDuration) {
-          mAnimId = requestAnimationFrame(drawMatrixFrame);
+        if (anyActive) {
+          mAnimId = requestAnimationFrame(drawWipeFrame);
         } else {
-          // Finished showering down: hide layer cleanly
-          mCanvas.style.opacity = '0';
-          setTimeout(() => {
-            mCanvas.style.display = 'none';
-            mctx.clearRect(0, 0, mCanvas.width, mCanvas.height);
-          }, 300);
+          // Finished: all symbols cleared past the bottom, entire portfolio is revealed
+          mCanvas.style.display = 'none';
+          mctx.clearRect(0, 0, w, h);
         }
       }
 
       if (mAnimId) cancelAnimationFrame(mAnimId);
-      mAnimId = requestAnimationFrame(drawMatrixFrame);
+      mAnimId = requestAnimationFrame(drawWipeFrame);
     }
 
-    // Replay function on clicking Z7 AXIOMS pill
+    // Replay function when clicking Z7 AXIOMS pill
     function replayMatrixSplash() {
-      runMatrixShower();
+      runMatrixWipe();
     }
 
     // Run automatically on load
-    runMatrixShower();
+    runMatrixWipe();
   </script>
 
 </body>
