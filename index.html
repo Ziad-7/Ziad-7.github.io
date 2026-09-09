@@ -707,16 +707,24 @@
 
     .allocation-bar {
       display: flex;
+      align-items: stretch;
       height: 10px;
       border-radius: 5px;
       overflow: hidden;
       margin-bottom: 1rem;
+      background: var(--bg);
       border: 1px solid var(--border-subtle);
+      box-sizing: border-box;
     }
 
     .alloc-seg {
       height: 100%;
-      transition: width 0.2s ease;
+      flex-shrink: 0;
+      box-sizing: border-box;
+      display: block;
+      margin: 0;
+      padding: 0;
+      transition: width 0.25s ease;
     }
 
     /* ─── SELECTED WORK (BENTO GRID CARDS) ─── */
@@ -1526,7 +1534,7 @@
             <i class="ti ti-math-function"></i> 2. MathGPT
           </button>
           <button class="lab-tab-btn" onclick="switchLabTab(2)">
-            <i class="ti ti-chart-pie"></i> 3. AI Portfolio Optimizer
+            <i class="ti ti-chart-pie"></i> 3. Egyptian Multi-Asset AI Optimizer
           </button>
         </div>
 
@@ -2907,8 +2915,12 @@
 
     let activeStockPreset = 'ai';
 
-    function updateSliderTrack(slider, color, pct) {
+    function updateSliderTrack(slider, color) {
       if (!slider) return;
+      const min = parseFloat(slider.min || 0);
+      const max = parseFloat(slider.max || 100);
+      const val = parseFloat(slider.value || 0);
+      const pct = max > min ? ((val - min) / (max - min)) * 100 : 0;
       const isLight = document.body.classList.contains('light');
       const trackBg = isLight ? 'rgba(0,0,0,0.08)' : 'rgba(255,255,255,0.08)';
       slider.style.background = `linear-gradient(to right, ${color} 0%, ${color} ${pct}%, ${trackBg} ${pct}%, ${trackBg} 100%)`;
@@ -2941,12 +2953,12 @@
       document.getElementById('valTBills').textContent = `${pTB}%`;
       document.getElementById('valRef').textContent = `${pRef}%`;
 
-      // Update dynamic slider fills
-      updateSliderTrack(document.getElementById('sliderEgx100'), '#38bdf8', p100);
-      updateSliderTrack(document.getElementById('sliderGold'), '#f59e0b', pGold);
-      updateSliderTrack(document.getElementById('sliderEgx30'), '#818cf8', p30);
-      updateSliderTrack(document.getElementById('sliderTBills'), '#10b981', pTB);
-      updateSliderTrack(document.getElementById('sliderRef'), '#ec4899', pRef);
+      // Update dynamic slider fills based on slider thumb value
+      updateSliderTrack(document.getElementById('sliderEgx100'), '#38bdf8');
+      updateSliderTrack(document.getElementById('sliderGold'), '#f59e0b');
+      updateSliderTrack(document.getElementById('sliderEgx30'), '#818cf8');
+      updateSliderTrack(document.getElementById('sliderTBills'), '#10b981');
+      updateSliderTrack(document.getElementById('sliderRef'), '#ec4899');
 
       // Update Allocation Bar
       document.getElementById('barEgx100').style.width = `${wEgx100 * 100}%`;
