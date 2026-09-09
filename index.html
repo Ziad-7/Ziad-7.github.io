@@ -4222,13 +4222,27 @@
   </script>
 
   <script>
-    /* ─── 1. OPTIONAL SPARKLE BURST UTILITY ─── */
+    /* ─── 1. MATHEMATICAL SPARKLE BURSTS ON NON-BUTTON CLICKS ─── */
     const z7MathSymbols = [
       '\u03C0', '\u2211', '\u222B', '\u2207', '\u221E', '\u03BB', 'Z7', 'e',
       '\u221A2', '\u03D5', '\u2202x', '\u2248', '\u211D', '\u2200x', '\u2208',
       'e^{i\u03C0}+1=0', '\u2207L', 'f(x)', '\u03C3^2', '\u2297', 'O(1)', 'dx'
     ];
     const z7Colors = ['#10b981', '#38bdf8', '#a855f7', '#f59e0b', '#34d399', '#60a5fa'];
+
+    window.addEventListener('click', (e) => {
+      // Strictly ignore clicks on actual clickable buttons, links, controls, tabs, cards, or inputs
+      if (
+        e.target.closest('button, a, input, select, textarea, [role="button"], [onclick], label') ||
+        e.target.closest('.btn, .btn-nav-action, .hero-link-btn, .btn-contact-main, .theme-btn') ||
+        e.target.closest('.tab-btn, .demo-action-btn, .preset-pill, .modal-close-btn, .wave-float-item') ||
+        e.target.closest('nav, .status-wave-container, .modal-dialog, canvas, .stock-slider') ||
+        window.getComputedStyle(e.target).cursor === 'pointer'
+      ) {
+        return;
+      }
+      spawnZ7Particles(e.clientX, e.clientY, 8);
+    });
 
     function spawnZ7Particles(x, y, count) {
       for (let i = 0; i < count; i++) {
