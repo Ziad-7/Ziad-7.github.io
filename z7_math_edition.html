@@ -2003,7 +2003,7 @@
       <!-- Under the waves: Z7 Facts / Axioms -->
       <div class="z7-facts-strip">
         <div class="z7-facts-label">
-          <span class="z7-facts-pill"><i class="ti ti-terminal-2"></i> Z7 AXIOMS</span>
+          <span class="z7-facts-pill" onclick="replayMatrixSplash()" style="cursor:pointer;" title="Click to replay Matrix Math Rain"><i class="ti ti-terminal-2"></i> Z7 AXIOMS</span>
         </div>
         <div class="z7-facts-body" id="z7FactDisplay" onclick="nextZ7Fact()" title="Click for next Z7 fact">
           "I don't debug code, it's correct"
@@ -4350,6 +4350,41 @@
           }
         }, 700);
       }
+    }
+
+    function replayMatrixSplash() {
+      if (!splash || !mCanvas) return;
+      splashClosed = false;
+      splash.style.display = 'flex';
+      splash.classList.remove('fade-out');
+      splash.style.opacity = '1';
+      splash.style.pointerEvents = 'all';
+
+      const mctx = mCanvas.getContext('2d');
+      mCanvas.width = window.innerWidth;
+      mCanvas.height = window.innerHeight;
+      const fontSize = 16;
+      const columns = Math.floor(mCanvas.width / fontSize);
+      const drops = Array(columns).fill(1);
+      const mathGlyphs = ['\u03C0', '\u2211', '\u222B', '\u2207', '\u03BB', 'Z7', 'e', '\u2202x', 'f(x)', '\u221E', 'O(1)', 'dx', '\u03C3', '\u03B8', '\u2248', '\u2200x'];
+
+      if (mInterval) clearInterval(mInterval);
+      mInterval = setInterval(() => {
+        mctx.fillStyle = 'rgba(6, 9, 14, 0.15)';
+        mctx.fillRect(0, 0, mCanvas.width, mCanvas.height);
+        mctx.fillStyle = '#10b981';
+        mctx.font = '600 ' + fontSize + 'px monospace';
+        for (let i = 0; i < drops.length; i++) {
+          const text = mathGlyphs[Math.floor(Math.random() * mathGlyphs.length)];
+          mctx.fillText(text, i * fontSize, drops[i] * fontSize);
+          if (drops[i] * fontSize > mCanvas.height && Math.random() > 0.975) {
+            drops[i] = 0;
+          }
+          drops[i]++;
+        }
+      }, 35);
+
+      setTimeout(closeSplash, 1300);
     }
 
     if (mCanvas && splash) {
