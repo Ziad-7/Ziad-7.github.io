@@ -1561,13 +1561,13 @@
     .z7-tag {
       background: #047857;
       color: #ffffff;
-      font-family: var(--font-mono);
+      font-family: var(--font-heading);
       font-size: 0.72rem;
-      font-weight: 800;
-      padding: 0.15rem 0.52rem;
+      font-weight: 900;
+      padding: 0.15rem 0.48rem;
       border-radius: 4px;
       margin-right: 0.45rem;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.06em;
       display: inline-block;
     }
 
@@ -1598,7 +1598,7 @@
       }
     }
 
-    /* ─── REPOSITIONED HARMONIC WAVE RIBBON & Z7 CORE ─── */
+    /* ─── REPOSITIONED HARMONIC WAVE RIBBON & BOLD BLOCKY Z7 CORE ─── */
     .z7-wave-ribbon-wrap {
       margin: 2.5rem 0 1.8rem;
       position: relative;
@@ -1633,7 +1633,7 @@
       background: rgba(0,0,0,0.015);
     }
 
-    /* Wave Stage with Centered Z7 Block */
+    /* Wave Stage with Centered Bold Blocky Z7 Block */
     .z7-wave-stage {
       position: relative;
       width: 100%;
@@ -1655,29 +1655,30 @@
       z-index: 1;
     }
 
+    /* Bold, blocky font with natural letter-spacing (no gluing) */
     .z7-core-text {
-      font-family: 'JetBrains Mono', 'Fira Code', monospace;
-      font-size: 4.4rem;
-      font-weight: 800;
-      letter-spacing: 0.25em;
-      padding-left: 0.25em;
-      color: rgba(16, 185, 129, 0.14);
+      font-family: var(--font-heading), 'Plus Jakarta Sans', -apple-system, sans-serif;
+      font-size: 4.6rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      color: rgba(16, 185, 129, 0.15);
       text-shadow: 0 0 35px rgba(16, 185, 129, 0.22), 0 0 75px rgba(56, 189, 248, 0.14);
       transition: color 0.3s ease, text-shadow 0.3s ease;
+      line-height: 1;
     }
 
     .z7-wave-ribbon-wrap:hover .z7-core-text {
-      color: rgba(16, 185, 129, 0.25);
+      color: rgba(16, 185, 129, 0.26);
       text-shadow: 0 0 45px rgba(16, 185, 129, 0.45), 0 0 90px rgba(56, 189, 248, 0.25);
     }
 
     body.light .z7-core-text {
-      color: rgba(4, 120, 87, 0.11);
+      color: rgba(4, 120, 87, 0.12);
       text-shadow: 0 0 35px rgba(4, 120, 87, 0.14);
     }
 
     body.light .z7-wave-ribbon-wrap:hover .z7-core-text {
-      color: rgba(4, 120, 87, 0.20);
+      color: rgba(4, 120, 87, 0.22);
       text-shadow: 0 0 40px rgba(4, 120, 87, 0.24);
     }
 
@@ -1726,9 +1727,10 @@
       gap: 0.35rem;
       user-select: none;
       transition: all 0.15s ease;
+      cursor: pointer;
     }
     .z7-facts-pill:hover {
-      background: rgba(16, 185, 129, 0.2);
+      background: rgba(16, 185, 129, 0.22);
       border-color: var(--accent);
       transform: translateY(-1px);
     }
@@ -1776,137 +1778,24 @@
       background: var(--bg-elevated);
     }
 
-    /* ─── INTRO MATRIX MATH RAIN: DOWNWARD REVEAL TRANSITION ─── */
-    .z7-matrix-splash {
+    /* ─── INTRO MATRIX MATH RAIN LAYER (Transparent 1s Shower) ─── */
+    .z7-matrix-canvas-layer {
       position: fixed;
       inset: 0;
       width: 100vw;
       height: 100vh;
-      z-index: 99999999;
-      background: #06090e;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      clip-path: inset(0 0 0 0);
-      will-change: clip-path;
-    }
-
-    .z7-matrix-splash.wiping {
-      animation: z7WipeDown 0.88s cubic-bezier(0.35, 0, 0.25, 1) forwards;
-    }
-
-    @keyframes z7WipeDown {
-      0% {
-        clip-path: inset(0 0 0 0);
-      }
-      100% {
-        clip-path: inset(100% 0 0 0);
-      }
-    }
-
-    /* Glowing laser leading edge of the downward wipe */
-    .z7-wipe-laser {
-      position: fixed;
-      left: 0;
-      width: 100vw;
-      height: 3px;
-      background: linear-gradient(90deg, transparent 5%, #10b981 25%, #38bdf8 50%, #10b981 75%, transparent 95%);
-      box-shadow: 0 0 16px #10b981, 0 0 32px rgba(56, 189, 248, 0.8), 0 3px 18px rgba(16, 185, 129, 0.5);
-      z-index: 100000000;
       pointer-events: none;
-      display: none;
-      top: 0;
-      will-change: top, opacity;
-    }
-
-    .z7-wipe-laser.active {
-      display: block;
-      animation: z7LaserSweep 0.88s cubic-bezier(0.35, 0, 0.25, 1) forwards;
-    }
-
-    @keyframes z7LaserSweep {
-      0% {
-        top: 0;
-        opacity: 1;
-      }
-      92% {
-        top: 100vh;
-        opacity: 1;
-      }
-      100% {
-        top: 100vh;
-        opacity: 0;
-      }
-    }
-
-    #z7MatrixCanvas {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      display: block;
-    }
-
-    .z7-matrix-overlay-content {
-      position: relative;
-      z-index: 2;
-      text-align: center;
-      pointer-events: none;
-      animation: matrixPulse 1.2s ease infinite alternate;
-    }
-
-    @keyframes matrixPulse {
-      from { transform: scale(0.98); opacity: 0.9; }
-      to { transform: scale(1.02); opacity: 1; }
-    }
-
-    .z7-matrix-brand {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 5rem;
-      font-weight: 800;
-      letter-spacing: 0.28em;
-      padding-left: 0.28em;
-      color: #10b981;
-      text-shadow: 0 0 35px rgba(16, 185, 129, 0.7), 0 0 75px rgba(16, 185, 129, 0.4);
-    }
-
-    .z7-matrix-sub {
-      font-family: var(--font-mono);
-      font-size: 0.76rem;
-      font-weight: 700;
-      letter-spacing: 0.25em;
-      color: #38bdf8;
-      margin-top: 0.4rem;
-      text-shadow: 0 0 15px rgba(56, 189, 248, 0.5);
-    }
-
-    .z7-matrix-skip-hint {
-      position: absolute;
-      bottom: 2rem;
-      z-index: 2;
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      color: rgba(255, 255, 255, 0.4);
-      letter-spacing: 0.05em;
-      pointer-events: none;
+      z-index: 9999999;
+      background: transparent;
+      transition: opacity 0.3s ease;
     }
   </style>
 </head>
 
 <body>
 
-  <!-- ─── INTRO MATRIX MATH RAIN SPLASH (Cascades down & reveals portfolio above) ─── -->
-  <div id="z7MatrixSplash" class="z7-matrix-splash">
-    <canvas id="z7MatrixCanvas"></canvas>
-    <div class="z7-matrix-overlay-content">
-      <div class="z7-matrix-brand">Z7</div>
-      <div class="z7-matrix-sub">INITIALIZING MATHEMATICAL ARCHITECTURE</div>
-    </div>
-    <div class="z7-matrix-skip-hint">Click anywhere to skip</div>
-  </div>
-  <div id="z7WipeLaser" class="z7-wipe-laser"></div>
+  <!-- ─── INTRO MATRIX MATH RAIN (1s Shower of Math Symbols) ─── -->
+  <canvas id="z7MatrixCanvas" class="z7-matrix-canvas-layer"></canvas>
 
 
   <!-- STICKY PREVIEW SWITCHER BAR -->
@@ -1954,7 +1843,7 @@
     <section class="hero">
       <div>
         <div class="hero-greeting">
-          <i class="ti ti-brain"></i> Cairo, Egypt &nbsp;•&nbsp; EUI Year 4 &nbsp;•&nbsp; AI Systems &amp; Mathematical Architect &bull; <strong style="color:var(--accent); letter-spacing:0.12em; font-family:var(--font-mono);">Z7</strong>
+          <i class="ti ti-brain"></i> Cairo, Egypt &nbsp;•&nbsp; EUI Year 4 &nbsp;•&nbsp; AI Systems &amp; Mathematical Architect &bull; <strong style="color:var(--accent); font-family:var(--font-heading); font-weight:900; letter-spacing:0.06em;">Z7</strong>
         </div>
         <h1 class="hero-title">
           AI systems engineer &amp; computer engineering student.
@@ -1998,10 +1887,7 @@
               </div>
             </div>
           </div>
-          <div class="status-row">
-            <i class="ti ti-briefcase"></i>
-            <div><strong>Availability:</strong> Open for AI engineering internships &amp; select technical collaborations</div>
-          </div>
+          
         </div>
       </aside>
     </section>
@@ -4359,98 +4245,110 @@
       }, 140);
     }
 
-    /* ─── 4. INTRO MATRIX MATH RAIN SPLASH (Wipes down to reveal portfolio above) ─── */
-    const splash = document.getElementById('z7MatrixSplash');
+    /* ─── 4. INTRO MATRIX MATH RAIN (1s Cascade Shower of Math Symbols) ─── */
     const mCanvas = document.getElementById('z7MatrixCanvas');
-    const laser = document.getElementById('z7WipeLaser');
-    let mInterval = null;
-    let splashClosed = false;
+    let mAnimId = null;
 
-    function startWipeReveal() {
-      if (splashClosed) return;
-      if (splash) splash.classList.add('wiping');
-      if (laser) laser.classList.add('active');
-
-      // Once wipe reaches bottom:
-      setTimeout(() => {
-        closeSplash();
-      }, 960);
-    }
-
-    function closeSplash() {
-      if (splashClosed) return;
-      splashClosed = true;
-      if (splash) {
-        splash.style.display = 'none';
-        splash.classList.remove('wiping');
-      }
-      if (laser) {
-        laser.style.display = 'none';
-        laser.classList.remove('active');
-      }
-      if (mInterval) {
-        clearInterval(mInterval);
-        mInterval = null;
-      }
-    }
-
-    function runMatrixAnimation() {
+    function runMatrixShower() {
       if (!mCanvas) return;
       const mctx = mCanvas.getContext('2d');
+
+      mCanvas.style.display = 'block';
+      mCanvas.style.opacity = '1';
       mCanvas.width = window.innerWidth;
       mCanvas.height = window.innerHeight;
 
       const fontSize = 16;
       const columns = Math.floor(mCanvas.width / fontSize);
-      const drops = Array(columns).fill(1);
-      const mathGlyphs = ['\u03C0', '\u2211', '\u222B', '\u2207', '\u03BB', 'Z 7', 'e', '\u2202x', 'f(x)', '\u221E', 'O(1)', 'dx', '\u03C3', '\u03B8', '\u2248', '\u2200x'];
+      const mathGlyphs = [
+        '\u03C0', '\u2211', '\u222B', '\u2207', '\u03BB', 'Z7', 'e', '\u2202x', 
+        'f(x)', '\u221E', 'O(1)', 'dx', '\u03C3', '\u03B8', '\u2248', '\u2200x', '\u2297'
+      ];
 
-      if (mInterval) clearInterval(mInterval);
-      mInterval = setInterval(() => {
-        mctx.fillStyle = 'rgba(6, 9, 14, 0.16)';
-        mctx.fillRect(0, 0, mCanvas.width, mCanvas.height);
-
-        mctx.fillStyle = '#10b981';
-        mctx.font = '600 ' + fontSize + 'px monospace';
-
-        for (let i = 0; i < drops.length; i++) {
-          const text = mathGlyphs[Math.floor(Math.random() * mathGlyphs.length)];
-          mctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-          if (drops[i] * fontSize > mCanvas.height && Math.random() > 0.975) {
-            drops[i] = 0;
-          }
-          drops[i]++;
-        }
-      }, 35);
-    }
-
-    function replayMatrixSplash() {
-      if (!splash || !mCanvas) return;
-      splashClosed = false;
-      splash.style.display = 'flex';
-      splash.classList.remove('wiping');
-      if (laser) {
-        laser.style.display = 'none';
-        laser.classList.remove('active');
+      // Each column has a drop with staggered start so symbols cascade down across the portfolio
+      const drops = [];
+      for (let i = 0; i < columns; i++) {
+        drops.push({
+          x: i * fontSize,
+          y: -20 - Math.random() * 200,
+          speed: 18 + Math.random() * 12,
+          tailLength: 7 + Math.floor(Math.random() * 5),
+          glyphs: []
+        });
       }
 
-      runMatrixAnimation();
+      drops.forEach(d => {
+        for (let j = 0; j < 15; j++) {
+          d.glyphs.push(mathGlyphs[Math.floor(Math.random() * mathGlyphs.length)]);
+        }
+      });
 
-      // Show symbols falling, then downward wipe reveals portfolio above
-      setTimeout(startWipeReveal, 220);
+      const startTime = performance.now();
+      const maxDuration = 1200; // 1.2s max duration
+
+      function drawMatrixFrame(now) {
+        const elapsed = now - startTime;
+        mctx.clearRect(0, 0, mCanvas.width, mCanvas.height);
+
+        let anyActive = false;
+        mctx.font = '700 ' + fontSize + 'px monospace';
+
+        for (let i = 0; i < drops.length; i++) {
+          const d = drops[i];
+          d.y += d.speed;
+
+          if (d.y - d.tailLength * fontSize < mCanvas.height) {
+            anyActive = true;
+          }
+
+          // Draw trailing glyphs
+          for (let j = 0; j < d.tailLength; j++) {
+            const charY = d.y - j * fontSize;
+            if (charY > 0 && charY < mCanvas.height + fontSize) {
+              const char = d.glyphs[j % d.glyphs.length];
+              if (j === 0) {
+                // Bright glowing head
+                mctx.fillStyle = '#a7f3d0';
+                mctx.shadowColor = '#10b981';
+                mctx.shadowBlur = 10;
+              } else {
+                // Fading tail in emerald & cyan
+                const alpha = Math.max(0, 1 - j / d.tailLength);
+                mctx.fillStyle = j % 2 === 0 
+                  ? `rgba(16, 185, 129, ${alpha * 0.85})` 
+                  : `rgba(56, 189, 248, ${alpha * 0.75})`;
+                mctx.shadowBlur = 0;
+              }
+              mctx.fillText(char, d.x, charY);
+            }
+          }
+        }
+
+        mctx.shadowBlur = 0;
+
+        if (anyActive && elapsed < maxDuration) {
+          mAnimId = requestAnimationFrame(drawMatrixFrame);
+        } else {
+          // Finished showering down: hide layer cleanly
+          mCanvas.style.opacity = '0';
+          setTimeout(() => {
+            mCanvas.style.display = 'none';
+            mctx.clearRect(0, 0, mCanvas.width, mCanvas.height);
+          }, 300);
+        }
+      }
+
+      if (mAnimId) cancelAnimationFrame(mAnimId);
+      mAnimId = requestAnimationFrame(drawMatrixFrame);
     }
 
-    if (mCanvas && splash) {
-      runMatrixAnimation();
-
-      // Auto start wipe reveal after initial rainfall
-      setTimeout(startWipeReveal, 220);
-
-      // Instant skip on click or keypress
-      splash.addEventListener('click', closeSplash);
-      window.addEventListener('keydown', closeSplash, { once: true });
+    // Replay function on clicking Z7 AXIOMS pill
+    function replayMatrixSplash() {
+      runMatrixShower();
     }
+
+    // Run automatically on load
+    runMatrixShower();
   </script>
 
 </body>
