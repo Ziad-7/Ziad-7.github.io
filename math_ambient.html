@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>[Edition 2: Ambient & Math Mode] Ziad Ahmed Rabie — Mathematical AI</title>
+  <title>[Concept 2: Ambient Waves & Fixed Math Mode] Ziad Ahmed Rabie</title>
   <meta name="description"
     content="Personal portfolio of Ziad Ahmed Rabie. Computer engineering student at EUI (3.95 GPA, Full Merit Scholarship) specializing in applied AI engineering, mathematical machine learning models from scratch, and efficient systems." />
 
@@ -1557,10 +1557,9 @@
       }
     }
   
-    /* ─── EDITION 2: AMBIENT WAVES & MATH MODE STYLING ─── */
-    #hero {
+    /* ─── FIXED AMBIENT WAVE CANVAS ─── */
+    .hero {
       position: relative;
-      overflow: hidden;
     }
 
     #mathAmbientCanvas {
@@ -1571,38 +1570,40 @@
       height: 100%;
       pointer-events: none;
       z-index: 0;
-      opacity: 0.18;
+      opacity: 0.35;
+      border-radius: var(--radius-lg);
       transition: opacity 0.3s ease;
     }
 
     body.light #mathAmbientCanvas {
-      opacity: 0.22;
+      opacity: 0.45;
     }
 
-    .hero-content {
+    .hero > * {
       position: relative;
       z-index: 1;
     }
 
-    /* Math Mode Toggle Button in Nav */
+    /* Math Mode Button in Nav */
     .math-mode-btn {
-      background: rgba(56, 189, 248, 0.1);
-      border: 1px solid rgba(56, 189, 248, 0.3);
-      color: var(--blue);
-      padding: 0.4rem 0.85rem;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      color: var(--accent);
+      padding: 0.38rem 0.85rem;
       border-radius: var(--radius-sm);
       font-family: var(--font-mono);
       font-size: 0.78rem;
-      font-weight: 600;
+      font-weight: 700;
       display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
+      gap: 0.45rem;
       cursor: pointer;
       transition: all 0.2s ease;
     }
 
     .math-mode-btn:hover {
-      background: rgba(56, 189, 248, 0.2);
+      background: var(--accent);
+      color: #ffffff;
       transform: translateY(-1px);
     }
 
@@ -1610,33 +1611,27 @@
       background: #047857;
       border-color: #047857;
       color: #ffffff;
-      box-shadow: 0 0 12px rgba(4, 120, 87, 0.4);
+      box-shadow: 0 0 12px rgba(4, 120, 87, 0.5);
     }
 
-    /* Math notation badge floating indicator */
+    /* Floating Math Mode Toast */
     #mathModeToast {
       position: fixed;
       bottom: 1.5rem;
       right: 1.5rem;
       background: #0f172a;
-      color: #38bdf8;
-      border: 1px solid #1e293b;
-      padding: 0.6rem 1.1rem;
+      color: #f8fafc;
+      border: 1px solid #334155;
+      padding: 0.65rem 1.2rem;
       border-radius: var(--radius-md);
       font-family: var(--font-mono);
       font-size: 0.82rem;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
-      z-index: 9999;
+      box-shadow: 0 10px 28px rgba(0,0,0,0.45);
+      z-index: 99999;
       display: none;
       align-items: center;
       gap: 0.6rem;
-      animation: fadeIn 0.3s ease;
-    }
-
-    /* Math Mode Text Transformations */
-    body.math-mode-on .math-trans-hero {
-      color: #10b981 !important;
-      font-family: 'JetBrains Mono', monospace !important;
+      animation: fadeIn 0.25s ease;
     }
 
   </style>
@@ -1644,17 +1639,17 @@
 
 <body>
 
-  <!-- STICKY MATH EDITIONS SWITCHER BAR -->
+  <!-- STICKY MATH VISUALS SWITCHER BAR -->
   <div id="mathPreviewBanner" style="background:#070a10; color:#f8fafc; font-family:'JetBrains Mono',monospace; font-size:0.75rem; padding:0.5rem 1.2rem; position:sticky; top:0; z-index:99999; border-bottom:1px solid #1e293b; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:0.5rem; box-shadow:0 4px 14px rgba(0,0,0,0.35);">
     <div style="display:flex; align-items:center; gap:0.6rem;">
-      <span style="background:#10b981; color:#052e16; font-size:0.65rem; font-weight:800; padding:0.15rem 0.5rem; border-radius:3px; letter-spacing:0.04em;">∑ MATH IDENTITY PREVIEW</span>
-      <span style="font-weight:600; color:#e2e8f0;">EDITION 2</span>
+      <span style="background:#10b981; color:#052e16; font-size:0.65rem; font-weight:800; padding:0.15rem 0.5rem; border-radius:3px; letter-spacing:0.04em;">∑ MATH VIBES PREVIEW</span>
+      <span style="font-weight:600; color:#e2e8f0;">AMBIENT</span>
     </div>
     <div style="display:flex; align-items:center; gap:0.35rem; flex-wrap:wrap;">
-      <span style="color:#64748b; font-size:0.7rem; margin-right:0.3rem;">Switch Edition:</span>
-      <a href="math_theorems.html" style="color:#94a3b8; padding:0.25rem 0.5rem; text-decoration:none; transition:color 0.15s;">Edition 1: Theorem Lab</a>
-      <a href="math_ambient.html" style="background:#047857; color:#ffffff; font-weight:700; padding:0.25rem 0.65rem; border-radius:4px; text-decoration:none;">Edition 2: Ambient & Math Mode</a>
-      <a href="math_sandbox.html" style="color:#94a3b8; padding:0.25rem 0.5rem; text-decoration:none; transition:color 0.15s;">Edition 3: Sandbox & Taxonomy</a>
+      <span style="color:#64748b; font-size:0.7rem; margin-right:0.3rem;">Switch Concept:</span>
+      <a href="math_sparks.html" style="color:#94a3b8; padding:0.25rem 0.5rem; text-decoration:none; transition:color 0.15s;">1: Math Sparks & Grid</a>
+      <a href="math_ambient.html" style="background:#047857; color:#ffffff; font-weight:700; padding:0.25rem 0.65rem; border-radius:4px; text-decoration:none;">2: Ambient Waves & Fixed Math Mode</a>
+      <a href="math_geometry.html" style="color:#94a3b8; padding:0.25rem 0.5rem; text-decoration:none; transition:color 0.15s;">3: Curve Morph & Hologram</a>
       <span style="color:#334155; margin:0 0.2rem;">|</span>
       <a href="index.html" style="color:#38bdf8; font-weight:600; text-decoration:none; padding:0.2rem 0.4rem;">← Main Portfolio</a>
     </div>
@@ -1680,7 +1675,7 @@
         <a href="Ziad_Ahmed_Rabie_Resume.pdf" target="_blank" class="btn-nav-action">
           <i class="ti ti-file-text"></i> Resume
         </a>
-        <button class="math-mode-btn" id="mathModeToggle" onclick="toggleMathMode()" aria-label="Toggle LaTeX Math Notation"><i class="ti ti-math-function"></i> <span>∑ Math Mode</span></button>
+        <button class="math-mode-btn" id="mathModeToggle" onclick="toggleMathMode()" aria-label="Toggle LaTeX Math Mode"><i class="ti ti-math-function"></i> <span>∑ Math Mode</span></button>
         <button class="theme-btn" id="themeToggle" aria-label="Toggle visual theme">
           <i class="ti ti-sun" id="themeSun" style="display:none;"></i>
           <i class="ti ti-moon" id="themeMoon"></i>
@@ -3893,23 +3888,35 @@
       themeBtn.addEventListener('click', () => setTheme(!document.body.classList.contains('light')));
     }
   </script>
-<div id="mathModeToast"></div>
+
+  <div id="mathModeToast"></div>
 
   <script>
-    /* ─── EDITION 2: AMBIENT FOURIER / GAUSSIAN HARMONIC FIELD ─── */
-    const ambientCanvas = document.getElementById('mathAmbientCanvas');
+    /* ─── FIXED & VISIBLE AMBIENT HARMONIC FOURIER FIELD ─── */
+    const heroElem = document.querySelector('.hero');
+    let ambientCanvas = document.getElementById('mathAmbientCanvas');
+
+    if (!ambientCanvas && heroElem) {
+      ambientCanvas = document.createElement('canvas');
+      ambientCanvas.id = 'mathAmbientCanvas';
+      heroElem.style.position = 'relative';
+      heroElem.insertBefore(ambientCanvas, heroElem.firstChild);
+    }
+
     if (ambientCanvas) {
       const actx = ambientCanvas.getContext('2d');
-      let aWidth = ambientCanvas.width = ambientCanvas.offsetWidth;
-      let aHeight = ambientCanvas.height = ambientCanvas.offsetHeight;
+      let aWidth = ambientCanvas.width = ambientCanvas.offsetWidth || 1160;
+      let aHeight = ambientCanvas.height = ambientCanvas.offsetHeight || 380;
       let time = 0;
       let mouseX = aWidth / 2, mouseY = aHeight / 2;
 
-      window.addEventListener('resize', () => {
+      function resizeCanvas() {
         if (!ambientCanvas) return;
         aWidth = ambientCanvas.width = ambientCanvas.offsetWidth;
         aHeight = ambientCanvas.height = ambientCanvas.offsetHeight;
-      });
+      }
+      window.addEventListener('resize', resizeCanvas);
+      resizeCanvas();
 
       window.addEventListener('mousemove', (e) => {
         const rect = ambientCanvas.getBoundingClientRect();
@@ -3917,75 +3924,96 @@
         mouseY = e.clientY - rect.top;
       });
 
-      function drawAmbientWaves() {
-        if (!actx) return;
+      function drawAmbientHarmonics() {
+        if (!actx || !aWidth || !aHeight) return;
         actx.clearRect(0, 0, aWidth, aHeight);
         const isLight = document.body.classList.contains('light');
-        const primaryColor = isLight ? '#047857' : '#10b981';
-        const secondaryColor = isLight ? '#0284c7' : '#38bdf8';
 
-        time += 0.015;
+        time += 0.018;
 
-        // Draw 5 mathematical wave harmonics
-        for (let wave = 0; wave < 5; wave++) {
+        // 4 Harmonic mathematical wave lines
+        const harmonics = [
+          { freq: 0.0035, amp: 28, phase: time * 1.2, color: isLight ? '#047857' : '#10b981', width: 2.2 },
+          { freq: 0.0055, amp: 20, phase: time * 0.9 + 1.2, color: isLight ? '#0369a1' : '#38bdf8', width: 1.8 },
+          { freq: 0.0022, amp: 35, phase: time * 1.5 + 2.5, color: isLight ? '#7c3aed' : '#a855f7', width: 1.4 },
+          { freq: 0.0080, amp: 14, phase: time * 2.0 + 3.8, color: isLight ? '#b45309' : '#f59e0b', width: 1.0 }
+        ];
+
+        harmonics.forEach((h, idx) => {
           actx.beginPath();
-          const freq = 0.003 + wave * 0.0015;
-          const amp = 24 + wave * 14;
-          const phase = time + wave * 0.8;
-          const yBase = aHeight * (0.35 + wave * 0.12);
+          const yCenter = aHeight * (0.35 + idx * 0.15);
 
-          for (let x = 0; x < aWidth; x += 8) {
-            // Distance perturbation from mouse
-            const dist = Math.hypot(x - mouseX, yBase - mouseY);
-            const mouseFactor = Math.max(0, 1 - dist / 220);
-            const ripple = Math.sin(dist * 0.05 - time * 4) * 22 * mouseFactor;
+          for (let x = 0; x < aWidth; x += 6) {
+            const dist = Math.hypot(x - mouseX, yCenter - mouseY);
+            const mouseEffect = Math.max(0, 1 - dist / 200);
+            const ripple = Math.sin(dist * 0.06 - time * 3) * 18 * mouseEffect;
 
-            const y = yBase + Math.sin(x * freq + phase) * amp + ripple;
+            const y = yCenter + Math.sin(x * h.freq + h.phase) * h.amp + ripple;
             if (x === 0) actx.moveTo(x, y);
             else actx.lineTo(x, y);
           }
-
-          actx.strokeStyle = wave % 2 === 0 ? primaryColor : secondaryColor;
-          actx.lineWidth = wave === 2 ? 2.5 : 1.2;
+          actx.strokeStyle = h.color;
+          actx.lineWidth = h.width;
           actx.stroke();
-        }
+        });
 
-        requestAnimationFrame(drawAmbientWaves);
+        requestAnimationFrame(drawAmbientHarmonics);
       }
-      drawAmbientWaves();
+      drawAmbientHarmonics();
     }
 
-    /* ─── [∑ Math Mode] Dynamic Transformation ─── */
-    let mathModeActive = false;
-    const mathDict = [
-      { sel: '#heroSubtitle', original: null, math: "Computer Engineering &amp; Applied AI: &nbsp; &forall;x &isin; Data, &nbsp; f<sub>&theta;</sub>(x) &rarr; &fnof;(x)" },
-      { sel: '#gpaMetric', original: null, math: "GPA: 3.95 &asymp; sup {Academic Merit &cap; Math Track 96.6%}" },
-      { sel: '#liveStatusFocus1', original: null, math: "&bull; Analytical Probability Distributions &amp; Statistical Mechanics (Dr. Herzallah)" },
-      { sel: '#liveStatusFocus2', original: null, math: "&bull; ml-from-scratch: &nabla;<sub>W,b</sub> L &equiv; Backprop from 1<sup>st</sup> Principles" },
-      { sel: '#sectionTitleLab', original: null, math: "&sum; Interactive Algorithmic &amp; Symbolic Kernels" },
-      { sel: '#sectionTitleProjects', original: null, math: "&fnof; Built Systems &amp; Mathematical Architectures" }
-    ];
+    /* ─── FULLY FUNCTIONAL [∑ Math Mode] TOGGLE ─── */
+    let isMathMode = false;
+    const heroTitleEl = document.querySelector('.hero-title');
+    const heroGreetEl = document.querySelector('.hero-greeting');
+    const heroTextEl = document.querySelector('.hero-text');
+    const secTitles = document.querySelectorAll('.section-title');
+
+    const originalData = {
+      heroTitle: heroTitleEl ? heroTitleEl.innerHTML : '',
+      heroGreet: heroGreetEl ? heroGreetEl.innerHTML : '',
+      heroText: heroTextEl ? heroTextEl.innerHTML : '',
+      secTitles: Array.from(secTitles).map(t => t.innerHTML)
+    };
 
     function toggleMathMode() {
-      mathModeActive = !mathModeActive;
-      document.body.classList.toggle('math-mode-on', mathModeActive);
+      isMathMode = !isMathMode;
+      document.body.classList.toggle('math-mode-on', isMathMode);
       const toast = document.getElementById('mathModeToast');
 
-      mathDict.forEach(item => {
-        const el = document.querySelector(item.sel);
-        if (el) {
-          if (!item.original) item.original = el.innerHTML;
-          el.innerHTML = mathModeActive ? item.math : item.original;
+      if (isMathMode) {
+        if (heroTitleEl) {
+          heroTitleEl.innerHTML = '&fnof;: (Computer Engineering &cap; Math) &rarr; Applied AI Systems.';
         }
-      });
+        if (heroGreetEl) {
+          heroGreetEl.innerHTML = '<i class="ti ti-math-function"></i> [30.0444&deg;N, 31.2357&deg;E] &bull; EUI Year 4 &bull; &forall;x &isin; Applied AI';
+        }
+        if (heroTextEl) {
+          heroTextEl.innerHTML = 'Computer Engineering student specializing in machine learning from mathematical first principles. Operating at the intersection of multivariable optimization, high-dimensional vector spaces &nabla;L, and dependable systems engineering.';
+        }
+        secTitles.forEach((t, i) => {
+          if (t.textContent.includes('Play With My Work')) t.innerHTML = '&sum; Interactive Algorithmic &amp; Symbolic Kernels';
+          else if (t.textContent.includes("Things I've Built")) t.innerHTML = '&fnof; Built Systems: P = {p<sub>i</sub> | Code(p<sub>i</sub>) &and; Math(p<sub>i</sub>)}';
+          else if (t.textContent.includes('Experience')) t.innerHTML = '&cup; Verified Credentials &amp; Industry Experience';
+          else if (t.textContent.includes('Education')) t.innerHTML = '&int; Foundations: GPA = 3.95 &asymp; sup(Merit)';
+        });
 
-      if (toast) {
-        toast.style.display = mathModeActive ? 'flex' : 'none';
-        toast.innerHTML = mathModeActive 
-          ? `<i class="ti ti-check" style="color:#10b981;"></i> <span>&sum; <strong>LaTeX Mode Active</strong> &bull; Rigorous mathematical symbols loaded</span>`
-          : '';
-        if (mathModeActive) {
+        if (toast) {
+          toast.style.display = 'flex';
+          toast.innerHTML = '<i class="ti ti-check" style="color:#10b981; font-size:1.1rem;"></i> <span><strong>∑ Math Mode Activated!</strong> Real-time LaTeX notation applied across portfolio.</span>';
           setTimeout(() => { if (toast) toast.style.display = 'none'; }, 4000);
+        }
+      } else {
+        // Restore
+        if (heroTitleEl) heroTitleEl.innerHTML = originalData.heroTitle;
+        if (heroGreetEl) heroGreetEl.innerHTML = originalData.heroGreet;
+        if (heroTextEl) heroTextEl.innerHTML = originalData.heroText;
+        secTitles.forEach((t, i) => { if (originalData.secTitles[i]) t.innerHTML = originalData.secTitles[i]; });
+
+        if (toast) {
+          toast.style.display = 'flex';
+          toast.innerHTML = '<i class="ti ti-refresh" style="color:#38bdf8;"></i> <span>Standard Human Mode Restored.</span>';
+          setTimeout(() => { if (toast) toast.style.display = 'none'; }, 2500);
         }
       }
     }

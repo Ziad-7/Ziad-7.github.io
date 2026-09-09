@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>[Edition 3: Sandbox & Taxonomy] Ziad Ahmed Rabie — Mathematical AI</title>
+  <title>[Concept 3: Curve Morph & Hologram] Ziad Ahmed Rabie</title>
   <meta name="description"
     content="Personal portfolio of Ziad Ahmed Rabie. Computer engineering student at EUI (3.95 GPA, Full Merit Scholarship) specializing in applied AI engineering, mathematical machine learning models from scratch, and efficient systems." />
 
@@ -1557,107 +1557,70 @@
       }
     }
   
-    /* ─── EDITION 3: MATH EASTER EGG & TAXONOMY STYLING ─── */
-    .math-taxonomy-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1.2rem;
-      margin: 2rem 0;
-    }
-
-    @media (max-width: 992px) {
-      .math-taxonomy-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-    @media (max-width: 576px) {
-      .math-taxonomy-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .math-tax-card {
+    /* ─── INTERACTIVE FUNCTION MORPH WIDGET ─── */
+    .math-morph-widget {
       background: var(--bg-elevated);
       border: 1px solid var(--border);
       border-radius: var(--radius-md);
-      padding: 1.4rem;
-      box-shadow: var(--shadow-sm);
-      transition: all 0.2s ease;
-    }
-
-    .math-tax-card:hover {
-      border-color: var(--accent);
-      transform: translateY(-2px);
-    }
-
-    .math-tax-icon {
-      font-size: 1.6rem;
-      color: var(--accent);
-      margin-bottom: 0.8rem;
-    }
-
-    .math-tax-title {
-      font-family: var(--font-heading);
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 0.5rem;
-    }
-
-    .math-tax-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      line-height: 1.7;
-    }
-
-    .math-tax-list li::before {
-      content: "•";
-      color: var(--accent);
-      font-weight: bold;
-      display: inline-block;
-      width: 0.9em;
-      margin-left: -0.2em;
-    }
-
-    /* Math Easter Egg Card */
-    .math-challenge-box {
-      background: var(--bg-elevated);
-      border: 1px dashed var(--accent);
-      border-radius: var(--radius-md);
-      padding: 1.2rem 1.5rem;
+      padding: 1rem 1.4rem;
       margin-top: 1.4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .math-morph-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 1rem;
+      gap: 0.5rem;
     }
 
-    .math-challenge-q {
-      font-family: var(--font-mono);
-      font-size: 0.95rem;
-      color: var(--text);
-      font-weight: 600;
-    }
-
-    .math-challenge-btn {
-      background: var(--accent-subtle);
-      border: 1px solid var(--accent);
-      color: var(--accent);
-      padding: 0.35rem 0.8rem;
+    .math-morph-canvas-wrap {
+      background: var(--bg);
+      border: 1px solid var(--border);
       border-radius: var(--radius-sm);
+      height: 120px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #mathMorphCanvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .curve-btn-row {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+
+    .curve-chip {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 0.25rem 0.6rem;
+      border-radius: 4px;
       font-family: var(--font-mono);
-      font-size: 0.8rem;
+      font-size: 0.72rem;
       cursor: pointer;
       transition: all 0.15s ease;
     }
 
-    .math-challenge-btn:hover {
+    .curve-chip:hover {
+      border-color: var(--accent);
+      color: var(--text);
+    }
+
+    .curve-chip.active {
       background: var(--accent);
       color: #ffffff;
+      border-color: var(--accent);
+      font-weight: 700;
     }
 
   </style>
@@ -1665,17 +1628,17 @@
 
 <body>
 
-  <!-- STICKY MATH EDITIONS SWITCHER BAR -->
+  <!-- STICKY MATH VISUALS SWITCHER BAR -->
   <div id="mathPreviewBanner" style="background:#070a10; color:#f8fafc; font-family:'JetBrains Mono',monospace; font-size:0.75rem; padding:0.5rem 1.2rem; position:sticky; top:0; z-index:99999; border-bottom:1px solid #1e293b; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:0.5rem; box-shadow:0 4px 14px rgba(0,0,0,0.35);">
     <div style="display:flex; align-items:center; gap:0.6rem;">
-      <span style="background:#10b981; color:#052e16; font-size:0.65rem; font-weight:800; padding:0.15rem 0.5rem; border-radius:3px; letter-spacing:0.04em;">∑ MATH IDENTITY PREVIEW</span>
-      <span style="font-weight:600; color:#e2e8f0;">EDITION 3</span>
+      <span style="background:#10b981; color:#052e16; font-size:0.65rem; font-weight:800; padding:0.15rem 0.5rem; border-radius:3px; letter-spacing:0.04em;">∑ MATH VIBES PREVIEW</span>
+      <span style="font-weight:600; color:#e2e8f0;">GEOMETRY</span>
     </div>
     <div style="display:flex; align-items:center; gap:0.35rem; flex-wrap:wrap;">
-      <span style="color:#64748b; font-size:0.7rem; margin-right:0.3rem;">Switch Edition:</span>
-      <a href="math_theorems.html" style="color:#94a3b8; padding:0.25rem 0.5rem; text-decoration:none; transition:color 0.15s;">Edition 1: Theorem Lab</a>
-      <a href="math_ambient.html" style="color:#94a3b8; padding:0.25rem 0.5rem; text-decoration:none; transition:color 0.15s;">Edition 2: Ambient & Math Mode</a>
-      <a href="math_sandbox.html" style="background:#047857; color:#ffffff; font-weight:700; padding:0.25rem 0.65rem; border-radius:4px; text-decoration:none;">Edition 3: Sandbox & Taxonomy</a>
+      <span style="color:#64748b; font-size:0.7rem; margin-right:0.3rem;">Switch Concept:</span>
+      <a href="math_sparks.html" style="color:#94a3b8; padding:0.25rem 0.5rem; text-decoration:none; transition:color 0.15s;">1: Math Sparks & Grid</a>
+      <a href="math_ambient.html" style="color:#94a3b8; padding:0.25rem 0.5rem; text-decoration:none; transition:color 0.15s;">2: Ambient Waves & Fixed Math Mode</a>
+      <a href="math_geometry.html" style="background:#047857; color:#ffffff; font-weight:700; padding:0.25rem 0.65rem; border-radius:4px; text-decoration:none;">3: Curve Morph & Hologram</a>
       <span style="color:#334155; margin:0 0.2rem;">|</span>
       <a href="index.html" style="color:#38bdf8; font-weight:600; text-decoration:none; padding:0.2rem 0.4rem;">← Main Portfolio</a>
     </div>
@@ -1740,6 +1703,28 @@
             <i class="ti ti-brand-linkedin"></i> LinkedIn
           </a>
         </div>
+
+        <!-- Playful Curve Morph Widget -->
+        <div class="math-morph-widget">
+          <div class="math-morph-header">
+            <span style="font-family:var(--font-mono); font-size:0.75rem; color:var(--text); font-weight:700;">
+              <i class="ti ti-chart-dots" style="color:var(--accent);"></i> Living Math Curve
+            </span>
+            <span id="morphEquationBadge" style="font-family:var(--font-mono); font-size:0.72rem; color:var(--accent); background:var(--accent-subtle); padding:0.15rem 0.5rem; border-radius:3px;">
+              x = sin(3t), y = sin(4t + &delta;)
+            </span>
+          </div>
+          <div class="math-morph-canvas-wrap">
+            <canvas id="mathMorphCanvas"></canvas>
+          </div>
+          <div class="curve-btn-row">
+            <button class="curve-chip active" onclick="setMorphCurve('lissajous', this)">Lissajous</button>
+            <button class="curve-chip" onclick="setMorphCurve('fourier', this)">Fourier Harmonic</button>
+            <button class="curve-chip" onclick="setMorphCurve('gaussian', this)">Gaussian Bell</button>
+            <button class="curve-chip" onclick="setMorphCurve('rose', this)">Rose Curve</button>
+          </div>
+        </div>
+
       </div>
 
       <!-- Live Status Card -->
@@ -2127,88 +2112,7 @@
     </section>
 
     <!-- ─── EXPERIENCE, TRAINING & CERTIFICATIONS ─── -->
-    
-  <!-- ══════════════════════════════════════════════════════════════════════ -->
-  <!-- MATHEMATICAL TOOLBOX & FOUNDATIONS TAXONOMY (EDITION 3)               -->
-  <!-- ══════════════════════════════════════════════════════════════════════ -->
-  <section class="section-container" id="math-foundations" style="padding-top:2rem;">
-    <div class="section-header">
-      <span class="section-tag"><i class="ti ti-math-symbols"></i> MATHEMATICAL ARSENAL</span>
-      <h2 class="section-title">The Math Behind My Engineering</h2>
-      <p class="section-sub">
-        Rooted in top 0.1% national standing in Egypt's Thanaweya Amma (Math Track 96.6%) and continuous mathematical research.
-      </p>
-    </div>
-
-    <div class="math-taxonomy-grid">
-      <!-- 1. Analysis & Calculus -->
-      <div class="math-tax-card">
-        <div class="math-tax-icon"><i class="ti ti-variable"></i></div>
-        <div class="math-tax-title">Analysis &amp; Optimization</div>
-        <ul class="math-tax-list">
-          <li>Multivariable Differential Calculus</li>
-          <li>Gradient &amp; Hessian Operators (&nabla;, H)</li>
-          <li>Lagrange Multipliers &amp; KKT</li>
-          <li>Convex &amp; Non-Convex Loss Basins</li>
-          <li>Taylor Series Approximations</li>
-        </ul>
-      </div>
-
-      <!-- 2. Linear Algebra -->
-      <div class="math-tax-card">
-        <div class="math-tax-icon"><i class="ti ti-matrix"></i></div>
-        <div class="math-tax-title">High-Dim Linear Algebra</div>
-        <ul class="math-tax-list">
-          <li>Singular Value Decomposition (SVD)</li>
-          <li>Eigendecomposition &amp; Spectral Theory</li>
-          <li>Gram-Schmidt Orthogonalization</li>
-          <li>Matrix Rank &amp; Latent Subspaces</li>
-          <li>Tensor Contractions &amp; Einstein Sum</li>
-        </ul>
-      </div>
-
-      <!-- 3. Probability & Statistics -->
-      <div class="math-tax-card">
-        <div class="math-tax-icon"><i class="ti ti-chart-dots"></i></div>
-        <div class="math-tax-title">Probability &amp; Inference</div>
-        <ul class="math-tax-list">
-          <li>Generalized Distribution Families</li>
-          <li>Bayesian Inference &amp; Conjugate Priors</li>
-          <li>Central Limit Theorem &amp; MGFs</li>
-          <li>Markov Decision Processes (RL)</li>
-          <li>Entropy &amp; Information Divergence</li>
-        </ul>
-      </div>
-
-      <!-- 4. Discrete & Graphs -->
-      <div class="math-tax-card">
-        <div class="math-tax-icon"><i class="ti ti-circles-relation"></i></div>
-        <div class="math-tax-title">Discrete &amp; Graph Theory</div>
-        <ul class="math-tax-list">
-          <li>Network Graphs (BFS, Dijkstra, MST)</li>
-          <li>Modular Arithmetic &amp; Number Theory</li>
-          <li>Combinatorics &amp; Permutation Groups</li>
-          <li>Amortized Complexity Analysis O(1)</li>
-          <li>Boolean Algebra &amp; Digital Logic</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Interactive Math Easter Egg Challenge -->
-    <div class="math-challenge-box" id="mathChallengeBox">
-      <div>
-        <span style="font-size:0.75rem; font-family:var(--font-mono); color:var(--accent); font-weight:700;">⚡ ZIAD'S 5-SECOND MENTAL MATH CHECK</span>
-        <div class="math-challenge-q" id="mathChallengeText">Evaluate: &int; (6x&sup2; - 4x + 1) dx from x = 0 to x = 2</div>
-      </div>
-      <div style="display:flex; align-items:center; gap:0.5rem;">
-        <button class="math-challenge-btn" onclick="submitMathAnswer(10)">Answer: 10</button>
-        <button class="math-challenge-btn" onclick="submitMathAnswer(9)">Answer: 9</button>
-        <button class="math-challenge-btn" onclick="submitMathAnswer(12)">Answer: 12</button>
-      </div>
-    </div>
-  </section>
-
-  <section id="experience">
+    <section id="experience">
       <div class="section-header">
         <div>
           <div class="section-label"><i class="ti ti-award"></i> Verified Credentials</div>
@@ -3996,26 +3900,90 @@
   </script>
 
   <script>
-    /* ─── EDITION 3: MATH CHALLENGE EASTER EGG ─── */
-    function submitMathAnswer(ans) {
-      const box = document.getElementById('mathChallengeBox');
-      if (!box) return;
-      if (ans === 10) {
-        box.style.borderColor = '#10b981';
-        box.style.background = 'rgba(16, 185, 129, 0.1)';
-        box.innerHTML = `
-          <div style="display:flex; align-items:center; gap:0.8rem;">
-            <i class="ti ti-circle-check" style="color:#10b981; font-size:1.8rem;"></i>
-            <div>
-              <div style="font-weight:700; color:var(--text); font-family:var(--font-heading);">Theorem Proven! [2x&sup3; - 2x&sup2; + x]|<sub>0</sub><sup>2</sup> = 16 - 8 + 2 = 10</div>
-              <div style="font-size:0.82rem; color:var(--text-muted); font-family:var(--font-mono);">You speak Ziad's native language! "Pure mathematics is, in its way, the poetry of logical ideas." — Einstein</div>
-            </div>
-          </div>
-          <button onclick="location.reload()" style="background:none; border:1px solid var(--border); color:var(--text-muted); padding:0.3rem 0.6rem; border-radius:4px; font-size:0.75rem; cursor:pointer;">Reset</button>
-        `;
-      } else {
-        alert("Close! Remember: [2x³ - 2x² + x] evaluated at 2 gives (16 - 8 + 2) = 10. Try again!");
+    /* ─── INTERACTIVE MATHEMATICAL CURVE MORPH ENGINE ─── */
+    const mCanvas = document.getElementById('mathMorphCanvas');
+    if (mCanvas) {
+      const mctx = mCanvas.getContext('2d');
+      let mw = mCanvas.width = mCanvas.offsetWidth || 500;
+      let mh = mCanvas.height = mCanvas.offsetHeight || 120;
+      let currentCurve = 'lissajous';
+      let morphT = 0;
+
+      window.addEventListener('resize', () => {
+        mw = mCanvas.width = mCanvas.offsetWidth;
+        mh = mCanvas.height = mCanvas.offsetHeight;
+      });
+
+      const curveEquations = {
+        lissajous: 'x = sin(3t), y = sin(4t + &delta;)',
+        fourier: 'f(t) = \u2211 (4/n\u03C0) sin(nt)',
+        gaussian: 'f(x) = (\u03C3\u221A2\u03C0)^-1 e^-x\u00B2/2\u03C3\u00B2',
+        rose: 'r = cos(4\u03B8) (8-Petal Rose)'
+      };
+
+      function drawCurve() {
+        if (!mctx || !mw || !mh) return;
+        mctx.clearRect(0, 0, mw, mh);
+        const isLight = document.body.classList.contains('light');
+        const cx = mw / 2, cy = mh / 2;
+
+        morphT += 0.025;
+
+        mctx.beginPath();
+        if (currentCurve === 'lissajous') {
+          for (let t = 0; t <= Math.PI * 2; t += 0.02) {
+            const x = cx + Math.sin(3 * t + morphT) * (mw * 0.35);
+            const y = cy + Math.sin(4 * t) * (mh * 0.38);
+            if (t === 0) mctx.moveTo(x, y);
+            else mctx.lineTo(x, y);
+          }
+          mctx.strokeStyle = '#10b981';
+        } else if (currentCurve === 'fourier') {
+          for (let x = 0; x < mw; x += 3) {
+            let y = 0;
+            for (let n = 1; n <= 7; n += 2) {
+              y += (4 / (n * Math.PI)) * Math.sin((x * 0.03 * n) + morphT * 2);
+            }
+            const py = cy + y * (mh * 0.35);
+            if (x === 0) mctx.moveTo(x, py);
+            else mctx.lineTo(x, py);
+          }
+          mctx.strokeStyle = '#38bdf8';
+        } else if (currentCurve === 'gaussian') {
+          const s = 1.2 + Math.sin(morphT) * 0.5;
+          for (let x = 0; x < mw; x += 3) {
+            const xv = (x - cx) / 40;
+            const yv = Math.exp(-0.5 * Math.pow(xv / s, 2));
+            const py = (mh - 15) - yv * (mh * 0.75);
+            if (x === 0) mctx.moveTo(x, py);
+            else mctx.lineTo(x, py);
+          }
+          mctx.strokeStyle = '#a855f7';
+        } else if (currentCurve === 'rose') {
+          for (let th = 0; th <= Math.PI * 2; th += 0.02) {
+            const r = Math.cos(4 * th + morphT) * (mh * 0.42);
+            const x = cx + r * Math.cos(th);
+            const y = cy + r * Math.sin(th);
+            if (th === 0) mctx.moveTo(x, y);
+            else mctx.lineTo(x, y);
+          }
+          mctx.strokeStyle = '#f59e0b';
+        }
+
+        mctx.lineWidth = 2.2;
+        mctx.stroke();
+
+        requestAnimationFrame(drawCurve);
       }
+      drawCurve();
+
+      window.setMorphCurve = function(curve, btn) {
+        currentCurve = curve;
+        document.querySelectorAll('.curve-chip').forEach(c => c.classList.remove('active'));
+        if (btn) btn.classList.add('active');
+        const eqBadge = document.getElementById('morphEquationBadge');
+        if (eqBadge) eqBadge.innerHTML = curveEquations[curve] || '';
+      };
     }
   </script>
 

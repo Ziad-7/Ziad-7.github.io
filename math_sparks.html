@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>[Edition 1: Theorem Lab] Ziad Ahmed Rabie — Mathematical AI</title>
+  <title>[Concept 1: Math Sparks & Grid] Ziad Ahmed Rabie</title>
   <meta name="description"
     content="Personal portfolio of Ziad Ahmed Rabie. Computer engineering student at EUI (3.95 GPA, Full Merit Scholarship) specializing in applied AI engineering, mathematical machine learning models from scratch, and efficient systems." />
 
@@ -1557,144 +1557,82 @@
       }
     }
   
-    /* ─── EDITION 1: THEOREM LAB STYLING ─── */
-    .math-showcase-wrap {
-      margin: 3.5rem 0;
-      padding: 2.2rem;
-      border-radius: var(--radius-lg);
-      background: var(--bg-elevated);
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow-sm);
-      position: relative;
-      overflow: hidden;
+    /* ─── MATH BLUEPRINT GRID TEXTURE ─── */
+    body {
+      background-image: radial-gradient(rgba(16, 185, 129, 0.08) 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+    body.light {
+      background-image: radial-gradient(rgba(15, 23, 42, 0.08) 1px, transparent 1px);
+      background-size: 28px 28px;
     }
 
-    .math-showcase-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 2rem;
-      flex-wrap: wrap;
-      gap: 1rem;
+    /* Math Click Sparkle Particles */
+    .math-sparkle {
+      position: fixed;
+      pointer-events: none;
+      font-family: 'JetBrains Mono', serif;
+      font-weight: 700;
+      z-index: 999999;
+      user-select: none;
+      animation: floatFade 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
     }
 
-    .math-quote-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: var(--accent-subtle);
-      border: 1px solid rgba(16, 185, 129, 0.25);
-      color: var(--accent);
-      padding: 0.35rem 0.85rem;
-      border-radius: 9999px;
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      font-weight: 600;
-    }
-
-    .math-manifesto-quote {
-      font-family: var(--font-body);
-      font-size: 1.05rem;
-      color: var(--text);
-      font-style: italic;
-      line-height: 1.65;
-      max-width: 780px;
-      margin-top: 0.6rem;
-    }
-
-    .theorem-bento-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.5rem;
-    }
-
-    @media (max-width: 900px) {
-      .theorem-bento-grid {
-        grid-template-columns: 1fr;
+    @keyframes floatFade {
+      0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(0.6) rotate(0deg);
+      }
+      50% {
+        opacity: 0.9;
+        transform: translate(calc(-50% + var(--vx)), calc(-50% + var(--vy))) scale(1.3) rotate(var(--rot));
+      }
+      100% {
+        opacity: 0;
+        transform: translate(calc(-50% + var(--vx) * 1.5), calc(-50% + var(--vy) * 1.8 - 40px)) scale(0.9) rotate(var(--rot));
       }
     }
 
-    .theorem-card {
-      background: var(--bg);
+    /* Coordinate Tracker Pill in Corner */
+    #mathCoordTracker {
+      position: fixed;
+      bottom: 1.2rem;
+      left: 1.2rem;
+      background: rgba(13, 15, 18, 0.85);
       border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 1.4rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      position: relative;
-      transition: all 0.2s ease;
-    }
-
-    .theorem-card:hover {
-      border-color: var(--accent);
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-sm);
-    }
-
-    .theorem-card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 0.8rem;
-    }
-
-    .theorem-title {
-      font-family: var(--font-heading);
-      font-weight: 700;
-      font-size: 1.05rem;
-      color: var(--text);
-    }
-
-    .theorem-formula-badge {
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      padding: 0.25rem 0.6rem;
-      background: rgba(56, 189, 248, 0.1);
-      border: 1px solid rgba(56, 189, 248, 0.25);
-      color: var(--blue);
+      color: var(--accent);
+      padding: 0.35rem 0.75rem;
       border-radius: var(--radius-sm);
-      font-weight: 600;
-    }
-
-    .theorem-card-desc {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      line-height: 1.6;
-      margin-bottom: 1rem;
-    }
-
-    .theorem-interactive-canvas-wrap {
-      border-radius: var(--radius-sm);
-      background: var(--bg-elevated);
-      border: 1px solid var(--border);
-      padding: 0.8rem;
-      position: relative;
-      margin-top: auto;
-    }
-
-    .theorem-canvas {
-      width: 100%;
-      height: 140px;
-      display: block;
-      border-radius: 4px;
-      cursor: crosshair;
-    }
-
-    .theorem-control-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 0.6rem;
       font-family: var(--font-mono);
       font-size: 0.72rem;
-      color: var(--text-dim);
+      z-index: 99;
+      pointer-events: none;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    }
+    body.light #mathCoordTracker {
+      background: rgba(255, 255, 255, 0.9);
+      color: #047857;
+      border-color: #cbd5e1;
     }
 
-    .theorem-slider {
-      flex: 1;
-      margin: 0 0.8rem;
-      accent-color: var(--accent);
+    /* Euler Identity Watermark Badge in Hero */
+    .euler-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      color: var(--text-dim);
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      padding: 0.2rem 0.6rem;
+      border-radius: var(--radius-sm);
+      margin-left: 0.5rem;
+      vertical-align: middle;
+    }
+    .euler-badge strong {
+      color: var(--accent);
     }
 
   </style>
@@ -1702,17 +1640,17 @@
 
 <body>
 
-  <!-- STICKY MATH EDITIONS SWITCHER BAR -->
+  <!-- STICKY MATH VISUALS SWITCHER BAR -->
   <div id="mathPreviewBanner" style="background:#070a10; color:#f8fafc; font-family:'JetBrains Mono',monospace; font-size:0.75rem; padding:0.5rem 1.2rem; position:sticky; top:0; z-index:99999; border-bottom:1px solid #1e293b; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:0.5rem; box-shadow:0 4px 14px rgba(0,0,0,0.35);">
     <div style="display:flex; align-items:center; gap:0.6rem;">
-      <span style="background:#10b981; color:#052e16; font-size:0.65rem; font-weight:800; padding:0.15rem 0.5rem; border-radius:3px; letter-spacing:0.04em;">∑ MATH IDENTITY PREVIEW</span>
-      <span style="font-weight:600; color:#e2e8f0;">EDITION 1</span>
+      <span style="background:#10b981; color:#052e16; font-size:0.65rem; font-weight:800; padding:0.15rem 0.5rem; border-radius:3px; letter-spacing:0.04em;">∑ MATH VIBES PREVIEW</span>
+      <span style="font-weight:600; color:#e2e8f0;">SPARKS</span>
     </div>
     <div style="display:flex; align-items:center; gap:0.35rem; flex-wrap:wrap;">
-      <span style="color:#64748b; font-size:0.7rem; margin-right:0.3rem;">Switch Edition:</span>
-      <a href="math_theorems.html" style="background:#047857; color:#ffffff; font-weight:700; padding:0.25rem 0.65rem; border-radius:4px; text-decoration:none;">Edition 1: Theorem Lab</a>
-      <a href="math_ambient.html" style="color:#94a3b8; padding:0.25rem 0.5rem; text-decoration:none; transition:color 0.15s;">Edition 2: Ambient & Math Mode</a>
-      <a href="math_sandbox.html" style="color:#94a3b8; padding:0.25rem 0.5rem; text-decoration:none; transition:color 0.15s;">Edition 3: Sandbox & Taxonomy</a>
+      <span style="color:#64748b; font-size:0.7rem; margin-right:0.3rem;">Switch Concept:</span>
+      <a href="math_sparks.html" style="background:#047857; color:#ffffff; font-weight:700; padding:0.25rem 0.65rem; border-radius:4px; text-decoration:none;">1: Math Sparks & Grid</a>
+      <a href="math_ambient.html" style="color:#94a3b8; padding:0.25rem 0.5rem; text-decoration:none; transition:color 0.15s;">2: Ambient Waves & Fixed Math Mode</a>
+      <a href="math_geometry.html" style="color:#94a3b8; padding:0.25rem 0.5rem; text-decoration:none; transition:color 0.15s;">3: Curve Morph & Hologram</a>
       <span style="color:#334155; margin:0 0.2rem;">|</span>
       <a href="index.html" style="color:#38bdf8; font-weight:600; text-decoration:none; padding:0.2rem 0.4rem;">← Main Portfolio</a>
     </div>
@@ -1753,6 +1691,7 @@
       <div>
         <div class="hero-greeting">
           <i class="ti ti-brain"></i> Cairo, Egypt &nbsp;•&nbsp; EUI Year 4 &nbsp;•&nbsp; AI Systems Engineer
+          <span class="euler-badge"><strong>e<sup>i&pi;</sup> + 1 = 0</strong></span>
         </div>
         <h1 class="hero-title">
           AI systems engineer &amp; computer engineering student.
@@ -2026,116 +1965,7 @@
     </section>
 
     <!-- ─── SELECTED WORK SECTION ─── -->
-    
-  <!-- ══════════════════════════════════════════════════════════════════════ -->
-  <!-- MATHEMATICAL FIRST PRINCIPLES SHOWCASE (EDITION 1)                    -->
-  <!-- ══════════════════════════════════════════════════════════════════════ -->
-  <section class="section-container" id="mathematical-principles" style="padding-top:2rem;">
-    <div class="math-showcase-wrap">
-      <div class="math-showcase-header">
-        <div>
-          <div class="math-quote-badge">
-            <i class="ti ti-math-function"></i> MATHEMATICAL FIRST PRINCIPLES
-          </div>
-          <div class="math-manifesto-quote">
-            "Most people view AI as API endpoints and neural Python packages. I view AI as high-dimensional linear algebra, multivariable optimization, and probability distributions brought to life by algorithms."
-          </div>
-        </div>
-        <div style="font-family:var(--font-mono); font-size:0.75rem; color:var(--text-dim); text-align:right;">
-          <span style="color:var(--accent); font-weight:700;">Thanaweya Math Track: 96.6%</span><br>
-          Founder & Mentor, EUI iMath Club
-        </div>
-      </div>
-
-      <div class="theorem-bento-grid">
-        <!-- THEOREM 1: Gradient Vector Flow -->
-        <div class="theorem-card">
-          <div>
-            <div class="theorem-card-header">
-              <span class="theorem-title">Gradient Descent & Loss Surfaces</span>
-              <span class="theorem-formula-badge">&theta;<sub>t+1</sub> = &theta;<sub>t</sub> - &eta;&nabla;L(&theta;)</span>
-            </div>
-            <p class="theorem-card-desc">
-              Why backpropagation works: neural parameters descend the steepest negative gradient of the empirical risk landscape. Drag or click the canvas to drop a parameter and watch it descend the loss basin.
-            </p>
-          </div>
-          <div class="theorem-interactive-canvas-wrap">
-            <canvas id="lossBasinCanvas" class="theorem-canvas" width="400" height="140"></canvas>
-            <div class="theorem-control-row">
-              <span>&eta; (Learning Rate): <strong id="lrVal" style="color:var(--accent);">0.08</strong></span>
-              <input type="range" id="sliderLR" class="theorem-slider" min="0.01" max="0.2" step="0.01" value="0.08" />
-              <button onclick="resetLossBall()" style="background:none; border:1px solid var(--border); color:var(--text-muted); font-size:0.7rem; border-radius:3px; padding:0.15rem 0.4rem; cursor:pointer;">Reset</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- THEOREM 2: Gaussian & Central Limit Theorem -->
-        <div class="theorem-card">
-          <div>
-            <div class="theorem-card-header">
-              <span class="theorem-title">The Gaussian Normal Law & CLT</span>
-              <span class="theorem-formula-badge">N(&mu;, &sigma;&sup2;) &sim; &radic;(2&pi;&sigma;&sup2;)<sup>-1</sup> e<sup>-(x-&mu;)&sup2;/2&sigma;&sup2;</sup></span>
-            </div>
-            <p class="theorem-card-desc">
-              The analytical bedrock of probability distribution research (with Dr. Herzallah). The Central Limit Theorem guarantees that microscopic independent noise converges into macroscopic bell-curve order.
-            </p>
-          </div>
-          <div class="theorem-interactive-canvas-wrap">
-            <canvas id="gaussianCanvas" class="theorem-canvas" width="400" height="140"></canvas>
-            <div class="theorem-control-row">
-              <span>&sigma; (Spread): <strong id="sigmaVal" style="color:var(--accent);">1.20</strong></span>
-              <input type="range" id="sliderSigma" class="theorem-slider" min="0.4" max="3.0" step="0.1" value="1.2" oninput="updateGaussianSim(this.value)" />
-              <span>68.2% in [&mu;&plusmn;&sigma;]</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- THEOREM 3: Euler's Rotation & Rotary Position Embeddings (RoPE) -->
-        <div class="theorem-card">
-          <div>
-            <div class="theorem-card-header">
-              <span class="theorem-title">Euler's Rotation & RoPE in LLMs</span>
-              <span class="theorem-formula-badge">e<sup>i&theta;</sup> = cos &theta; + i sin &theta;</span>
-            </div>
-            <p class="theorem-card-desc">
-              Euler's identity is the most beautiful equation in mathematics. Modern Transformer LLMs (Llama 3, Mistral) inject relative word positions by multiplying query-key vectors with complex 2D rotation matrices.
-            </p>
-          </div>
-          <div class="theorem-interactive-canvas-wrap">
-            <canvas id="ropeCanvas" class="theorem-canvas" width="400" height="140"></canvas>
-            <div class="theorem-control-row">
-              <span>Token Pos <strong style="color:var(--blue);">&Delta;m</strong>: <strong id="ropeAngleVal" style="color:var(--accent);">45&deg;</strong></span>
-              <input type="range" id="sliderRope" class="theorem-slider" min="0" max="360" step="5" value="45" oninput="updateRopeSim(this.value)" />
-              <span id="ropeCoord">[0.71, 0.71i]</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- THEOREM 4: Singular Value Decomposition (SVD) -->
-        <div class="theorem-card">
-          <div>
-            <div class="theorem-card-header">
-              <span class="theorem-title">Singular Value Decomposition (SVD)</span>
-              <span class="theorem-formula-badge">A = U &Sigma; V<sup>T</sup></span>
-            </div>
-            <p class="theorem-card-desc">
-              The fundamental theorem of linear algebra: any matrix transformation factors into rotation (V), scaling (&Sigma;), and reflection/rotation (U). The mathematical heart of PCA, latent embeddings, and LoRA fine-tuning.
-            </p>
-          </div>
-          <div class="theorem-interactive-canvas-wrap">
-            <canvas id="svdCanvas" class="theorem-canvas" width="400" height="140"></canvas>
-            <div class="theorem-control-row">
-              <span>Compression Rank: <strong id="svdRankVal" style="color:var(--accent);">k = 2</strong></span>
-              <input type="range" id="sliderSVD" class="theorem-slider" min="1" max="4" step="1" value="2" oninput="updateSVDSim(this.value)" />
-              <span id="svdEnergy">88.4% Energy Retained</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="work">
+    <section id="work">
       <div class="section-header">
         <div>
           <div class="section-label"><i class="ti ti-briefcase"></i> Selected Projects</div>
@@ -4060,223 +3890,74 @@
     }
   </script>
 
+  <!-- Live Math Coordinate Tracker -->
+  <div id="mathCoordTracker">x: 0px &bull; y: 0px &bull; &theta; = 0.00 rad</div>
+
   <script>
-    /* ─── EDITION 1: INTERACTIVE THEOREM CANVAS SCRIPTS ─── */
-    // 1. Loss Basin Gradient Flow
-    const lossCanvas = document.getElementById('lossBasinCanvas');
-    let lossCtx = lossCanvas ? lossCanvas.getContext('2d') : null;
-    let ballX = 0.75, ballY = 0.65;
-    let lossAnimFrame;
+    /* ─── CLICK TO BURST MATHEMATICAL SPARKS ─── */
+    const mathSymbols = [
+      '\u03C0', '\u2211', '\u222B', '\u2207', '\u221E', '\u03BB', 'e', '\u221A2',
+      '\u03D5', '\u2202x', '\u2248', '\u211D', '\u2200x', '\u2203y', '\u2208',
+      'e^{i\u03C0}+1=0', '\u2207L', 'f(x)', '\u03C3^2', '\u2297', '\u2295', '\u223F'
+    ];
 
-    function drawLossBasin() {
-      if (!lossCtx || !lossCanvas) return;
-      const w = lossCanvas.width, h = lossCanvas.height;
-      const isLight = document.body.classList.contains('light');
-      lossCtx.clearRect(0, 0, w, h);
-      lossCtx.fillStyle = isLight ? '#f8fafc' : '#0a0d14';
-      lossCtx.fillRect(0, 0, w, h);
+    const sparkColors = ['#10b981', '#38bdf8', '#a855f7', '#f59e0b', '#34d399', '#60a5fa'];
 
-      // Draw concentric loss contours
-      const cx = w / 2, cy = h / 2;
-      for (let r = 20; r <= 160; r += 20) {
-        lossCtx.beginPath();
-        lossCtx.ellipse(cx, cy, r * 1.3, r * 0.7, Math.PI / 6, 0, Math.PI * 2);
-        lossCtx.strokeStyle = isLight ? 'rgba(0,0,0,0.06)' : 'rgba(255,255,255,0.06)';
-        lossCtx.lineWidth = 1;
-        lossCtx.stroke();
+    window.addEventListener('click', (e) => {
+      // Don't burst if clicking interactive inputs/sliders
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'BUTTON' || e.target.tagName === 'A') {
+        // Still generate 3 subtle particles
+        spawnMathParticles(e.clientX, e.clientY, 3);
+        return;
       }
+      spawnMathParticles(e.clientX, e.clientY, 7);
+    });
 
-      // Draw global minimum target
-      lossCtx.beginPath();
-      lossCtx.arc(cx, cy, 4, 0, Math.PI * 2);
-      lossCtx.fillStyle = '#10b981';
-      lossCtx.fill();
+    function spawnMathParticles(x, y, count) {
+      for (let i = 0; i < count; i++) {
+        const span = document.createElement('span');
+        span.className = 'math-sparkle';
+        span.textContent = mathSymbols[Math.floor(Math.random() * mathSymbols.length)];
+        span.style.left = x + 'px';
+        span.style.top = y + 'px';
 
-      // Current parameter ball
-      const px = cx + (ballX - 0.5) * w * 0.7;
-      const py = cy + (ballY - 0.5) * h * 0.7;
+        const angle = Math.random() * Math.PI * 2;
+        const speed = 35 + Math.random() * 65;
+        const vx = Math.cos(angle) * speed + 'px';
+        const vy = Math.sin(angle) * speed + 'px';
+        const rot = (Math.random() - 0.5) * 60 + 'deg';
+        const color = sparkColors[Math.floor(Math.random() * sparkColors.length)];
 
-      // Gradient vector arrow
-      const lr = parseFloat(document.getElementById('sliderLR')?.value || '0.08');
-      const gradX = (ballX - 0.5) * 1.5;
-      const gradY = (ballY - 0.5) * 2.2;
-      
-      lossCtx.beginPath();
-      lossCtx.moveTo(px, py);
-      lossCtx.lineTo(px - gradX * 50, py - gradY * 50);
-      lossCtx.strokeStyle = '#38bdf8';
-      lossCtx.lineWidth = 2;
-      lossCtx.stroke();
+        span.style.setProperty('--vx', vx);
+        span.style.setProperty('--vy', vy);
+        span.style.setProperty('--rot', rot);
+        span.style.color = color;
+        span.style.fontSize = (0.75 + Math.random() * 0.55) + 'rem';
+        span.style.textShadow = `0 0 8px ${color}88`;
 
-      // Draw ball
-      lossCtx.beginPath();
-      lossCtx.arc(px, py, 6, 0, Math.PI * 2);
-      lossCtx.fillStyle = '#f59e0b';
-      lossCtx.fill();
-      lossCtx.strokeStyle = '#ffffff';
-      lossCtx.lineWidth = 1.5;
-      lossCtx.stroke();
-
-      // Step towards minimum
-      ballX -= gradX * lr * 0.15;
-      ballY -= gradY * lr * 0.15;
-
-      lossAnimFrame = requestAnimationFrame(drawLossBasin);
-    }
-
-    function resetLossBall() {
-      ballX = 0.1 + Math.random() * 0.8;
-      ballY = 0.1 + Math.random() * 0.8;
-    }
-
-    if (lossCanvas) {
-      lossCanvas.addEventListener('click', (e) => {
-        const rect = lossCanvas.getBoundingClientRect();
-        ballX = (e.clientX - rect.left) / rect.width;
-        ballY = (e.clientY - rect.top) / rect.height;
-      });
-    }
-
-    // 2. Gaussian Bell Curve Simulation
-    function updateGaussianSim(sigma) {
-      const gCanvas = document.getElementById('gaussianCanvas');
-      if (!gCanvas) return;
-      const ctx = gCanvas.getContext('2d');
-      const w = gCanvas.width, h = gCanvas.height;
-      const isLight = document.body.classList.contains('light');
-      ctx.clearRect(0, 0, w, h);
-      ctx.fillStyle = isLight ? '#f8fafc' : '#0a0d14';
-      ctx.fillRect(0, 0, w, h);
-
-      const s = parseFloat(sigma);
-      const sigmaElem = document.getElementById('sigmaVal');
-      if (sigmaElem) sigmaElem.textContent = s.toFixed(2);
-
-      const cx = w / 2;
-      const baseline = h - 20;
-
-      // Axis
-      ctx.beginPath();
-      ctx.moveTo(20, baseline);
-      ctx.lineTo(w - 20, baseline);
-      ctx.strokeStyle = isLight ? 'rgba(0,0,0,0.15)' : 'rgba(255,255,255,0.15)';
-      ctx.stroke();
-
-      // Plot Normal Curve
-      ctx.beginPath();
-      let first = true;
-      for (let x = 20; x <= w - 20; x += 2) {
-        const xVal = (x - cx) / 35;
-        const yVal = (1 / (s * Math.sqrt(2 * Math.PI))) * Math.exp(-0.5 * Math.pow(xVal / s, 2));
-        const py = baseline - yVal * (h * 0.85);
-        if (first) { ctx.moveTo(x, py); first = false; }
-        else { ctx.lineTo(x, py); }
+        document.body.appendChild(span);
+        setTimeout(() => span.remove(), 1200);
       }
-      ctx.strokeStyle = '#047857';
-      ctx.lineWidth = 2.5;
-      ctx.stroke();
-
-      // Shaded area under 1 sigma
-      ctx.lineTo(cx + s * 35, baseline);
-      ctx.lineTo(cx - s * 35, baseline);
-      ctx.fillStyle = isLight ? 'rgba(4, 120, 87, 0.12)' : 'rgba(16, 185, 129, 0.15)';
-      ctx.fill();
     }
 
-    // 3. RoPE Complex Rotation
-    function updateRopeSim(deg) {
-      const rCanvas = document.getElementById('ropeCanvas');
-      if (!rCanvas) return;
-      const ctx = rCanvas.getContext('2d');
-      const w = rCanvas.width, h = rCanvas.height;
-      const isLight = document.body.classList.contains('light');
-      ctx.clearRect(0, 0, w, h);
-      ctx.fillStyle = isLight ? '#f8fafc' : '#0a0d14';
-      ctx.fillRect(0, 0, w, h);
+    // Coordinate Tracker in bottom left
+    const tracker = document.getElementById('mathCoordTracker');
+    window.addEventListener('mousemove', (e) => {
+      if (!tracker) return;
+      const x = e.clientX;
+      const y = e.clientY;
+      const theta = Math.atan2(y - window.innerHeight / 2, x - window.innerWidth / 2);
+      tracker.innerHTML = `x: ${x}px &bull; y: ${y}px &bull; &theta; = ${theta.toFixed(2)} rad &bull; <span style="color:var(--text-dim);">Click anywhere for math sparks</span>`;
+    });
 
-      const d = parseFloat(deg);
-      const rad = (d * Math.PI) / 180;
-      const ropeAngleElem = document.getElementById('ropeAngleVal');
-      if (ropeAngleElem) ropeAngleElem.textContent = d + '°';
-
-      const cx = w / 2, cy = h / 2, r = 45;
-      // Unit Circle
-      ctx.beginPath();
-      ctx.arc(cx, cy, r, 0, Math.PI * 2);
-      ctx.strokeStyle = isLight ? 'rgba(0,0,0,0.15)' : 'rgba(255,255,255,0.15)';
-      ctx.stroke();
-
-      // Axes
-      ctx.beginPath();
-      ctx.moveTo(cx - r - 15, cy); ctx.lineTo(cx + r + 15, cy);
-      ctx.moveTo(cx, cy - r - 15); ctx.lineTo(cx, cy + r + 15);
-      ctx.strokeStyle = isLight ? 'rgba(0,0,0,0.08)' : 'rgba(255,255,255,0.08)';
-      ctx.stroke();
-
-      // Vector
-      const vx = cx + r * Math.cos(rad);
-      const vy = cy - r * Math.sin(rad);
-      ctx.beginPath();
-      ctx.moveTo(cx, cy);
-      ctx.lineTo(vx, vy);
-      ctx.strokeStyle = '#047857';
-      ctx.lineWidth = 2.5;
-      ctx.stroke();
-
-      ctx.beginPath();
-      ctx.arc(vx, vy, 5, 0, Math.PI * 2);
-      ctx.fillStyle = '#38bdf8';
-      ctx.fill();
-
-      const coordElem = document.getElementById('ropeCoord');
-      if (coordElem) coordElem.textContent = `[${Math.cos(rad).toFixed(2)}, ${Math.sin(rad).toFixed(2)}i]`;
-    }
-
-    // 4. SVD Energy Spectrum
-    function updateSVDSim(rank) {
-      const sCanvas = document.getElementById('svdCanvas');
-      if (!sCanvas) return;
-      const ctx = sCanvas.getContext('2d');
-      const w = sCanvas.width, h = sCanvas.height;
-      const isLight = document.body.classList.contains('light');
-      ctx.clearRect(0, 0, w, h);
-      ctx.fillStyle = isLight ? '#f8fafc' : '#0a0d14';
-      ctx.fillRect(0, 0, w, h);
-
-      const k = parseInt(rank);
-      const rankElem = document.getElementById('svdRankVal');
-      if (rankElem) rankElem.textContent = 'k = ' + k;
-
-      const singularValues = [45, 28, 14, 6];
-      const energyValues = ['48.2%', '78.4%', '93.5%', '100.0%'];
-      const energyElem = document.getElementById('svdEnergy');
-      if (energyElem) energyElem.textContent = energyValues[k - 1] + ' Energy Retained';
-
-      const barWidth = 35, gap = 25;
-      const startX = (w - (4 * barWidth + 3 * gap)) / 2;
-
-      singularValues.forEach((val, idx) => {
-        const bx = startX + idx * (barWidth + gap);
-        const bh = (val / 50) * (h - 40);
-        const by = h - 20 - bh;
-
-        ctx.fillStyle = idx < k ? '#047857' : (isLight ? '#cbd5e1' : '#334155');
-        ctx.fillRect(bx, by, barWidth, bh);
-
-        // Labels
-        ctx.fillStyle = isLight ? '#475569' : '#94a3b8';
-        ctx.font = '10px monospace';
-        ctx.textAlign = 'center';
-        ctx.fillText(`&sigma;${idx+1}`, bx + barWidth / 2, h - 6);
-      });
-    }
-
-    // Initialize all canvas objects on load
-    window.addEventListener('load', () => {
-      drawLossBasin();
-      updateGaussianSim(1.2);
-      updateRopeSim(45);
-      updateSVDSim(2);
+    // Replace live status bullet dots with sleek math operators
+    window.addEventListener('DOMContentLoaded', () => {
+      const statusDesc = document.querySelector('.status-desc');
+      if (statusDesc) {
+        statusDesc.innerHTML = statusDesc.innerHTML
+          .replace('&bull; Statistics', '<span style="color:var(--accent); font-weight:700;">&nabla;</span> Statistics')
+          .replace('&bull; ml-from-scratch', '<span style="color:var(--blue); font-weight:700;">&lambda;</span> ml-from-scratch');
+      }
     });
   </script>
 
