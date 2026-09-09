@@ -311,9 +311,9 @@
     .hero {
       padding: 4.5rem 0 3.5rem;
       display: grid;
-      grid-template-columns: 1.3fr 0.9fr;
+      grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.9fr);
       gap: 2.5rem;
-      align-items: center;
+      align-items: start;
     }
 
     .hero-greeting {
@@ -375,9 +375,20 @@
       background: var(--bg-elevated);
       border: 1px solid var(--border);
       border-radius: var(--radius-md);
-      padding: 1.5rem;
+      padding: 1.35rem 1.4rem;
       box-shadow: var(--shadow-sm);
       position: relative;
+      width: 100%;
+      min-width: 0;
+      max-width: 100%;
+      box-sizing: border-box;
+      overflow: hidden;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .status-card:hover {
+      border-color: rgba(16, 185, 129, 0.35);
+      box-shadow: 0 4px 20px rgba(16, 185, 129, 0.06);
     }
 
     .status-card-header {
@@ -385,8 +396,8 @@
       justify-content: space-between;
       align-items: center;
       border-bottom: 1px solid var(--border-subtle);
-      padding-bottom: 0.8rem;
-      margin-bottom: 1rem;
+      padding-bottom: 0.75rem;
+      margin-bottom: 0.85rem;
     }
 
     .status-title {
@@ -397,7 +408,8 @@
       letter-spacing: 0.08em;
       display: flex;
       align-items: center;
-      gap: 0.4rem;
+      gap: 0.45rem;
+      font-weight: 700;
     }
 
     .live-clock {
@@ -407,84 +419,36 @@
       font-weight: 500;
     }
 
-    .status-items {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-      font-size: 0.85rem;
-    }
-
-    .status-row {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.6rem;
-      color: var(--text-muted);
-    }
-
-    .status-row i {
-      color: var(--accent);
-      font-size: 1rem;
-      margin-top: 0.2rem;
-      flex-shrink: 0;
-    }
-
-    .status-row strong {
-      color: var(--text);
-    }
-
-    /* Combined Status Telemetry Block */
-    .status-telemetry-block {
-      margin-top: 0.4rem;
-      background: rgba(0, 0, 0, 0.22);
-      border: 1px solid var(--border-subtle);
+    /* ─── HARMONIC WAVE STAGE WITH FLOATING WORKINGS ─── */
+    .status-wave-container {
+      position: relative;
+      width: 100%;
+      height: 160px;
       border-radius: var(--radius-sm);
       overflow: hidden;
+      background: rgba(0, 0, 0, 0.32);
+      border: 1px solid var(--border-subtle);
+      cursor: crosshair;
+      margin-bottom: 0.85rem;
       transition: border-color 0.2s ease;
     }
 
-    .status-card:hover .status-telemetry-block {
+    .status-card:hover .status-wave-container {
       border-color: rgba(16, 185, 129, 0.4);
     }
 
-    body.light .status-telemetry-block {
+    body.light .status-wave-container {
       background: rgba(0, 0, 0, 0.025);
       border-color: rgba(0, 0, 0, 0.08);
     }
 
-    body.light .status-card:hover .status-telemetry-block {
-      border-color: rgba(4, 120, 87, 0.3);
-    }
-
-    .status-telemetry-header {
-      padding: 0.35rem 0.65rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid var(--border-subtle);
-      font-family: var(--font-mono);
-      font-size: 0.68rem;
-      color: var(--text-dim);
-      user-select: none;
-    }
-
-    .status-telemetry-label {
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      color: var(--accent);
-    }
-
-    .status-telemetry-math {
-      font-size: 0.65rem;
-      opacity: 0.8;
-    }
-
-    .status-wave-stage {
-      position: relative;
+    .status-wave-canvas {
+      position: absolute;
+      inset: 0;
       width: 100%;
-      height: 54px;
-      overflow: hidden;
-      cursor: crosshair;
-      background: transparent;
+      height: 160px;
+      display: block;
+      z-index: 1;
     }
 
     .status-core-watermark {
@@ -493,110 +457,173 @@
       left: 50%;
       transform: translate(-50%, -50%);
       font-family: var(--font-heading), 'Plus Jakarta Sans', sans-serif;
-      font-size: 2.2rem;
+      font-size: 3.8rem;
       font-weight: 900;
       letter-spacing: 0.1em;
-      color: rgba(16, 185, 129, 0.12);
-      text-shadow: 0 0 20px rgba(16, 185, 129, 0.15);
+      color: rgba(16, 185, 129, 0.09);
+      text-shadow: 0 0 25px rgba(16, 185, 129, 0.12);
       pointer-events: none;
       user-select: none;
       line-height: 1;
+      z-index: 2;
       transition: color 0.2s ease;
     }
 
     .status-card:hover .status-core-watermark {
-      color: rgba(16, 185, 129, 0.22);
+      color: rgba(16, 185, 129, 0.16);
     }
 
     body.light .status-core-watermark {
-      color: rgba(4, 120, 87, 0.10);
-      text-shadow: 0 0 15px rgba(4, 120, 87, 0.10);
+      color: rgba(4, 120, 87, 0.07);
     }
 
-    body.light .status-card:hover .status-core-watermark {
-      color: rgba(4, 120, 87, 0.18);
-    }
-
-    .status-wave-canvas {
+    .wave-formula-tag {
       position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 54px;
-      display: block;
+      top: 6px;
+      right: 8px;
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      color: var(--text-dim);
+      opacity: 0.7;
+      pointer-events: none;
+      user-select: none;
+      z-index: 3;
     }
 
-    /* Live Z7 Axiom Row */
-    .status-axiom-row {
+    /* Floating Workings (Chips riding physical wave crests) */
+    .wave-float-item {
+      position: absolute;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 0.5rem;
-      padding-top: 0.5rem;
-      border-top: 1px solid var(--border-subtle);
-      margin-top: 0.2rem;
+      gap: 0.45rem;
+      padding: 0.38rem 0.65rem;
+      border-radius: 6px;
+      background: rgba(15, 23, 42, 0.84);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+      user-select: none;
+      cursor: pointer;
+      z-index: 4;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      will-change: transform;
     }
 
-    .status-axiom-badge {
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      font-weight: 800;
-      letter-spacing: 0.06em;
+    .wave-float-item:hover {
+      border-color: var(--accent);
+      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.25);
+      background: rgba(15, 23, 42, 0.96);
+    }
+
+    body.light .wave-float-item {
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid rgba(4, 120, 87, 0.25);
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+    }
+
+    body.light .wave-float-item:hover {
+      background: #ffffff;
+      border-color: var(--accent);
+      box-shadow: 0 6px 18px rgba(4, 120, 87, 0.15);
+    }
+
+    .float-icon {
       color: var(--accent);
+      font-size: 1.05rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .float-meta {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.25;
+    }
+
+    .float-title {
+      font-family: var(--font-heading);
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .float-sub {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      color: var(--text-dim);
+    }
+
+    .chip-ai-research {
+      left: 12px;
+      top: 18px;
+    }
+
+    .chip-ml-scratch {
+      right: 12px;
+      top: 86px;
+    }
+
+    /* ─── MATHEMATICAL FIRST PRINCIPLES (REPLACING ARROGANT SAYINGS) ─── */
+    .status-axiom-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 0.75rem;
+      min-width: 0;
+    }
+
+    .status-axiom-cycle-btn {
       background: rgba(16, 185, 129, 0.12);
+      color: var(--accent);
       border: 1px solid rgba(16, 185, 129, 0.28);
-      padding: 0.22rem 0.45rem;
+      padding: 0.32rem 0.65rem;
       border-radius: var(--radius-sm);
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
       display: inline-flex;
       align-items: center;
-      gap: 0.3rem;
+      gap: 0.4rem;
       cursor: pointer;
-      user-select: none;
       flex-shrink: 0;
+      user-select: none;
       transition: all 0.15s ease;
     }
 
-    .status-axiom-badge:hover {
+    .status-axiom-cycle-btn:hover {
       background: rgba(16, 185, 129, 0.22);
       border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .status-axiom-cycle-btn:active {
+      transform: translateY(0);
     }
 
     .status-axiom-quote {
       font-family: var(--font-heading);
-      font-size: 0.84rem;
+      font-size: 0.82rem;
       font-style: italic;
-      color: var(--text);
+      color: var(--text-muted);
       flex: 1;
       min-width: 0;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+      line-height: 1.38;
       cursor: pointer;
       user-select: none;
-      transition: opacity 0.15s ease, color 0.15s ease, transform 0.15s ease;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      transition: opacity 0.15s ease, color 0.15s ease;
     }
 
     .status-axiom-quote:hover {
       color: var(--accent);
-    }
-
-    .status-axiom-btn {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      color: var(--text-dim);
-      padding: 0.25rem 0.5rem;
-      border-radius: var(--radius-sm);
-      cursor: pointer;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.15s ease;
-    }
-
-    .status-axiom-btn:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-      background: var(--bg-elevated);
     }
 
     /* ─── SECTION COMMONS ─── */
@@ -1988,7 +2015,7 @@
     <div style="display:flex; align-items:center; gap:0.6rem; flex-wrap:wrap;">
       <span onclick="replayMatrixSplash()" style="background:#10b981; color:#052e16; font-size:0.65rem; font-weight:800; padding:0.18rem 0.55rem; border-radius:3px; letter-spacing:0.04em; cursor:pointer;" title="Click to replay Matrix Math Rain Wipe">⚡ REPLAY WIPE</span>
       <span style="color:#64748b; font-size:0.7rem;">| PREVIEWS:</span>
-      <span style="background:rgba(16, 185, 129, 0.25); color:#34d399; border:1px solid #10b981; font-weight:700; padding:0.15rem 0.5rem; border-radius:3px; font-size:0.7rem;">★ Combined Live Status &amp; Telemetry (Active)</span>
+      <span style="background:rgba(16, 185, 129, 0.25); color:#34d399; border:1px solid #10b981; font-weight:700; padding:0.15rem 0.5rem; border-radius:3px; font-size:0.7rem;">★ Combined Live Status &amp; Floating Workings (Active)</span>
       <a href="z7_ticker_edition.html" style="color:#94a3b8; text-decoration:none; padding:0.15rem 0.5rem; border:1px solid #334155; border-radius:3px; font-size:0.7rem; transition:all 0.15s ease;" onmouseover="this.style.color='#38bdf8';this.style.borderColor='#38bdf8'" onmouseout="this.style.color='#94a3b8';this.style.borderColor='#334155'">○ Option 2: 44px Ticker</a>
       <a href="z7_hero_edition.html" style="color:#94a3b8; text-decoration:none; padding:0.15rem 0.5rem; border:1px solid #334155; border-radius:3px; font-size:0.7rem; transition:all 0.15s ease;" onmouseover="this.style.color='#38bdf8';this.style.borderColor='#38bdf8'" onmouseout="this.style.color='#94a3b8';this.style.borderColor='#334155'">○ Option 1: Hero Signature</a>
       <a href="z7_lab_edition.html" style="color:#94a3b8; text-decoration:none; padding:0.15rem 0.5rem; border:1px solid #334155; border-radius:3px; font-size:0.7rem; transition:all 0.15s ease;" onmouseover="this.style.color='#38bdf8';this.style.borderColor='#38bdf8'" onmouseout="this.style.color='#94a3b8';this.style.borderColor='#334155'">○ Option 3: Lab Tab</a>
@@ -2060,54 +2087,55 @@
         </div>
       </div>
 
-      <!-- ─── UNIFIED LIVE STATUS & QUANT TELEMETRY TERMINAL ─── -->
-      <aside class="status-card">
+      <!-- ─── LIVE STATUS: HARMONIC WAVE WITH FLOATING WORKINGS ─── -->
+      <aside class="status-card" id="statusCard">
+        <!-- 1. Header: strictly "Live Status" -->
         <div class="status-card-header">
           <span class="status-title">
-            <span class="ticker-live-dot" title="Live Resonance Active"></span>
-            Live Status &amp; Telemetry
+            <span class="ticker-live-dot" title="Live status active"></span>
+            Live Status
           </span>
           <span class="live-clock" id="cairoTime">--:--:-- GMT+3</span>
         </div>
-        <div class="status-items">
-          <div class="status-row">
-            <i class="ti ti-target"></i>
-            <div>
-              <strong>Current Focus:</strong>
-              <div style="margin-top:0.25rem; font-size:0.8rem; color:var(--text-muted); line-height:1.45;">
-                • Statistics &amp; Machine Learning Research<br />
-                • <code>ml-from-scratch</code> repo expansion (neural architectures &amp; backprop)
-              </div>
+
+        <!-- 2. Harmonic Wave Stage with Floating Workings (AI Research & ml-from-scratch) -->
+        <div class="status-wave-container" id="statusWaveStage" title="Move cursor over wave to perturb harmonics">
+          <!-- Background Harmonic Canvas -->
+          <canvas id="statusWaveCanvas" class="status-wave-canvas" height="160"></canvas>
+
+          <!-- Subtle Z7 watermark in wave center -->
+          <div class="status-core-watermark" aria-hidden="true">Z7</div>
+
+          <!-- Formula indicator -->
+          <div class="wave-formula-tag">&psi;(x,t) = &sum; A<sub>k</sub> sin(&omega;<sub>k</sub>t + kx)</div>
+
+          <!-- Floating Workings: Physically bobbing on the wave crests! -->
+          <div class="wave-float-item chip-ai-research" id="floatChip1" title="Current Focus: AI & Statistics Research">
+            <div class="float-icon"><i class="ti ti-brain"></i></div>
+            <div class="float-meta">
+              <span class="float-title">AI Research</span>
+              <span class="float-sub">Bounded Inverse Gamma &amp; ML</span>
             </div>
           </div>
 
-          <!-- Integrated Mini Oscilloscope Wave Strip -->
-          <div class="status-telemetry-block">
-            <div class="status-telemetry-header">
-              <div style="display:flex; align-items:center; gap:0.4rem;">
-                <i class="ti ti-wave-sine" style="color:var(--accent);"></i>
-                <span class="status-telemetry-label">Eigen-Harmonics</span>
-              </div>
-              <span class="status-telemetry-math">&psi;(x,t) = &sum; A<sub>k</sub> sin(&omega;<sub>k</sub>t + kx)</span>
-            </div>
-
-            <div class="status-wave-stage" id="statusWaveStage" title="Move cursor across card to perturb harmonics in real time">
-              <div class="status-core-watermark" aria-hidden="true">Z7</div>
-              <canvas id="z7MiniWaveCanvas" class="status-wave-canvas" height="54"></canvas>
+          <div class="wave-float-item chip-ml-scratch" id="floatChip2" title="Current Focus: Neural Architectures & Backprop in pure NumPy">
+            <div class="float-icon"><i class="ti ti-binary-tree"></i></div>
+            <div class="float-meta">
+              <span class="float-title">ml-from-scratch</span>
+              <span class="float-sub">Neural Nets &amp; Backprop</span>
             </div>
           </div>
+        </div>
 
-          <!-- Integrated Live Z7 Axiom Stream with Next Button -->
-          <div class="status-axiom-row">
-            <div class="status-axiom-badge" onclick="replayMatrixSplash()" title="Click to replay Matrix Math Rain Wipe">
-              <i class="ti ti-terminal-2"></i> Z7 AXIOM
-            </div>
-            <div class="status-axiom-quote" id="z7FactDisplay" onclick="nextZ7Fact()" title="Click to cycle next truth">
-              "I don't debug code, it's correct"
-            </div>
-            <button class="status-axiom-btn" onclick="nextZ7Fact()" title="Next Truth">
-              <i class="ti ti-refresh"></i>
-            </button>
+        <!-- 3. Mathematical First Principles (Replacing arrogant sayings) -->
+        <div class="status-axiom-bar">
+          <button class="status-axiom-cycle-btn" onclick="cycleNextPrinciple()" title="Click to cycle next principle">
+            <i class="ti ti-sparkles"></i>
+            <span>First Principles</span>
+            <i class="ti ti-refresh" id="axiomSpinIcon"></i>
+          </button>
+          <div class="status-axiom-quote" id="activePrincipleDisplay" onclick="cycleNextPrinciple()" title="Click to cycle next principle">
+            "Backpropagation is reverse-mode automatic differentiation on computational DAGs."
           </div>
         </div>
       </aside>
@@ -4303,130 +4331,175 @@
       }
     }
 
-    /* ─── 2. INTEGRATED STATUS CARD MINI OSCILLOSCOPE WAVE ─── */
-    const miniCanvas = document.getElementById('z7MiniWaveCanvas');
-    const statusCardEl = document.querySelector('.status-card');
+    /* ─── 2. LIVE STATUS: HARMONIC WAVE & FLOATING WORKINGS PHYSICS ─── */
+    const statusWaveCanvas = document.getElementById('statusWaveCanvas');
+    const statusWaveStage = document.getElementById('statusWaveStage');
+    const floatChip1 = document.getElementById('floatChip1');
+    const floatChip2 = document.getElementById('floatChip2');
 
-    if (miniCanvas) {
-      const mctx = miniCanvas.getContext('2d');
-      let mw = 340;
-      let mh = 54;
-      let mTime = 0;
+    if (statusWaveCanvas && statusWaveStage) {
+      const sctx = statusWaveCanvas.getContext('2d');
+      let sw = 380;
+      let sh = 160;
+      let sTime = 0;
       let mouseX = -9999;
       let mouseY = -9999;
       let isHovering = false;
 
-      function resizeMiniWave() {
-        if (!miniCanvas) return;
-        const rect = miniCanvas.getBoundingClientRect();
-        mw = miniCanvas.width = Math.floor(rect.width || miniCanvas.offsetWidth || 340);
-        mh = miniCanvas.height = 54;
+      function resizeStatusWave() {
+        if (!statusWaveCanvas) return;
+        const rect = statusWaveCanvas.getBoundingClientRect();
+        sw = statusWaveCanvas.width = Math.floor(rect.width || statusWaveCanvas.offsetWidth || 380);
+        sh = statusWaveCanvas.height = 160;
       }
-      window.addEventListener('resize', resizeMiniWave);
-      setTimeout(resizeMiniWave, 50);
+      window.addEventListener('resize', resizeStatusWave);
+      setTimeout(resizeStatusWave, 60);
 
-      const hoverTarget = statusCardEl || miniCanvas;
-      hoverTarget.addEventListener('mousemove', (e) => {
-        const rect = miniCanvas.getBoundingClientRect();
+      statusWaveStage.addEventListener('mousemove', (e) => {
+        const rect = statusWaveCanvas.getBoundingClientRect();
         mouseX = e.clientX - rect.left;
         mouseY = e.clientY - rect.top;
         isHovering = true;
       });
 
-      hoverTarget.addEventListener('mouseleave', () => {
+      statusWaveStage.addEventListener('mouseleave', () => {
         mouseX = -9999;
         mouseY = -9999;
         isHovering = false;
       });
 
-      function drawMiniWave() {
-        requestAnimationFrame(drawMiniWave);
-        if (!mctx) return;
-        if (!mw || !mh || mw < 10) {
-          resizeMiniWave();
+      function drawStatusWave() {
+        requestAnimationFrame(drawStatusWave);
+        if (!sctx) return;
+        if (!sw || !sh || sw < 20) {
+          resizeStatusWave();
           return;
         }
 
-        mctx.clearRect(0, 0, mw, mh);
+        sctx.clearRect(0, 0, sw, sh);
         const isLight = document.body.classList.contains('light');
 
-        mTime += 0.028;
+        sTime += 0.024;
+        const cy = sh / 2;
 
-        // Subtle Center Harmonic Line
-        mctx.strokeStyle = isLight ? 'rgba(0,0,0,0.06)' : 'rgba(255,255,255,0.06)';
-        mctx.lineWidth = 1;
-        mctx.beginPath();
-        mctx.moveTo(0, mh / 2);
-        mctx.lineTo(mw, mh / 2);
-        mctx.stroke();
+        // Subtle coordinate axis / harmonic zero line
+        sctx.strokeStyle = isLight ? 'rgba(0,0,0,0.06)' : 'rgba(255,255,255,0.06)';
+        sctx.lineWidth = 1;
+        sctx.setLineDash([4, 6]);
+        sctx.beginPath();
+        sctx.moveTo(0, cy);
+        sctx.lineTo(sw, cy);
+        sctx.stroke();
+        sctx.setLineDash([]);
 
         // 3 Layered Harmonic Waves (Emerald, Cyan, Purple)
-        const waves = [
-          { freq: 0.022, amp: mh * 0.30, phase: mTime * 1.1, color: isLight ? '#047857' : '#10b981', width: 2.0 },
-          { freq: 0.038, amp: mh * 0.20, phase: mTime * 0.85 + 1.2, color: isLight ? '#0284c7' : '#38bdf8', width: 1.5 },
-          { freq: 0.015, amp: mh * 0.25, phase: mTime * 1.3 + 2.5, color: isLight ? '#7c3aed' : '#a855f7', width: 1.1 }
+        const waveProfiles = [
+          { freq: 0.016, amp: 26, phase: sTime * 1.15, color: isLight ? 'rgba(4, 120, 87, 0.75)' : 'rgba(16, 185, 129, 0.85)', width: 2.2 },
+          { freq: 0.028, amp: 18, phase: sTime * 0.9 + 1.4, color: isLight ? 'rgba(2, 132, 199, 0.65)' : 'rgba(56, 189, 248, 0.75)', width: 1.6 },
+          { freq: 0.011, amp: 22, phase: sTime * 1.35 + 2.8, color: isLight ? 'rgba(124, 58, 237, 0.55)' : 'rgba(168, 85, 247, 0.65)', width: 1.2 }
         ];
 
-        waves.forEach((w) => {
-          mctx.beginPath();
-          const cy = mh / 2;
-
-          for (let x = 0; x <= mw; x += 3) {
+        // Wave rendering
+        waveProfiles.forEach((w) => {
+          sctx.beginPath();
+          for (let x = 0; x <= sw; x += 3) {
             let ripple = 0;
-            if (isHovering && mouseX >= -30 && mouseX <= mw + 30) {
+            if (isHovering && mouseX >= -30 && mouseX <= sw + 30) {
               const dist = Math.hypot(x - mouseX, cy - mouseY);
-              const mouseEffect = Math.max(0, 1 - dist / 120);
-              ripple = Math.sin(dist * 0.12 - mTime * 5.0) * 8 * mouseEffect;
+              const mouseFactor = Math.max(0, 1 - dist / 140);
+              ripple = Math.sin(dist * 0.10 - sTime * 5.5) * 12 * mouseFactor;
             }
 
             const y = cy + Math.sin(x * w.freq + w.phase) * w.amp + ripple;
-            if (x === 0) mctx.moveTo(x, y);
-            else mctx.lineTo(x, y);
+            if (x === 0) sctx.moveTo(x, y);
+            else sctx.lineTo(x, y);
           }
-          mctx.strokeStyle = w.color;
-          mctx.lineWidth = w.width;
-          mctx.stroke();
+          sctx.strokeStyle = w.color;
+          sctx.lineWidth = w.width;
+          sctx.stroke();
         });
 
-        // Glowing perturbation dot
-        if (isHovering && mouseX >= 0 && mouseX <= mw) {
-          mctx.beginPath();
-          mctx.arc(mouseX, mh / 2, 3.5, 0, Math.PI * 2);
-          mctx.fillStyle = isLight ? '#047857' : '#10b981';
-          mctx.fill();
+        // Glowing interactive perturbation cursor
+        if (isHovering && mouseX >= 0 && mouseX <= sw) {
+          sctx.beginPath();
+          sctx.arc(mouseX, mouseY, 4, 0, Math.PI * 2);
+          sctx.fillStyle = isLight ? '#047857' : '#10b981';
+          sctx.shadowColor = isLight ? 'rgba(4, 120, 87, 0.4)' : 'rgba(16, 185, 129, 0.6)';
+          sctx.shadowBlur = 8;
+          sctx.fill();
+          sctx.shadowBlur = 0;
+        }
+
+        // PHYSICAL FLOATING BUOY PHYSICS FOR WORKINGS CHIPS
+        // Chip 1 (AI Research) rests near left: sample at sw * 0.22
+        if (floatChip1) {
+          const sampleX1 = Math.max(20, sw * 0.22);
+          const w1 = waveProfiles[0];
+          let rip1 = 0;
+          if (isHovering) {
+            const dist1 = Math.hypot(sampleX1 - mouseX, cy - mouseY);
+            const factor1 = Math.max(0, 1 - dist1 / 140);
+            rip1 = Math.sin(dist1 * 0.10 - sTime * 5.5) * 12 * factor1;
+          }
+          const waveElevation1 = Math.sin(sampleX1 * w1.freq + w1.phase) * 11 + rip1;
+          const slope1 = Math.cos(sampleX1 * w1.freq + w1.phase) * 0.2;
+          const tilt1 = Math.max(-5, Math.min(5, slope1 * 14));
+          floatChip1.style.transform = `translate3d(0, ${waveElevation1.toFixed(2)}px, 0) rotate(${tilt1.toFixed(2)}deg)`;
+        }
+
+        // Chip 2 (ml-from-scratch) rests near right: sample at sw * 0.76
+        if (floatChip2) {
+          const sampleX2 = Math.min(sw - 20, sw * 0.76);
+          const w2 = waveProfiles[1];
+          let rip2 = 0;
+          if (isHovering) {
+            const dist2 = Math.hypot(sampleX2 - mouseX, cy - mouseY);
+            const factor2 = Math.max(0, 1 - dist2 / 140);
+            rip2 = Math.sin(dist2 * 0.10 - sTime * 5.5) * 12 * factor2;
+          }
+          const waveElevation2 = Math.sin(sampleX2 * w2.freq + w2.phase) * 10 + rip2;
+          const slope2 = Math.cos(sampleX2 * w2.freq + w2.phase) * 0.22;
+          const tilt2 = Math.max(-5, Math.min(5, slope2 * 14));
+          floatChip2.style.transform = `translate3d(0, ${waveElevation2.toFixed(2)}px, 0) rotate(${tilt2.toFixed(2)}deg)`;
         }
       }
-      requestAnimationFrame(drawMiniWave);
+      requestAnimationFrame(drawStatusWave);
     }
 
-    /* ─── 3. UNDER THE WAVES: Z7 AXIOMS / FACTS ─── */
-    const z7Facts = [
-      "\"I don't debug code, it's correct\"",
-      "\"I know the optimal values for the 70-billion parameter in a NN, no need to backprop\"",
-      "\"Euler solved calculus while going blind. What was your excuse for that CUDA out-of-memory error?\"",
-      "\"P vs NP? Solved it yesterday. Proof was too trivial to write down.\"",
-      "\"If my model doesn't converge, gradient descent is wrong, not my architecture.\"",
-      "\"My neural networks don't overfit; reality is just poorly distributed.\"",
-      "\"I write algorithms in O(1). Time is a construct anyway.\"",
-      "\"Compilers don't optimize my code; they study it.\"",
-      "\"I don't use loss functions; the model already knows what it did wrong.\"",
-      "\"Why approximate when you can just be right?\""
+    /* ─── 3. MATHEMATICAL FIRST PRINCIPLES (REPLACING ARROGANT SAYINGS) ─── */
+    const mathPrinciples = [
+      "\"Backpropagation is reverse-mode automatic differentiation on computational DAGs.\"",
+      "\"If you can't derive the gradient by hand, you don't understand the model.\"",
+      "\"Loss landscapes are non-convex, but high-dimensional saddles are rarely local minima.\"",
+      "\"The Bounded Inverse Gamma: heavy-tailed priors with strictly compact support boundaries.\"",
+      "\"Attention is dynamic kernel regression over projected linear vector subspaces.\"",
+      "\"No black boxes: derive the mathematics first, then engineer the computational graph.\"",
+      "\"Generalization is inductive bias guided by gradient descent through data geometry.\"",
+      "\"Vectorization isn't just fast syntax; it is thinking in linear transformations.\"",
+      "\"Softmax cross-entropy gradients collapse to residual prediction error: \u2207_z \u2112 = \u0177 - y.\"",
+      "\"Clean mathematical formulation produces dependable, robust production code.\""
     ];
 
-    let currentFactIndex = 0;
+    let currentPrincipleIndex = 0;
 
-    function nextZ7Fact() {
-      const factBox = document.getElementById('z7FactDisplay');
-      if (!factBox) return;
+    function cycleNextPrinciple() {
+      const display = document.getElementById('activePrincipleDisplay');
+      const icon = document.getElementById('axiomSpinIcon');
+      if (!display) return;
 
-      factBox.style.opacity = '0';
-      factBox.style.transform = 'translateY(4px)';
+      if (icon) {
+        icon.style.transform = 'rotate(180deg)';
+        setTimeout(() => { icon.style.transform = 'rotate(0deg)'; }, 280);
+      }
+
+      display.style.opacity = '0';
+      display.style.transform = 'translateY(4px)';
 
       setTimeout(() => {
-        currentFactIndex = (currentFactIndex + 1) % z7Facts.length;
-        factBox.textContent = z7Facts[currentFactIndex];
-        factBox.style.opacity = '1';
-        factBox.style.transform = 'translateY(0)';
+        currentPrincipleIndex = (currentPrincipleIndex + 1) % mathPrinciples.length;
+        display.textContent = mathPrinciples[currentPrincipleIndex];
+        display.style.opacity = '1';
+        display.style.transform = 'translateY(0)';
       }, 140);
     }
 
