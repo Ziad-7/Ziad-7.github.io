@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;450;500;600&display=swap"
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800;900&family=Inter:wght@400;450;500;600&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
 
@@ -1801,8 +1801,8 @@
   <!-- STICKY PREVIEW SWITCHER BAR -->
   <div style="background:#070a10; color:#f8fafc; font-family:'JetBrains Mono',monospace; font-size:0.75rem; padding:0.5rem 1.2rem; position:sticky; top:0; z-index:99999; border-bottom:1px solid #1e293b; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:0.5rem; box-shadow:0 4px 14px rgba(0,0,0,0.35);">
     <div style="display:flex; align-items:center; gap:0.6rem;">
-      <span style="background:#10b981; color:#052e16; font-size:0.65rem; font-weight:800; padding:0.15rem 0.5rem; border-radius:3px; letter-spacing:0.04em;">⚡ Z7 ARROGANT GENIUS EDITION</span>
-      <span style="color:#e2e8f0; font-weight:600;">Opening Matrix Math Rain + Z7 Resonance Field &amp; Facts + Math Click Sparks</span>
+      <span onclick="replayMatrixSplash()" style="background:#10b981; color:#052e16; font-size:0.65rem; font-weight:800; padding:0.15rem 0.5rem; border-radius:3px; letter-spacing:0.04em; cursor:pointer;" title="Click to replay Matrix Math Rain Wipe">⚡ Z7 ARROGANT GENIUS EDITION (Replay)</span>
+      <span style="color:#e2e8f0; font-weight:600;">Opening Matrix Math Wipe + Z7 Resonance Field &amp; Facts + Math Click Sparks</span>
     </div>
     <div>
       <a href="index.html" style="color:#38bdf8; font-weight:600; text-decoration:none; padding:0.2rem 0.4rem;">← Back to Main Portfolio</a>
@@ -4248,6 +4248,7 @@
     /* ─── 4. INTRO: MATRIX SYMBOLS WIPE BLACK SCREEN INTO PORTFOLIO ─── */
     const mCanvas = document.getElementById('z7MatrixCanvas');
     let mAnimId = null;
+    let wipeStartTime = 0;
 
     function runMatrixWipe() {
       if (!mCanvas) return;
@@ -4264,63 +4265,120 @@
         'f(x)', '\u221E', 'O(1)', 'dx', '\u03C3', '\u03B8', '\u2248', '\u2200x', '\u2297'
       ];
 
-      // Drops start slightly staggered at top. Black covers from head down to bottom.
+      // Slower, smooth cinematic cascade (~2.0s - 2.3s)
+      // Drops start staggered above top to create initial moment of central Z7 emblem
       const drops = [];
       for (let i = 0; i < columns; i++) {
         drops.push({
           x: i * fontSize,
-          y: -Math.random() * 50, // Slight stagger at the very top
-          speed: 15 + Math.random() * 7, // Sweeps down in ~1.0s to 1.2s
-          tailLength: 7 + Math.floor(Math.random() * 4),
+          y: -25 - Math.random() * 85, // Brief pause at top
+          speed: 6.8 + Math.random() * 3.4, // Slower: ~6.8 to 10.2 px/frame
+          tailLength: 10 + Math.floor(Math.random() * 6), // Dense, lush math tail
           glyphs: []
         });
       }
 
       drops.forEach(d => {
-        for (let j = 0; j < 25; j++) {
+        for (let j = 0; j < 30; j++) {
           d.glyphs.push(mathGlyphs[Math.floor(Math.random() * mathGlyphs.length)]);
         }
       });
 
+      wipeStartTime = performance.now();
+
       function drawWipeFrame() {
-        mctx.clearRect(0, 0, w, h);
+        const elapsed = performance.now() - wipeStartTime;
 
-        let anyActive = false;
-        mctx.font = '700 ' + fontSize + 'px monospace';
-
-        // 1. Draw black veil for each column below the falling head
+        // 1. Fill entire canvas with solid dark background
+        mctx.globalCompositeOperation = 'source-over';
         mctx.fillStyle = '#06090e';
+        mctx.fillRect(0, 0, w, h);
+
+        // 2. Draw glowing Z7 brand emblem and subtitle in the center of the black screen
+        const centerX = w / 2;
+        const centerY = h / 2;
+
+        mctx.save();
+        mctx.textAlign = 'center';
+        mctx.textBaseline = 'middle';
+
+        // Subtle breathing glow on central emblem
+        const glowFactor = 0.85 + 0.15 * Math.sin(elapsed / 180);
+
+        // Bold blocky Z7 with explicit spacing between Z and 7
+        mctx.font = '900 4.8rem "Plus Jakarta Sans", -apple-system, sans-serif';
+        mctx.fillStyle = '#10b981';
+        mctx.shadowColor = `rgba(16, 185, 129, ${0.75 * glowFactor})`;
+        mctx.shadowBlur = 35 * glowFactor;
+
+        const zWidth = mctx.measureText('Z').width;
+        const sevenWidth = mctx.measureText('7').width;
+        const charGap = 14;
+        const totalW = zWidth + charGap + sevenWidth;
+        const startX = centerX - totalW / 2;
+        mctx.fillText('Z', startX + zWidth / 2, centerY - 14);
+        mctx.fillText('7', startX + zWidth + charGap + sevenWidth / 2, centerY - 14);
+
+        // Subtitle: INITIALIZING MATHEMATICAL ARCHITECTURE
+        mctx.font = '700 0.76rem "JetBrains Mono", monospace';
+        mctx.fillStyle = '#38bdf8';
+        mctx.shadowColor = `rgba(56, 189, 248, ${0.55 * glowFactor})`;
+        mctx.shadowBlur = 16;
+        const subText = 'INITIALIZING MATHEMATICAL ARCHITECTURE';
+        if ('letterSpacing' in mctx) {
+          mctx.letterSpacing = '5px';
+          mctx.fillText(subText, centerX, centerY + 34);
+        } else {
+          const charSpacing = 5;
+          let totalSubW = 0;
+          for (let c of subText) totalSubW += mctx.measureText(c).width + charSpacing;
+          totalSubW -= charSpacing;
+          let curX = centerX - totalSubW / 2;
+          for (let c of subText) {
+            const cw = mctx.measureText(c).width;
+            mctx.fillText(c, curX + cw / 2, centerY + 34);
+            curX += cw + charSpacing;
+          }
+        }
+        mctx.restore();
+
+        // 3. WIPE AWAY: Erase black background and Z7 above each falling drop's head
+        mctx.globalCompositeOperation = 'destination-out';
+        mctx.fillStyle = '#000000';
+        let anyActive = false;
+
         for (let i = 0; i < columns; i++) {
           const d = drops[i];
           d.y += d.speed;
 
-          const topOfBlack = Math.max(0, Math.floor(d.y));
-          if (topOfBlack < h) {
+          const topOfWipe = Math.max(0, Math.floor(d.y));
+          if (topOfWipe > 0) {
+            // Cut transparent hole from top (y=0) down to drop's head
+            mctx.fillRect(d.x, 0, fontSize + 1, Math.min(h, topOfWipe));
+          }
+
+          if (d.y - d.tailLength * fontSize < h) {
             anyActive = true;
-            // Black fills from the falling symbol down to the bottom
-            mctx.fillRect(d.x, topOfBlack, fontSize + 1, h - topOfBlack);
-          } else {
-            // Drop head reached bottom, check if tail is still clearing
-            if (d.y - d.tailLength * fontSize < h) {
-              anyActive = true;
-            }
           }
         }
 
-        // 2. Draw glowing math symbols at and above the head
+        // 4. DRAW MATH SYMBOLS: Cascading right on wipe boundary and trailing into revealed site
+        mctx.globalCompositeOperation = 'source-over';
+        mctx.font = '700 ' + fontSize + 'px monospace';
+
         for (let i = 0; i < columns; i++) {
           const d = drops[i];
           for (let j = 0; j < d.tailLength; j++) {
             const charY = d.y - j * fontSize;
             if (charY >= 0 && charY <= h + fontSize) {
-              const char = d.glyphs[j % d.glyphs.length];
+              const char = d.glyphs[(Math.floor(elapsed / 80) + j) % d.glyphs.length];
               if (j === 0) {
                 // Leading head wiping the black away: bright glowing emerald white
-                mctx.fillStyle = '#e6fffa';
+                mctx.fillStyle = '#f0fdf4';
                 mctx.shadowColor = '#10b981';
-                mctx.shadowBlur = 12;
+                mctx.shadowBlur = 14;
               } else {
-                // Trailing glyphs above: fading out into the revealed portfolio
+                // Trailing glyphs above: fading out into revealed portfolio
                 const alpha = Math.max(0, 1 - j / d.tailLength);
                 mctx.fillStyle = j % 2 === 0 
                   ? `rgba(16, 185, 129, ${alpha * 0.95})` 
@@ -4337,7 +4395,7 @@
         if (anyActive) {
           mAnimId = requestAnimationFrame(drawWipeFrame);
         } else {
-          // Finished: all symbols cleared past the bottom, entire portfolio is revealed
+          // Finished: all symbols cleared past bottom, full portfolio unveiled
           mCanvas.style.display = 'none';
           mctx.clearRect(0, 0, w, h);
         }
@@ -4347,7 +4405,17 @@
       mAnimId = requestAnimationFrame(drawWipeFrame);
     }
 
-    // Replay function when clicking Z7 AXIOMS pill
+    // Dismiss wipe if user clicks on page after 200ms
+    window.addEventListener('click', () => {
+      if (mCanvas && mCanvas.style.display !== 'none' && performance.now() - wipeStartTime > 200) {
+        if (mAnimId) cancelAnimationFrame(mAnimId);
+        mCanvas.style.display = 'none';
+        const mctx = mCanvas.getContext('2d');
+        if (mctx) mctx.clearRect(0, 0, mCanvas.width, mCanvas.height);
+      }
+    }, { passive: true });
+
+    // Replay function when clicking Z7 AXIOMS pill or top switcher bar
     function replayMatrixSplash() {
       runMatrixWipe();
     }
