@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ziad Ahmed Rabie — AI Systems Engineer &amp; Computer Engineering</title>
+  <title>Z7 // Ziad Ahmed Rabie — AI Systems & Mathematical Engineering</title>
   <meta name="description"
     content="Personal portfolio of Ziad Ahmed Rabie. Computer engineering student at EUI (3.95 GPA, Full Merit Scholarship) specializing in applied AI engineering, mathematical machine learning models from scratch, and efficient systems." />
 
@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;450;500;600&display=swap"
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800;900&family=Inter:wght@400;450;500;600&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
 
@@ -311,9 +311,9 @@
     .hero {
       padding: 4.5rem 0 3.5rem;
       display: grid;
-      grid-template-columns: 1.3fr 0.9fr;
+      grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.9fr);
       gap: 2.5rem;
-      align-items: center;
+      align-items: start;
     }
 
     .hero-greeting {
@@ -375,9 +375,20 @@
       background: var(--bg-elevated);
       border: 1px solid var(--border);
       border-radius: var(--radius-md);
-      padding: 1.5rem;
+      padding: 1.35rem 1.4rem;
       box-shadow: var(--shadow-sm);
       position: relative;
+      width: 100%;
+      min-width: 0;
+      max-width: 100%;
+      box-sizing: border-box;
+      overflow: hidden;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .status-card:hover {
+      border-color: rgba(16, 185, 129, 0.35);
+      box-shadow: 0 4px 20px rgba(16, 185, 129, 0.06);
     }
 
     .status-card-header {
@@ -385,8 +396,8 @@
       justify-content: space-between;
       align-items: center;
       border-bottom: 1px solid var(--border-subtle);
-      padding-bottom: 0.8rem;
-      margin-bottom: 1rem;
+      padding-bottom: 0.75rem;
+      margin-bottom: 0.85rem;
     }
 
     .status-title {
@@ -397,7 +408,8 @@
       letter-spacing: 0.08em;
       display: flex;
       align-items: center;
-      gap: 0.4rem;
+      gap: 0.45rem;
+      font-weight: 700;
     }
 
     .live-clock {
@@ -407,29 +419,177 @@
       font-weight: 500;
     }
 
-    .status-items {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-      font-size: 0.85rem;
+    /* ─── HARMONIC WAVE STAGE WITH FLOATING WORKINGS ─── */
+    .status-wave-container {
+      position: relative;
+      width: 100%;
+      height: 160px;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      background: rgba(0, 0, 0, 0.32);
+      border: 1px solid var(--border-subtle);
+      cursor: crosshair;
+      margin-bottom: 0;
+      transition: border-color 0.2s ease;
     }
 
-    .status-row {
+    .status-card:hover .status-wave-container {
+      border-color: rgba(16, 185, 129, 0.4);
+    }
+
+    body.light .status-wave-container {
+      background: rgba(0, 0, 0, 0.025);
+      border-color: rgba(0, 0, 0, 0.08);
+    }
+
+    .status-wave-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 160px;
+      display: block;
+      z-index: 1;
+    }
+
+    .status-core-watermark {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: var(--font-heading), 'Plus Jakarta Sans', sans-serif;
+      font-size: 3.8rem;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      color: rgba(16, 185, 129, 0.09);
+      text-shadow: 0 0 25px rgba(16, 185, 129, 0.12);
+      pointer-events: none;
+      user-select: none;
+      line-height: 1;
+      z-index: 2;
+      transition: color 0.2s ease;
+    }
+
+    .status-card:hover .status-core-watermark {
+      color: rgba(16, 185, 129, 0.16);
+    }
+
+    body.light .status-core-watermark {
+      color: rgba(4, 120, 87, 0.07);
+    }
+
+    .wave-formula-tag {
+      position: absolute;
+      top: 6px;
+      right: 8px;
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      color: var(--text-dim);
+      opacity: 0.7;
+      pointer-events: none;
+      user-select: none;
+      z-index: 3;
+    }
+
+    /* ─── LIVE STATUS: FOCUS LEAD & DRAG HINT ─── */
+    .status-focus-bar {
       display: flex;
-      align-items: flex-start;
-      gap: 0.6rem;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.55rem;
+      padding: 0 0.15rem;
+    }
+
+    .status-focus-label {
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      font-weight: 700;
       color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      letter-spacing: 0.02em;
     }
 
-    .status-row i {
+    .status-drag-tip {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      opacity: 0.8;
+      user-select: none;
+    }
+
+    /* Floating Workings (Draggable chips riding wave crests) */
+    .wave-float-item {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.4rem 0.85rem;
+      border-radius: 9999px;
+      background: rgba(15, 23, 42, 0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+      user-select: none;
+      cursor: grab;
+      touch-action: none;
+      z-index: 5;
+      font-family: var(--font-heading);
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text);
+      transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, color 0.15s ease;
+      will-change: transform;
+    }
+
+    .wave-float-item:hover {
+      border-color: var(--accent);
+      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.3);
       color: var(--accent);
+    }
+
+    .wave-float-item.is-dragging {
+      cursor: grabbing !important;
+      border-color: var(--accent) !important;
+      box-shadow: 0 10px 25px rgba(16, 185, 129, 0.45) !important;
+      z-index: 10 !important;
+      opacity: 0.96;
+    }
+
+    body.light .wave-float-item {
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid rgba(4, 120, 87, 0.28);
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+      color: #0f172a;
+    }
+
+    body.light .wave-float-item:hover {
+      background: #ffffff;
+      border-color: var(--accent);
+      box-shadow: 0 6px 18px rgba(4, 120, 87, 0.2);
+      color: var(--accent);
+    }
+
+    body.light .wave-float-item.is-dragging {
+      border-color: var(--accent) !important;
+      box-shadow: 0 8px 22px rgba(4, 120, 87, 0.3) !important;
+    }
+
+    .float-icon {
       font-size: 1rem;
-      margin-top: 0.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       flex-shrink: 0;
     }
 
-    .status-row strong {
-      color: var(--text);
+    .float-title {
+      white-space: nowrap;
     }
 
     /* ─── SECTION COMMONS ─── */
@@ -1556,23 +1716,278 @@
         grid-template-columns: 1fr;
       }
     }
+  
+    /* ─── Z7 BRANDING & NAVBAR STYLING ─── */
+    .z7-tag {
+      background: #047857;
+      color: #ffffff;
+      font-family: var(--font-heading);
+      font-size: 0.72rem;
+      font-weight: 900;
+      padding: 0.15rem 0.48rem;
+      border-radius: 4px;
+      margin-right: 0.45rem;
+      letter-spacing: 0.06em;
+      display: inline-block;
+    }
+
+    /* Math Sparkles Burst on Click */
+    .math-sparkle {
+      position: fixed;
+      pointer-events: none;
+      user-select: none;
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      font-weight: 800;
+      z-index: 99999;
+      transform: translate(-50%, -50%);
+      animation: z7Sparkle 1.1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    }
+
+    @keyframes z7Sparkle {
+      0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(0.6) rotate(0deg);
+      }
+      40% {
+        opacity: 0.95;
+        transform: translate(calc(-50% + var(--vx) * 0.7), calc(-50% + var(--vy) * 0.7 - 15px)) scale(1.15) rotate(var(--rot));
+      }
+      100% {
+        opacity: 0;
+        transform: translate(calc(-50% + var(--vx) * 1.4), calc(-50% + var(--vy) * 1.6 - 35px)) scale(0.85) rotate(var(--rot));
+      }
+    }
+
+    /* ─── OPTION 2: SLEEK QUANT / TERMINAL TICKER (44PX PRECISION BAR) ─── */
+    .z7-quant-ticker-wrap {
+      margin: 2rem 0 1.8rem;
+      width: 100%;
+    }
+
+    .z7-quant-ticker {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.85rem;
+      min-height: 44px;
+      height: 44px;
+      padding: 0 1rem;
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .z7-quant-ticker:hover {
+      border-color: rgba(16, 185, 129, 0.45);
+      box-shadow: 0 4px 18px rgba(16, 185, 129, 0.08);
+    }
+
+    body.light .z7-quant-ticker {
+      background: #ffffff;
+      border-color: rgba(0, 0, 0, 0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    body.light .z7-quant-ticker:hover {
+      border-color: rgba(4, 120, 87, 0.35);
+      box-shadow: 0 4px 14px rgba(4, 120, 87, 0.06);
+    }
+
+    .ticker-lead {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      flex-shrink: 0;
+      user-select: none;
+    }
+
+    .ticker-live-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 8px #10b981;
+      animation: tickerPulse 2s infinite ease-in-out;
+    }
+
+    @keyframes tickerPulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.45; transform: scale(0.85); }
+    }
+
+    body.light .ticker-live-dot {
+      background: #047857;
+      box-shadow: 0 0 6px rgba(4, 120, 87, 0.5);
+    }
+
+    .ticker-brand {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+    }
+
+    .ticker-sep {
+      color: var(--border);
+      font-size: 0.75rem;
+      user-select: none;
+      opacity: 0.6;
+    }
+
+    .ticker-formula {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--text-dim);
+      opacity: 0.85;
+    }
+
+    /* Mini Oscilloscope Wave */
+    .ticker-wave-box {
+      display: flex;
+      align-items: center;
+      height: 32px;
+      width: 150px;
+      flex-shrink: 0;
+      position: relative;
+      cursor: crosshair;
+      border-left: 1px solid var(--border-subtle);
+      border-right: 1px solid var(--border-subtle);
+      padding: 0 0.4rem;
+    }
+
+    .ticker-wave-canvas {
+      width: 100%;
+      height: 32px;
+      display: block;
+    }
+
+    /* Live Axiom Stream */
+    .ticker-truth-box {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      min-width: 0;
+      cursor: pointer;
+      user-select: none;
+      padding: 0 0.5rem;
+    }
+
+    .ticker-truth-quote {
+      font-family: var(--font-heading);
+      font-size: 0.86rem;
+      font-style: italic;
+      color: var(--text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      transition: opacity 0.15s ease, transform 0.15s ease, color 0.15s ease;
+    }
+
+    .ticker-truth-box:hover .ticker-truth-quote {
+      color: var(--accent);
+    }
+
+    /* Actions */
+    .ticker-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      flex-shrink: 0;
+    }
+
+    .ticker-btn {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+      padding: 0.22rem 0.6rem;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      user-select: none;
+    }
+
+    .ticker-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--bg-elevated);
+    }
+
+    .z7-facts-body:hover {
+      color: var(--accent);
+    }
+
+    .z7-facts-nav {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .z7-fact-btn {
+      background: var(--bg);
+      color: var(--text-dim);
+      border: 1px solid var(--border);
+      padding: 0.35rem 0.75rem;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .z7-fact-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--bg-elevated);
+    }
+
+    /* ─── INTRO MATRIX MATH RAIN: BLACK WIPING INTO PORTFOLIO ─── */
+    .z7-matrix-canvas-layer {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 99999999;
+      background: transparent;
+      display: block;
+    }
   </style>
 </head>
 
 <body>
 
+  <!-- ─── INTRO MATRIX MATH RAIN (1s Shower of Math Symbols) ─── -->
+  <canvas id="z7MatrixCanvas" class="z7-matrix-canvas-layer"></canvas>
+
+
   <!-- ─── NAVIGATION ─── -->
   <nav>
     <div class="wrapper nav-inner">
-      <a href="index.html" class="nav-logo">
-        <span class="pulse"></span> Ziad Ahmed Rabie
+      <a href="index.html" class="nav-logo" title="Click Z7 to replay intro wipe">
+        <span class="z7-tag" onclick="replayMatrixSplash(); return false;">Z7</span><span class="pulse"></span> Ziad Ahmed Rabie
       </a>
 
       <ul class="nav-menu">
         <li><a href="#lab">Sandbox</a></li>
         <li><a href="#work">Projects</a></li>
         <li><a href="#experience">Experience &amp; Honors</a></li>
-        <li><a href="#about">About</a></li>
+        <li><a href="#education">Education</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
 
@@ -1593,11 +2008,9 @@
     <!-- ─── HERO SECTION (Human & Grounded) ─── -->
     <section class="hero">
       <div>
-        <div class="hero-greeting">
-          <i class="ti ti-brain"></i> Cairo, Egypt &nbsp;•&nbsp; EUI Year 4 &nbsp;•&nbsp; AI Systems Engineer
-        </div>
         <h1 class="hero-title">
-          AI systems engineer &amp; computer engineering student.
+          Ziad Ahmed Rabie.<br />
+          <span style="color:var(--accent);">AI Systems Engineer.</span>
         </h1>
         <p class="hero-text">
           I'm a Computer Engineering student specializing in applied AI systems. 
@@ -1621,32 +2034,48 @@
         </div>
       </div>
 
-      <!-- Live Status Card -->
-      <aside class="status-card">
+      <!-- ─── LIVE STATUS: HARMONIC WAVE WITH FLOATING WORKINGS ─── -->
+      <aside class="status-card" id="statusCard">
+        <!-- 1. Header: strictly "Live Status" -->
         <div class="status-card-header">
-          <span class="status-title"><i class="ti ti-activity"></i> Live Status</span>
+          <span class="status-title">
+            <span class="ticker-live-dot"></span>
+            Live Status
+          </span>
           <span class="live-clock" id="cairoTime">--:--:-- GMT+3</span>
         </div>
-        <div class="status-items">
-          <div class="status-row">
-            <i class="ti ti-target"></i>
-            <div>
-              <strong>Current Focus:</strong>
-              <div style="margin-top:0.25rem; font-size:0.8rem; color:var(--text-muted); line-height:1.45;">
-                • Statistics &amp; ML Research<br />
-                • <code>ml-from-scratch</code> repo expansion (neural architectures &amp; backprop)
-              </div>
-            </div>
+
+        <!-- 2. Focus Lead: "Currently working on:" + Drag Hint -->
+        <div class="status-focus-bar">
+          <span class="status-focus-label">Currently working on:</span>
+          <span class="status-drag-tip"><i class="ti ti-hand-grab"></i> drag to move</span>
+        </div>
+
+        <!-- 3. Harmonic Wave Stage with Movable Floating Workings -->
+        <div class="status-wave-container" id="statusWaveStage">
+          <!-- Background Harmonic Canvas -->
+          <canvas id="statusWaveCanvas" class="status-wave-canvas" height="160"></canvas>
+
+          <!-- Subtle Z7 watermark in wave center -->
+          <div class="status-core-watermark" aria-hidden="true">Z7</div>
+
+          <!-- Formula indicator -->
+          <div class="wave-formula-tag">&psi;(x,t) = &sum; A<sub>k</sub> sin(&omega;<sub>k</sub>t + kx)</div>
+
+          <!-- Floating Workings: Clean topic boxes, draggable, riding the waves! -->
+          <div class="wave-float-item chip-ai-research" id="floatChip1">
+            <i class="ti ti-brain float-icon" style="color:var(--accent);"></i>
+            <span class="float-title">AI Research</span>
           </div>
-          <div class="status-row">
-            <i class="ti ti-briefcase"></i>
-            <div><strong>Availability:</strong> Open for AI engineering internships &amp; select technical collaborations</div>
+
+          <div class="wave-float-item chip-ml-scratch" id="floatChip2">
+            <i class="ti ti-binary-tree float-icon" style="color:#38bdf8;"></i>
+            <span class="float-title">ml-from-scratch</span>
           </div>
         </div>
       </aside>
     </section>
 
-    <!-- ─── INTERACTIVE LAB (TACTILE DEMOS & SANDBOXES) ─── -->
     <section id="lab">
       <div class="section-header" style="margin-bottom: 1.2rem;">
         <div>
@@ -2240,8 +2669,8 @@
       </div>
     </div>
 
-    <!-- ─── ABOUT: EDUCATION & FOUNDATIONS ─── -->
-    <section id="about">
+    <!-- ─── EDUCATION & FOUNDATIONS ─── -->
+    <section id="education">
       <div class="section-header">
         <div>
           <div class="section-label"><i class="ti ti-school"></i> Academic Background</div>
@@ -2323,22 +2752,21 @@
         Whether you have an interesting software project, a freelance engagement, or an academic collaboration, I'd love to chat.
       </p>
 
-      <div class="contact-btn-group">
+      <div class="contact-btn-group" style="justify-content:center;">
         <button class="btn-contact-main" onclick="copyEmail(this)">
           <i class="ti ti-copy"></i> <span id="copyEmailText">Copy Email Address</span>
         </button>
-        <a href="mailto:ziad.ahmed.rabie1@gmail.com" class="btn-contact-sub">
-          <i class="ti ti-mail"></i> Open Mail Client
-        </a>
-        <a href="https://linkedin.com/in/ziadahmedrabie" target="_blank" class="btn-contact-sub">
-          <i class="ti ti-brand-linkedin"></i> LinkedIn
-        </a>
       </div>
     </section>
 
     <!-- ─── FOOTER ─── -->
     <footer>
       <span>Ziad Ahmed Rabie • Cairo, Egypt</span>
+      <div style="display:flex; align-items:center; gap:1.2rem;">
+        <a href="https://github.com/Ziad-7" target="_blank" style="color:var(--text-muted); text-decoration:none; display:inline-flex; align-items:center; gap:0.35rem;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'"><i class="ti ti-brand-github"></i> GitHub</a>
+        <a href="https://linkedin.com/in/ziadahmedrabie" target="_blank" style="color:var(--text-muted); text-decoration:none; display:inline-flex; align-items:center; gap:0.35rem;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'"><i class="ti ti-brand-linkedin"></i> LinkedIn</a>
+        <a href="Ziad_Ahmed_Rabie_Resume.pdf" target="_blank" style="color:var(--text-muted); text-decoration:none; display:inline-flex; align-items:center; gap:0.35rem;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'"><i class="ti ti-file-text"></i> Resume</a>
+      </div>
       <span>Built with vanilla HTML, CSS &amp; JavaScript</span>
     </footer>
 
@@ -3792,6 +4220,590 @@
       themeBtn.addEventListener('click', () => setTheme(!document.body.classList.contains('light')));
     }
   </script>
+
+  <script>
+    /* ─── 1. CLICK TO BURST MATHEMATICAL PARTICLES (From Concept 1) ─── */
+    const z7MathSymbols = [
+      '\u03C0', '\u2211', '\u222B', '\u2207', '\u221E', '\u03BB', 'Z7', 'e',
+      '\u221A2', '\u03D5', '\u2202x', '\u2248', '\u211D', '\u2200x', '\u2208',
+      'e^{i\u03C0}+1=0', '\u2207L', 'f(x)', '\u03C3^2', '\u2297', 'O(1)', 'dx'
+    ];
+    const z7Colors = ['#10b981', '#38bdf8', '#a855f7', '#f59e0b', '#34d399', '#60a5fa'];
+
+    window.addEventListener('click', (e) => {
+      // Avoid interference with interactive controls
+      if (e.target.closest('input') || e.target.closest('.stock-slider') || e.target.closest('.math-pad-canvas') || e.target.closest('button') || e.target.closest('a') || e.target.closest('#z7MatrixSplash')) {
+        return;
+      }
+      spawnZ7Particles(e.clientX, e.clientY, 8);
+    });
+
+    function spawnZ7Particles(x, y, count) {
+      for (let i = 0; i < count; i++) {
+        const span = document.createElement('span');
+        span.className = 'math-sparkle';
+        span.textContent = z7MathSymbols[Math.floor(Math.random() * z7MathSymbols.length)];
+        span.style.left = x + 'px';
+        span.style.top = y + 'px';
+
+        const angle = Math.random() * Math.PI * 2;
+        const dist = 30 + Math.random() * 65;
+        const vx = Math.cos(angle) * dist + 'px';
+        const vy = Math.sin(angle) * dist + 'px';
+        const rot = (Math.random() * 50 - 25) + 'deg';
+        const color = z7Colors[Math.floor(Math.random() * z7Colors.length)];
+
+        span.style.setProperty('--vx', vx);
+        span.style.setProperty('--vy', vy);
+        span.style.setProperty('--rot', rot);
+        span.style.color = color;
+        span.style.fontSize = (0.8 + Math.random() * 0.5) + 'rem';
+        span.style.textShadow = `0 0 10px ${color}aa`;
+
+        document.body.appendChild(span);
+        setTimeout(() => span.remove(), 1100);
+      }
+    }
+
+    /* ─── 2. LIVE STATUS: HARMONIC WAVE & MOVABLE FLOATING WORKINGS PHYSICS ─── */
+    const statusWaveCanvas = document.getElementById('statusWaveCanvas');
+    const statusWaveStage = document.getElementById('statusWaveStage');
+    const floatChip1 = document.getElementById('floatChip1');
+    const floatChip2 = document.getElementById('floatChip2');
+
+    let splashRipples = [];
+
+    function triggerWaterSplash(x, y, power = 18) {
+      splashRipples.push({
+        x: x,
+        y: y,
+        birth: performance.now(),
+        power: power,
+        speed: 3.6,
+        decay: 1200
+      });
+      if (splashRipples.length > 6) splashRipples.shift();
+    }
+
+    // Chip state definitions with draggable coordinates & wave profiles
+    const chips = [
+      {
+        id: 'ai-research',
+        el: floatChip1,
+        x: 18,
+        y: 22,
+        isDragging: false,
+        dragOffsetX: 0,
+        dragOffsetY: 0,
+        waveFreq: 0.016,
+        waveAmp: 11,
+        phase: 0,
+        splashImpulse: 0
+      },
+      {
+        id: 'ml-scratch',
+        el: floatChip2,
+        x: 195,
+        y: 86,
+        isDragging: false,
+        dragOffsetX: 0,
+        dragOffsetY: 0,
+        waveFreq: 0.026,
+        waveAmp: 10,
+        phase: 1.6,
+        splashImpulse: 0
+      }
+    ];
+
+    function initChipPositions() {
+      if (!statusWaveStage) return;
+      const stageW = statusWaveStage.clientWidth || 380;
+      chips[0].x = 18;
+      chips[0].y = 22;
+      const chip2W = floatChip2 ? floatChip2.offsetWidth || 140 : 140;
+      chips[1].x = Math.max(120, stageW - chip2W - 18);
+      chips[1].y = 86;
+    }
+
+    // Interactive Button: Splash Wave
+    window.splashWave = function() {
+      if (!statusWaveCanvas) return;
+      const sw = statusWaveCanvas.width || 380;
+      const sh = statusWaveCanvas.height || 160;
+      triggerWaterSplash(sw / 2, sh / 2, 30);
+      chips.forEach(c => {
+        c.splashImpulse = -24;
+      });
+    };
+
+    // Interactive Button: Reset Chip Buoys
+    window.resetChips = function() {
+      initChipPositions();
+      chips.forEach(c => {
+        c.splashImpulse = -14;
+        c.isDragging = false;
+        if (c.el) c.el.classList.remove('is-dragging');
+      });
+      triggerWaterSplash(statusWaveCanvas ? statusWaveCanvas.width / 2 : 190, 80, 16);
+    };
+
+    // Attach Pointer Event Listeners for Draggable Behavior
+    chips.forEach(chip => {
+      if (!chip.el) return;
+
+      chip.el.addEventListener('pointerdown', (e) => {
+        e.preventDefault();
+        chip.isDragging = true;
+        chip.el.classList.add('is-dragging');
+        try { chip.el.setPointerCapture(e.pointerId); } catch(err) {}
+
+        const stageRect = statusWaveStage.getBoundingClientRect();
+        chip.dragOffsetX = e.clientX - stageRect.left - chip.x;
+        chip.dragOffsetY = e.clientY - stageRect.top - chip.y;
+
+        triggerWaterSplash(chip.x + chip.el.offsetWidth / 2, chip.y + chip.el.offsetHeight / 2, 16);
+      });
+
+      chip.el.addEventListener('pointermove', (e) => {
+        if (!chip.isDragging) return;
+        const stageRect = statusWaveStage.getBoundingClientRect();
+        const rawX = e.clientX - stageRect.left - chip.dragOffsetX;
+        const rawY = e.clientY - stageRect.top - chip.dragOffsetY;
+
+        const maxX = Math.max(10, statusWaveStage.clientWidth - chip.el.offsetWidth - 8);
+        const maxY = Math.max(10, statusWaveStage.clientHeight - chip.el.offsetHeight - 8);
+
+        chip.x = Math.max(8, Math.min(maxX, rawX));
+        chip.y = Math.max(8, Math.min(maxY, rawY));
+
+        chip.el.style.transform = `translate3d(${chip.x.toFixed(1)}px, ${chip.y.toFixed(1)}px, 0) scale(1.06)`;
+
+        // Wake ripple while dragging through water
+        if (Math.random() < 0.35) {
+          triggerWaterSplash(chip.x + chip.el.offsetWidth / 2, chip.y + chip.el.offsetHeight / 2, 7);
+        }
+      });
+
+      const endDrag = (e) => {
+        if (!chip.isDragging) return;
+        chip.isDragging = false;
+        chip.el.classList.remove('is-dragging');
+        try { chip.el.releasePointerCapture(e.pointerId); } catch(err) {}
+
+        triggerWaterSplash(chip.x + chip.el.offsetWidth / 2, chip.y + chip.el.offsetHeight / 2, 20);
+        chip.splashImpulse = 4; // realistic drop settling bounce
+      };
+
+      chip.el.addEventListener('pointerup', endDrag);
+      chip.el.addEventListener('pointercancel', endDrag);
+    });
+
+    if (statusWaveCanvas && statusWaveStage) {
+      const sctx = statusWaveCanvas.getContext('2d');
+      let sw = 380;
+      let sh = 160;
+      let sTime = 0;
+      let mouseX = -9999;
+      let mouseY = -9999;
+      let isHovering = false;
+
+      function resizeStatusWave() {
+        if (!statusWaveCanvas) return;
+        const rect = statusWaveCanvas.getBoundingClientRect();
+        sw = statusWaveCanvas.width = Math.floor(rect.width || statusWaveCanvas.offsetWidth || 380);
+        sh = statusWaveCanvas.height = 160;
+      }
+      window.addEventListener('resize', () => {
+        resizeStatusWave();
+        // Clamp chip positions if container narrowed
+        chips.forEach(c => {
+          if (!c.el) return;
+          const maxX = Math.max(10, (statusWaveStage.clientWidth || sw) - c.el.offsetWidth - 8);
+          if (c.x > maxX) c.x = maxX;
+        });
+      });
+      setTimeout(() => {
+        resizeStatusWave();
+        initChipPositions();
+      }, 70);
+
+      statusWaveStage.addEventListener('mousemove', (e) => {
+        const rect = statusWaveCanvas.getBoundingClientRect();
+        mouseX = e.clientX - rect.left;
+        mouseY = e.clientY - rect.top;
+        isHovering = true;
+      });
+
+      statusWaveStage.addEventListener('mouseleave', () => {
+        mouseX = -9999;
+        mouseY = -9999;
+        isHovering = false;
+      });
+
+      // Clicking on water creates ripple splash; double-clicking resets chip buoys
+      statusWaveStage.addEventListener('click', (e) => {
+        if (e.target.closest('.wave-float-item')) return;
+        const rect = statusWaveCanvas.getBoundingClientRect();
+        const clickX = e.clientX - rect.left;
+        const clickY = e.clientY - rect.top;
+        triggerWaterSplash(clickX, clickY, 22);
+      });
+
+      statusWaveStage.addEventListener('dblclick', (e) => {
+        if (e.target.closest('.wave-float-item')) return;
+        resetChips();
+      });
+
+      function drawStatusWave() {
+        requestAnimationFrame(drawStatusWave);
+        if (!sctx) return;
+        if (!sw || !sh || sw < 20) {
+          resizeStatusWave();
+          return;
+        }
+
+        sctx.clearRect(0, 0, sw, sh);
+        const isLight = document.body.classList.contains('light');
+        const now = performance.now();
+
+        sTime += 0.024;
+        const cy = sh / 2;
+
+        // Clean expired ripples
+        splashRipples = splashRipples.filter(r => now - r.birth < r.decay);
+
+        // Subtle coordinate axis
+        sctx.strokeStyle = isLight ? 'rgba(0,0,0,0.06)' : 'rgba(255,255,255,0.06)';
+        sctx.lineWidth = 1;
+        sctx.setLineDash([4, 6]);
+        sctx.beginPath();
+        sctx.moveTo(0, cy);
+        sctx.lineTo(sw, cy);
+        sctx.stroke();
+        sctx.setLineDash([]);
+
+        // 3 Layered Harmonic Waves
+        const waveProfiles = [
+          { freq: 0.016, amp: 24, phase: sTime * 1.15, color: isLight ? 'rgba(4, 120, 87, 0.75)' : 'rgba(16, 185, 129, 0.85)', width: 2.2 },
+          { freq: 0.028, amp: 16, phase: sTime * 0.9 + 1.4, color: isLight ? 'rgba(2, 132, 199, 0.65)' : 'rgba(56, 189, 248, 0.75)', width: 1.6 },
+          { freq: 0.011, amp: 20, phase: sTime * 1.35 + 2.8, color: isLight ? 'rgba(124, 58, 237, 0.55)' : 'rgba(168, 85, 247, 0.65)', width: 1.2 }
+        ];
+
+        function getWaveRipplesAt(x, y) {
+          let rip = 0;
+          if (isHovering && mouseX >= -30 && mouseX <= sw + 30) {
+            const dist = Math.hypot(x - mouseX, y - mouseY);
+            const factor = Math.max(0, 1 - dist / 140);
+            rip += Math.sin(dist * 0.10 - sTime * 5.5) * 12 * factor;
+          }
+          splashRipples.forEach(r => {
+            const age = now - r.birth;
+            const dist = Math.hypot(x - r.x, y - r.y);
+            const radius = (age / 1000) * (r.speed * 42);
+            const diff = Math.abs(dist - radius);
+            if (diff < 40) {
+              const fade = (1 - age / r.decay) * (1 - diff / 40);
+              rip += Math.sin(diff * 0.18) * r.power * fade;
+            }
+          });
+          return rip;
+        }
+
+        // Draw Waves
+        waveProfiles.forEach((w) => {
+          sctx.beginPath();
+          for (let x = 0; x <= sw; x += 3) {
+            const rip = getWaveRipplesAt(x, cy);
+            const y = cy + Math.sin(x * w.freq + w.phase) * w.amp + rip;
+            if (x === 0) sctx.moveTo(x, y);
+            else sctx.lineTo(x, y);
+          }
+          sctx.strokeStyle = w.color;
+          sctx.lineWidth = w.width;
+          sctx.stroke();
+        });
+
+        // Glowing interactive perturbation cursor
+        if (isHovering && mouseX >= 0 && mouseX <= sw) {
+          sctx.beginPath();
+          sctx.arc(mouseX, mouseY, 4, 0, Math.PI * 2);
+          sctx.fillStyle = isLight ? '#047857' : '#10b981';
+          sctx.shadowColor = isLight ? 'rgba(4, 120, 87, 0.4)' : 'rgba(16, 185, 129, 0.6)';
+          sctx.shadowBlur = 8;
+          sctx.fill();
+          sctx.shadowBlur = 0;
+        }
+
+        // PHYSICAL BUOY SIMULATION FOR WORKINGS CHIPS
+        chips.forEach(chip => {
+          if (!chip.el) return;
+
+          // Decay splash impulse
+          if (Math.abs(chip.splashImpulse) > 0.1) {
+            chip.splashImpulse *= 0.91;
+          } else {
+            chip.splashImpulse = 0;
+          }
+
+          if (!chip.isDragging) {
+            const chipMidX = chip.x + (chip.el.offsetWidth || 120) / 2;
+            const rip = getWaveRipplesAt(chipMidX, cy);
+
+            const waveElevation = Math.sin(chipMidX * chip.waveFreq + sTime * 1.15 + chip.phase) * chip.waveAmp + rip + chip.splashImpulse;
+            const slope = Math.cos(chipMidX * chip.waveFreq + sTime * 1.15 + chip.phase) * 0.18;
+            const tilt = Math.max(-8, Math.min(8, slope * 15));
+
+            chip.el.style.transform = `translate3d(${chip.x.toFixed(1)}px, ${(chip.y + waveElevation).toFixed(1)}px, 0) rotate(${tilt.toFixed(1)}deg)`;
+          }
+        });
+      }
+      requestAnimationFrame(drawStatusWave);
+    }
+
+    /* ─── 4. INTRO: MATRIX SYMBOLS WIPE BLACK SCREEN INTO PORTFOLIO ─── */
+    const mCanvas = document.getElementById('z7MatrixCanvas');
+    let mAnimId = null;
+    let wipeStartTime = 0;
+
+    function runMatrixWipe() {
+      if (!mCanvas) return;
+      const mctx = mCanvas.getContext('2d');
+
+      mCanvas.style.display = 'block';
+      const w = mCanvas.width = window.innerWidth;
+      const h = mCanvas.height = window.innerHeight;
+
+      // Prominent font size so mathematical symbols are clearly noticeable and readable
+      const fontSize = 22;
+      const columns = Math.ceil(w / fontSize);
+      const mathGlyphs = [
+        '\u03C0', '\u2211', '\u222B', '\u2207', '\u03BB', '\u221E', 'f(x)', 
+        '\u2202x', 'O(1)', 'dx', '\u03C3', '\u03B8', '\u2248', '\u2297', '\u2200x', 
+        'e', '\u2208', '\u221A', '\u2260', '\u2205'
+      ];
+
+      // Slower, graceful cascade (~3.5s - 4.0s) so viewer clearly reads and appreciates symbols
+      // Drops start slightly staggered above the top of the viewport
+      const drops = [];
+      for (let i = 0; i < columns; i++) {
+        drops.push({
+          x: i * fontSize,
+          y: -20 - Math.random() * 95, // Brief pause at top to take in central Z7
+          speed: 3.2 + Math.random() * 1.6, // Slower: ~3.2 to 4.8 px/frame (approx 3.6s - 4.0s across screen)
+          tailLength: 9, // Exactly 9 symbols: 0-4 on solid black, 5-8 fading out during gradient veil
+          glyphs: []
+        });
+      }
+
+      drops.forEach(d => {
+        for (let j = 0; j < 35; j++) {
+          d.glyphs.push(mathGlyphs[Math.floor(Math.random() * mathGlyphs.length)]);
+        }
+      });
+
+      wipeStartTime = performance.now();
+
+      function drawWipeFrame() {
+        const elapsed = performance.now() - wipeStartTime;
+        const isLight = document.body.classList.contains('light');
+
+        // 1. Fill entire canvas with veil background (light slate for light mode, dark for dark mode)
+        mctx.globalCompositeOperation = 'source-over';
+        mctx.fillStyle = isLight ? '#f0f3f7' : '#06090e';
+        mctx.fillRect(0, 0, w, h);
+
+        // 2. Draw glowing Z7 brand emblem and subtitle in the center of the screen
+        const centerX = w / 2;
+        const centerY = h / 2;
+
+        mctx.save();
+        mctx.textAlign = 'center';
+        mctx.textBaseline = 'middle';
+
+        // Subtle breathing glow on central emblem
+        const glowFactor = 0.85 + 0.15 * Math.sin(elapsed / 220);
+
+        // Bold blocky Z7 with explicit spacing between Z and 7
+        mctx.font = '900 5.2rem "Plus Jakarta Sans", -apple-system, sans-serif';
+        if (isLight) {
+          mctx.fillStyle = '#047857';
+          mctx.shadowColor = `rgba(4, 120, 87, ${0.38 * glowFactor})`;
+          mctx.shadowBlur = 24 * glowFactor;
+        } else {
+          mctx.fillStyle = '#10b981';
+          mctx.shadowColor = `rgba(16, 185, 129, ${0.78 * glowFactor})`;
+          mctx.shadowBlur = 38 * glowFactor;
+        }
+
+        const zWidth = mctx.measureText('Z').width;
+        const sevenWidth = mctx.measureText('7').width;
+        const charGap = 16;
+        const totalW = zWidth + charGap + sevenWidth;
+        const startX = centerX - totalW / 2;
+        mctx.fillText('Z', startX + zWidth / 2, centerY - 16);
+        mctx.fillText('7', startX + zWidth + charGap + sevenWidth / 2, centerY - 16);
+
+        // Subtitle: INITIALIZING MATHEMATICAL ARCHITECTURE
+        mctx.font = '700 0.82rem "JetBrains Mono", monospace';
+        if (isLight) {
+          mctx.fillStyle = '#0284c7';
+          mctx.shadowColor = `rgba(2, 132, 199, ${0.28 * glowFactor})`;
+          mctx.shadowBlur = 14;
+        } else {
+          mctx.fillStyle = '#38bdf8';
+          mctx.shadowColor = `rgba(56, 189, 248, ${0.55 * glowFactor})`;
+          mctx.shadowBlur = 18;
+        }
+        const subText = 'INITIALIZING MATHEMATICAL ARCHITECTURE';
+        if ('letterSpacing' in mctx) {
+          mctx.letterSpacing = '5px';
+          mctx.fillText(subText, centerX, centerY + 36);
+        } else {
+          const charSpacing = 5;
+          let totalSubW = 0;
+          for (let c of subText) totalSubW += mctx.measureText(c).width + charSpacing;
+          totalSubW -= charSpacing;
+          let curX = centerX - totalSubW / 2;
+          for (let c of subText) {
+            const cw = mctx.measureText(c).width;
+            mctx.fillText(c, curX + cw / 2, centerY + 36);
+            curX += cw + charSpacing;
+          }
+        }
+        mctx.restore();
+
+        // 3. DRAW MATH SYMBOLS ONTO THE VEIL (source-over)
+        mctx.font = '700 ' + fontSize + 'px "JetBrains Mono", monospace';
+        const glyphPhase = Math.floor(elapsed / 260);
+
+        for (let i = 0; i < columns; i++) {
+          const d = drops[i];
+          d.y += d.speed;
+
+          for (let j = 0; j < d.tailLength; j++) {
+            const charY = d.y - j * fontSize;
+            if (charY >= -fontSize && charY <= h + fontSize) {
+              const char = d.glyphs[(glyphPhase + j) % d.glyphs.length];
+              if (isLight) {
+                if (j === 0) {
+                  mctx.fillStyle = '#064e3b';
+                  mctx.shadowColor = 'rgba(4, 120, 87, 0.50)';
+                  mctx.shadowBlur = 12;
+                } else if (j === 1) {
+                  mctx.fillStyle = '#047857';
+                  mctx.shadowColor = 'rgba(4, 120, 87, 0.35)';
+                  mctx.shadowBlur = 8;
+                } else if (j === 2) {
+                  mctx.fillStyle = '#059669';
+                  mctx.shadowBlur = 0;
+                } else if (j <= 4) {
+                  mctx.fillStyle = '#0284c7';
+                  mctx.shadowBlur = 0;
+                } else {
+                  const alpha = Math.max(0, 1 - (j - 4) / (d.tailLength - 4));
+                  mctx.fillStyle = j % 2 === 0 
+                    ? `rgba(4, 120, 87, ${alpha * 0.90})` 
+                    : `rgba(2, 132, 199, ${alpha * 0.85})`;
+                  mctx.shadowBlur = 0;
+                }
+              } else {
+                if (j === 0) {
+                  mctx.fillStyle = '#ffffff';
+                  mctx.shadowColor = '#10b981';
+                  mctx.shadowBlur = 18;
+                } else if (j === 1) {
+                  mctx.fillStyle = '#a7f3d0';
+                  mctx.shadowColor = '#34d399';
+                  mctx.shadowBlur = 10;
+                } else if (j === 2) {
+                  mctx.fillStyle = '#34d399';
+                  mctx.shadowBlur = 0;
+                } else if (j <= 4) {
+                  mctx.fillStyle = '#10b981';
+                  mctx.shadowBlur = 0;
+                } else {
+                  const alpha = Math.max(0, 1 - (j - 4) / (d.tailLength - 4));
+                  mctx.fillStyle = j % 2 === 0 
+                    ? `rgba(16, 185, 129, ${alpha * 0.85})` 
+                    : `rgba(56, 189, 248, ${alpha * 0.75})`;
+                  mctx.shadowBlur = 0;
+                }
+              }
+              mctx.fillText(char, d.x, charY);
+            }
+          }
+        }
+        mctx.shadowBlur = 0;
+
+        // 4. ERASE VEIL & SYMBOLS GRADUALLY 4 SYMBOLS BEHIND THE HEAD (destination-out)
+        // Because destination-out is executed after symbols are drawn, it erases the veil
+        // AND any upper tail symbols together above startRevealY.
+        // Result: The portfolio text is NEVER overlapped by falling math symbols!
+        mctx.globalCompositeOperation = 'destination-out';
+        let anyActive = false;
+
+        for (let i = 0; i < columns; i++) {
+          const d = drops[i];
+          const fullRevealY = Math.floor(d.y - 8.5 * fontSize);
+          const startRevealY = Math.floor(d.y - 4.2 * fontSize);
+
+          // 100% transparent portfolio reveal above fullRevealY
+          if (fullRevealY > 0) {
+            mctx.fillStyle = '#000000';
+            mctx.fillRect(d.x, 0, fontSize + 2, Math.min(h, fullRevealY));
+          }
+
+          // Smooth gradient dissolve between fullRevealY and startRevealY
+          if (startRevealY > 0 && fullRevealY < h) {
+            const drawTop = Math.max(0, fullRevealY);
+            const drawBottom = Math.min(h, startRevealY);
+            if (drawBottom > drawTop) {
+              const grad = mctx.createLinearGradient(0, fullRevealY, 0, startRevealY);
+              grad.addColorStop(0, 'rgba(0, 0, 0, 1)'); // 100% transparent portfolio reveal
+              grad.addColorStop(1, 'rgba(0, 0, 0, 0)'); // 0% reveal (solid veil below)
+              mctx.fillStyle = grad;
+              mctx.fillRect(d.x, drawTop, fontSize + 2, drawBottom - drawTop);
+            }
+          }
+
+          // Column is active until full transparency reaches the bottom of the screen
+          if (fullRevealY < h) {
+            anyActive = true;
+          }
+        }
+
+        if (anyActive) {
+          mAnimId = requestAnimationFrame(drawWipeFrame);
+        } else {
+          // Finished: all symbols cleared past bottom, full portfolio unveiled
+          mCanvas.style.display = 'none';
+          mctx.clearRect(0, 0, w, h);
+        }
+      }
+
+      if (mAnimId) cancelAnimationFrame(mAnimId);
+      mAnimId = requestAnimationFrame(drawWipeFrame);
+    }
+
+    // Dismiss wipe if user clicks on page after 200ms
+    window.addEventListener('click', () => {
+      if (mCanvas && mCanvas.style.display !== 'none' && performance.now() - wipeStartTime > 200) {
+        if (mAnimId) cancelAnimationFrame(mAnimId);
+        mCanvas.style.display = 'none';
+        const mctx = mCanvas.getContext('2d');
+        if (mctx) mctx.clearRect(0, 0, mCanvas.width, mCanvas.height);
+      }
+    }, { passive: true });
+
+    // Replay function when clicking Z7 AXIOMS pill or top switcher bar
+    function replayMatrixSplash() {
+      runMatrixWipe();
+    }
+
+    // Run automatically on load
+    runMatrixWipe();
+  </script>
+
 </body>
 
 </html>
