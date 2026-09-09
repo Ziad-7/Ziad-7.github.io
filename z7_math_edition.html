@@ -1624,7 +1624,7 @@
       }
     }
 
-    /* ─── REPOSITIONED HARMONIC WAVE RIBBON ─── */
+    /* ─── REPOSITIONED HARMONIC WAVE RIBBON & Z7 CORE ─── */
     .z7-wave-ribbon-wrap {
       margin: 2.5rem 0 1.8rem;
       position: relative;
@@ -1659,212 +1659,233 @@
       background: rgba(0,0,0,0.015);
     }
 
-    .z7-wave-canvas {
+    /* Wave Stage with Centered Z7 Block */
+    .z7-wave-stage {
+      position: relative;
       width: 100%;
-      height: 110px;
+      height: 125px;
+      overflow: hidden;
+      background: transparent;
+    }
+
+    .z7-core-block {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+    }
+
+    .z7-core-text {
+      font-family: var(--font-heading), 'JetBrains Mono', monospace;
+      font-size: 4.2rem;
+      font-weight: 900;
+      letter-spacing: -0.06em;
+      color: rgba(16, 185, 129, 0.11);
+      text-shadow: 0 0 35px rgba(16, 185, 129, 0.2), 0 0 75px rgba(56, 189, 248, 0.12);
+      transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
+
+    .z7-wave-ribbon-wrap:hover .z7-core-text {
+      color: rgba(16, 185, 129, 0.22);
+      text-shadow: 0 0 45px rgba(16, 185, 129, 0.4), 0 0 90px rgba(56, 189, 248, 0.25);
+    }
+
+    body.light .z7-core-text {
+      color: rgba(4, 120, 87, 0.09);
+      text-shadow: 0 0 35px rgba(4, 120, 87, 0.12);
+    }
+
+    body.light .z7-wave-ribbon-wrap:hover .z7-core-text {
+      color: rgba(4, 120, 87, 0.18);
+      text-shadow: 0 0 40px rgba(4, 120, 87, 0.22);
+    }
+
+    .z7-wave-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 125px;
       display: block;
+      z-index: 2;
       cursor: crosshair;
       background: transparent;
     }
 
-    /* ─── Z7 ARROGANT GENIUS MODAL ─── */
-    .z7-modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.82);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      z-index: 999999;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 1.2rem;
-    }
-
-    .z7-modal-card {
-      background: var(--bg-surface);
-      border: 1px solid var(--border-focus);
-      border-radius: var(--radius-lg);
-      max-width: 680px;
-      width: 100%;
-      padding: 2rem;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 0 0 35px rgba(16, 185, 129, 0.25);
-      position: relative;
-      animation: z7ModalPop 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    @keyframes z7ModalPop {
-      0% { opacity: 0; transform: scale(0.92) translateY(12px); }
-      100% { opacity: 1; transform: scale(1) translateY(0); }
-    }
-
-    .z7-modal-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      background: rgba(16, 185, 129, 0.15);
-      color: var(--accent);
-      border: 1px solid rgba(16, 185, 129, 0.3);
-      padding: 0.25rem 0.65rem;
-      border-radius: 999px;
-      font-size: 0.72rem;
-      font-weight: 700;
-      font-family: var(--font-mono);
-      letter-spacing: 0.05em;
-    }
-
-    .z7-close-btn {
-      position: absolute;
-      top: 1.2rem;
-      right: 1.2rem;
-      background: transparent;
-      border: none;
-      color: var(--text-dim);
-      font-size: 1.4rem;
-      cursor: pointer;
-      padding: 0.3rem 0.5rem;
-      border-radius: var(--radius-sm);
-      line-height: 1;
-      transition: color 0.15s ease;
-    }
-    .z7-close-btn:hover {
-      color: var(--text);
-    }
-
-    .z7-quote-box {
-      background: var(--bg-elevated);
-      border-left: 3px solid var(--accent);
-      padding: 1.1rem 1.3rem;
-      border-radius: 0 var(--radius-md) var(--radius-md) 0;
-      margin: 1.2rem 0;
-      font-family: var(--font-heading);
-      font-size: 1.05rem;
-      line-height: 1.5;
-      color: var(--text);
-      font-style: italic;
-      min-height: 72px;
-      display: flex;
-      align-items: center;
-      transition: opacity 0.15s ease;
-    }
-
-    .z7-stats-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 0.65rem;
-      margin-bottom: 1.3rem;
-    }
-
-    @media (max-width: 600px) {
-      .z7-stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    .z7-stat-pill {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 0.65rem 0.8rem;
-      text-align: center;
-      font-family: var(--font-mono);
-    }
-
-    .z7-stat-val {
-      font-size: 1.15rem;
-      font-weight: 800;
-      color: var(--accent);
-    }
-
-    .z7-stat-lbl {
-      font-size: 0.65rem;
-      color: var(--text-dim);
-      margin-top: 0.2rem;
-    }
-
-    .z7-interactive-panel {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
-      margin-top: 1rem;
-      padding-top: 1rem;
+    /* ─── UNDER THE WAVES: Z7 FACTS STRIP ─── */
+    .z7-facts-strip {
       border-top: 1px solid var(--border-subtle);
+      background: var(--bg-surface);
+      padding: 0.75rem 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      position: relative;
+      z-index: 3;
     }
 
-    .z7-btn-action {
-      background: var(--accent);
-      color: #ffffff;
-      border: none;
-      padding: 0.6rem 1.1rem;
-      border-radius: var(--radius-sm);
+    .z7-facts-label {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .z7-facts-pill {
       font-family: var(--font-mono);
-      font-size: 0.8rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.15s ease;
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      color: var(--accent);
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.28);
+      padding: 0.22rem 0.6rem;
+      border-radius: var(--radius-sm);
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
-    }
-    .z7-btn-action:hover {
-      background: var(--accent-hover);
-      transform: translateY(-1px);
+      gap: 0.35rem;
     }
 
-    .z7-btn-secondary {
-      background: var(--bg);
+    .z7-facts-body {
+      font-family: var(--font-heading);
+      font-size: 0.95rem;
+      font-style: italic;
       color: var(--text);
-      border: 1px solid var(--border);
-      padding: 0.6rem 1.1rem;
-      border-radius: var(--radius-sm);
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
+      line-height: 1.45;
+      flex: 1;
       cursor: pointer;
-      transition: all 0.15s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
+      transition: opacity 0.15s ease, transform 0.15s ease;
+      user-select: none;
     }
-    .z7-btn-secondary:hover {
-      border-color: var(--border-focus);
+
+    .z7-facts-body:hover {
       color: var(--accent);
     }
 
-    /* Matrix Rain Canvas */
-    #z7MatrixCanvas {
+    .z7-facts-nav {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .z7-fact-btn {
+      background: var(--bg);
+      color: var(--text-dim);
+      border: 1px solid var(--border);
+      padding: 0.35rem 0.75rem;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .z7-fact-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--bg-elevated);
+    }
+
+    /* ─── INTRO MATRIX MATH RAIN SPLASH ─── */
+    .z7-matrix-splash {
       position: fixed;
       inset: 0;
       width: 100vw;
       height: 100vh;
-      pointer-events: none;
-      z-index: 999998;
-      display: none;
+      z-index: 99999999;
+      background: #06090e;
+      overflow: hidden;
+      transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
     }
 
-    /* Fake Proof Box */
-    #z7ProofBox {
-      display: none;
-      margin-top: 1rem;
-      background: var(--bg);
-      border: 1px dashed var(--accent);
-      border-radius: var(--radius-md);
-      padding: 1rem;
+    .z7-matrix-splash.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    #z7MatrixCanvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .z7-matrix-overlay-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      pointer-events: none;
+      animation: matrixPulse 1.2s ease infinite alternate;
+    }
+
+    @keyframes matrixPulse {
+      from { transform: scale(0.98); opacity: 0.9; }
+      to { transform: scale(1.02); opacity: 1; }
+    }
+
+    .z7-matrix-brand {
+      font-family: var(--font-heading), 'JetBrains Mono', monospace;
+      font-size: 4.8rem;
+      font-weight: 900;
+      letter-spacing: -0.06em;
+      color: #10b981;
+      text-shadow: 0 0 35px rgba(16, 185, 129, 0.7), 0 0 75px rgba(16, 185, 129, 0.4);
+    }
+
+    .z7-matrix-sub {
       font-family: var(--font-mono);
-      font-size: 0.82rem;
-      line-height: 1.6;
-      color: var(--text-muted);
-      animation: fadeIn 0.2s ease;
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      color: #38bdf8;
+      margin-top: 0.4rem;
+      text-shadow: 0 0 15px rgba(56, 189, 248, 0.5);
+    }
+
+    .z7-matrix-skip-hint {
+      position: absolute;
+      bottom: 2rem;
+      z-index: 2;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: rgba(255, 255, 255, 0.4);
+      letter-spacing: 0.05em;
+      pointer-events: none;
     }
   </style>
 </head>
 
 <body>
 
+  <!-- ─── INTRO MATRIX MATH RAIN SPLASH (1.2s opening then reveals portfolio) ─── -->
+  <div id="z7MatrixSplash" class="z7-matrix-splash">
+    <canvas id="z7MatrixCanvas"></canvas>
+    <div class="z7-matrix-overlay-content">
+      <div class="z7-matrix-brand">Z7</div>
+      <div class="z7-matrix-sub">INITIALIZING MATHEMATICAL ARCHITECTURE</div>
+    </div>
+    <div class="z7-matrix-skip-hint">Click anywhere to skip</div>
+  </div>
+
+
   <!-- STICKY PREVIEW SWITCHER BAR -->
   <div style="background:#070a10; color:#f8fafc; font-family:'JetBrains Mono',monospace; font-size:0.75rem; padding:0.5rem 1.2rem; position:sticky; top:0; z-index:99999; border-bottom:1px solid #1e293b; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:0.5rem; box-shadow:0 4px 14px rgba(0,0,0,0.35);">
     <div style="display:flex; align-items:center; gap:0.6rem;">
       <span style="background:#10b981; color:#052e16; font-size:0.65rem; font-weight:800; padding:0.15rem 0.5rem; border-radius:3px; letter-spacing:0.04em;">⚡ Z7 ARROGANT GENIUS EDITION</span>
-      <span style="color:#e2e8f0; font-weight:600;">Math Click Sparks + Repositioned Wave Ribbon + [⚡ Z7 Mode]</span>
+      <span style="color:#e2e8f0; font-weight:600;">Opening Matrix Math Rain + Z7 Resonance Field &amp; Facts + Math Click Sparks</span>
     </div>
     <div>
       <a href="index.html" style="color:#38bdf8; font-weight:600; text-decoration:none; padding:0.2rem 0.4rem;">← Back to Main Portfolio</a>
@@ -1891,7 +1912,6 @@
         <a href="Ziad_Ahmed_Rabie_Resume.pdf" target="_blank" class="btn-nav-action">
           <i class="ti ti-file-text"></i> Resume
         </a>
-        <button class="btn-z7-mode" onclick="openZ7Modal()" aria-label="Activate Z7 Math Genius Mode"><i class="ti ti-bolt"></i> <span>⚡ Z7 Mode</span></button>
         <button class="theme-btn" id="themeToggle" aria-label="Toggle visual theme">
           <i class="ti ti-sun" id="themeSun" style="display:none;"></i>
           <i class="ti ti-moon" id="themeMoon"></i>
@@ -1960,7 +1980,7 @@
 
     <!-- ─── INTERACTIVE LAB (TACTILE DEMOS & SANDBOXES) ─── -->
     
-    <!-- ─── Z7 MATHEMATICAL RESONANCE FIELD (HARMONIC WAVE RIBBON) ─── -->
+    <!-- ─── Z7 MATHEMATICAL RESONANCE FIELD & AXIOMS ─── -->
     <div class="z7-wave-ribbon-wrap" id="z7WaveRibbonSection">
       <div class="z7-wave-header">
         <div style="display:flex; align-items:center; gap:0.55rem;">
@@ -1968,11 +1988,32 @@
           <span style="color:var(--text-dim); opacity:0.8;">&bull; &psi;(x,t) = &sum; A<sub>k</sub> sin(&omega;<sub>k</sub>t + kx)</span>
         </div>
         <div style="display:flex; align-items:center; gap:0.8rem;">
-          <span id="z7WaveStatus" style="color:var(--accent); font-size:0.7rem; font-weight:600;">● Active (1.0x)</span>
           <span style="color:var(--text-dim);">&bull; Move mouse across ribbon to perturb harmonics</span>
         </div>
       </div>
-      <canvas id="z7WaveRibbonCanvas" class="z7-wave-canvas" height="110"></canvas>
+
+      <!-- Wave canvas container with central glowing Z7 block -->
+      <div class="z7-wave-stage">
+        <div class="z7-core-block" aria-hidden="true">
+          <span class="z7-core-text">Z7</span>
+        </div>
+        <canvas id="z7WaveRibbonCanvas" class="z7-wave-canvas" height="125"></canvas>
+      </div>
+
+      <!-- Under the waves: Z7 Facts / Axioms -->
+      <div class="z7-facts-strip">
+        <div class="z7-facts-label">
+          <span class="z7-facts-pill"><i class="ti ti-terminal-2"></i> Z7 AXIOMS</span>
+        </div>
+        <div class="z7-facts-body" id="z7FactDisplay" onclick="nextZ7Fact()" title="Click for next Z7 fact">
+          "I don't debug code, it's correct"
+        </div>
+        <div class="z7-facts-nav">
+          <button class="z7-fact-btn" onclick="nextZ7Fact()" title="Next Z7 Fact">
+            <i class="ti ti-refresh"></i> Next Truth
+          </button>
+        </div>
+      </div>
     </div>
 
     <section id="lab">
@@ -4121,81 +4162,6 @@
     }
   </script>
 
-  <!-- ─── MATRIX RAIN CANVAS (Z7 SILLY TOY) ─── -->
-  <canvas id="z7MatrixCanvas"></canvas>
-
-  <!-- ─── SILLY & FUN Z7 ARROGANT GENIUS MODAL ─── -->
-  <div id="z7GeniusModal" class="z7-modal-overlay" onclick="if(event.target === this) closeZ7Modal()">
-    <div class="z7-modal-card">
-      <button class="z7-close-btn" onclick="closeZ7Modal()" aria-label="Close modal">&times;</button>
-      
-      <div style="display:flex; align-items:center; gap:0.6rem; margin-bottom:0.6rem;">
-        <span class="z7-modal-badge">⚡ Z7 // MATHEMATICAL OMNISCIENCE</span>
-        <span style="font-family:var(--font-mono); font-size:0.72rem; color:var(--text-dim);">Ego Level: MAX_INT</span>
-      </div>
-
-      <h2 style="font-size:1.45rem; font-weight:800; margin-bottom:0.3rem; letter-spacing:-0.02em;">
-        Ziad "Z7" Ahmed Rabie
-      </h2>
-      <p style="font-size:0.86rem; color:var(--text-muted); margin-bottom:0.8rem;">
-        "Complexity is just an excuse for people who can't do the math."
-      </p>
-
-      <div class="z7-quote-box" id="z7DynamicQuote">
-        <!-- Injected via JS -->
-      </div>
-
-      <div class="z7-stats-grid">
-        <div class="z7-stat-pill">
-          <div class="z7-stat-val">96.6%</div>
-          <div class="z7-stat-lbl">Thanaweya Math (Top 0.1%)</div>
-        </div>
-        <div class="z7-stat-pill">
-          <div class="z7-stat-val">&infin;</div>
-          <div class="z7-stat-lbl">Ego Level (&plusmn;0.0)</div>
-        </div>
-        <div class="z7-stat-pill">
-          <div class="z7-stat-val">O(1)</div>
-          <div class="z7-stat-lbl">Algorithmic Ambition</div>
-        </div>
-        <div class="z7-stat-pill">
-          <div class="z7-stat-val">100%</div>
-          <div class="z7-stat-lbl">NumPy Purity</div>
-        </div>
-      </div>
-
-      <!-- SILLY INTERACTIVE TOYS -->
-      <div class="z7-interactive-panel">
-        <button class="z7-btn-action" onclick="generateZ7Flex()">
-          <i class="ti ti-dice-5"></i> Another Z7 Truth
-        </button>
-        <button class="z7-btn-secondary" id="z7OverclockBtn" onclick="toggleWaveOverclock()">
-          <i class="ti ti-bolt"></i> Overclock Waves (3x)
-        </button>
-        <button class="z7-btn-secondary" id="z7MatrixBtn" onclick="toggleMatrixRain()">
-          <i class="ti ti-sparkles"></i> Matrix Math Rain
-        </button>
-        <button class="z7-btn-secondary" onclick="toggleFakeProof()">
-          <i class="ti ti-scale"></i> Prove 1 = 2
-        </button>
-      </div>
-
-      <!-- FAKE PROOF CONTAINER -->
-      <div id="z7ProofBox">
-        <strong style="color:var(--accent);">Z7 "Proof" that 1 = 2:</strong><br />
-        1. Let a = b<br />
-        2. a² = ab &implies; a² - b² = ab - b²<br />
-        3. (a - b)(a + b) = b(a - b)<br />
-        4. Divide both sides by (a - b) &implies; a + b = b<br />
-        5. Since a = b, 2b = b &implies; <strong>2 = 1</strong>.<br />
-        <span style="color:#ef4444; font-weight:700; display:inline-block; margin-top:0.4rem;">
-          &rarr; Z7 Commentary:
-        </span> 
-        <em>Step 4 divided by (a - b) = 0. Division by zero undefined. If you fell for this, please step away from my gradient loss curves xD</em>
-      </div>
-    </div>
-  </div>
-
   <script>
     /* ─── 1. CLICK TO BURST MATHEMATICAL PARTICLES (From Concept 1) ─── */
     const z7MathSymbols = [
@@ -4207,7 +4173,7 @@
 
     window.addEventListener('click', (e) => {
       // Avoid interference with interactive controls
-      if (e.target.closest('input') || e.target.closest('.stock-slider') || e.target.closest('.math-pad-canvas') || e.target.closest('button') || e.target.closest('a')) {
+      if (e.target.closest('input') || e.target.closest('.stock-slider') || e.target.closest('.math-pad-canvas') || e.target.closest('button') || e.target.closest('a') || e.target.closest('#z7MatrixSplash')) {
         return;
       }
       spawnZ7Particles(e.clientX, e.clientY, 8);
@@ -4240,15 +4206,13 @@
       }
     }
 
-    /* ─── 2. REPOSITIONED HARMONIC WAVE RIBBON (Under Hero, Rock Solid) ─── */
+    /* ─── 2. REPOSITIONED HARMONIC WAVE RIBBON WITH Z7 CORE ─── */
     const ribbonCanvas = document.getElementById('z7WaveRibbonCanvas');
-    let waveSpeedMultiplier = 1;
-    let waveIsOverclocked = false;
 
     if (ribbonCanvas) {
       const rctx = ribbonCanvas.getContext('2d');
       let rw = 1160;
-      let rh = 110;
+      let rh = 125;
       let rTime = 0;
       let mouseX = -9999;
       let mouseY = -9999;
@@ -4258,7 +4222,7 @@
         if (!ribbonCanvas) return;
         const rect = ribbonCanvas.getBoundingClientRect();
         rw = ribbonCanvas.width = Math.floor(rect.width || ribbonCanvas.offsetWidth || 1160);
-        rh = ribbonCanvas.height = 110;
+        rh = ribbonCanvas.height = 125;
       }
       window.addEventListener('resize', resizeRibbon);
       resizeRibbon();
@@ -4287,7 +4251,7 @@
         rctx.clearRect(0, 0, rw, rh);
         const isLight = document.body.classList.contains('light');
 
-        rTime += 0.022 * waveSpeedMultiplier;
+        rTime += 0.024;
 
         // Subtle Center Harmonic Axis
         rctx.strokeStyle = isLight ? 'rgba(0,0,0,0.06)' : 'rgba(255,255,255,0.05)';
@@ -4325,10 +4289,10 @@
           rctx.stroke();
         });
 
-        // Mouse perturbation dot
+        // Mouse perturbation glow dot
         if (isHovering && mouseX >= 0 && mouseX <= rw) {
           rctx.beginPath();
-          rctx.arc(mouseX, rh / 2, 4, 0, Math.PI * 2);
+          rctx.arc(mouseX, rh / 2, 4.5, 0, Math.PI * 2);
           rctx.fillStyle = isLight ? '#047857' : '#10b981';
           rctx.fill();
         }
@@ -4336,136 +4300,93 @@
       requestAnimationFrame(drawWaveRibbon);
     }
 
-    /* ─── 3. SILLY & FUN Z7 ARROGANT GENIUS MODAL LOGIC ─── */
-    const z7FlexQuotes = [
-      "\"Why train a 70-billion parameter model blindly when you can derive the backprop gradient by hand in 20 lines of pure NumPy?\"",
-      "\"Euler solved calculus while going blind in 1748. What was your excuse for that CUDA out-of-memory error again?\"",
-      "\"Neural networks are just high-dimensional calculus with billionaire funding and good PR.\"",
-      "\"If your loss doesn't converge, you didn't respect the convex hull.\"",
-      "\"Thanaweya Amma Math: 96.6%. The missing 3.4% was an ambiguity in the Egyptian Ministry's question drafting, not my derivation.\"",
-      "\"P vs NP? Trivial: if P = 0 or N = 1, it holds. Next question.\"",
-      "\"I don't just use algorithms; I judge their loss landscapes personally.\"",
-      "\"In Z7-OS, every algorithm runs in O(1) through sheer mathematical willpower.\"",
-      "\"I don't debug code; the mathematics simply aligns itself out of sheer respect.\""
+    /* ─── 3. UNDER THE WAVES: Z7 AXIOMS / FACTS ─── */
+    const z7Facts = [
+      "\"I don't debug code, it's correct\"",
+      "\"I know the optimal values for the 70-billion parameter in a NN, no need to backprop\"",
+      "\"Euler solved calculus while going blind. What was your excuse for that CUDA out-of-memory error?\"",
+      "\"P vs NP? Solved it yesterday. Proof was too trivial to write down.\"",
+      "\"If my model doesn't converge, gradient descent is wrong, not my architecture.\"",
+      "\"My neural networks don't overfit; reality is just poorly distributed.\"",
+      "\"I write algorithms in O(1). Time is a construct anyway.\"",
+      "\"Compilers don't optimize my code; they study it.\"",
+      "\"I don't use loss functions; the model already knows what it did wrong.\"",
+      "\"Why approximate when you can just be right?\""
     ];
 
-    function openZ7Modal() {
-      const modal = document.getElementById('z7GeniusModal');
-      if (modal) {
-        modal.style.display = 'flex';
-        generateZ7Flex();
-        spawnZ7Particles(window.innerWidth / 2, window.innerHeight / 2, 16);
-      }
+    let currentFactIndex = 0;
+
+    function nextZ7Fact() {
+      const factBox = document.getElementById('z7FactDisplay');
+      if (!factBox) return;
+
+      factBox.style.opacity = '0';
+      factBox.style.transform = 'translateY(4px)';
+
+      setTimeout(() => {
+        currentFactIndex = (currentFactIndex + 1) % z7Facts.length;
+        factBox.textContent = z7Facts[currentFactIndex];
+        factBox.style.opacity = '1';
+        factBox.style.transform = 'translateY(0)';
+      }, 140);
     }
 
-    function closeZ7Modal() {
-      const modal = document.getElementById('z7GeniusModal');
-      if (modal) modal.style.display = 'none';
-    }
+    /* ─── 4. INTRO MATRIX MATH RAIN SPLASH (Shows for ~1.2s then reveals portfolio) ─── */
+    const splash = document.getElementById('z7MatrixSplash');
+    const mCanvas = document.getElementById('z7MatrixCanvas');
+    let mInterval = null;
+    let splashClosed = false;
 
-    function generateZ7Flex() {
-      const quoteBox = document.getElementById('z7DynamicQuote');
-      if (quoteBox) {
-        const rand = z7FlexQuotes[Math.floor(Math.random() * z7FlexQuotes.length)];
-        quoteBox.style.opacity = '0';
+    function closeSplash() {
+      if (splashClosed) return;
+      splashClosed = true;
+      if (splash) {
+        splash.classList.add('fade-out');
         setTimeout(() => {
-          quoteBox.innerHTML = rand;
-          quoteBox.style.opacity = '1';
-        }, 120);
+          splash.style.display = 'none';
+          if (mInterval) {
+            clearInterval(mInterval);
+            mInterval = null;
+          }
+        }, 700);
       }
     }
 
-    function toggleWaveOverclock() {
-      waveIsOverclocked = !waveIsOverclocked;
-      waveSpeedMultiplier = waveIsOverclocked ? 3.0 : 1.0;
-      
-      const btn = document.getElementById('z7OverclockBtn');
-      const status = document.getElementById('z7WaveStatus');
-
-      if (btn) {
-        btn.innerHTML = waveIsOverclocked 
-          ? '<i class="ti ti-flame" style="color:#f59e0b;"></i> Turbo Overclock (3x ACTIVE)'
-          : '<i class="ti ti-bolt"></i> Overclock Waves (3x)';
-      }
-      if (status) {
-        status.innerHTML = waveIsOverclocked 
-          ? '● <strong style="color:#f59e0b;">TURBO OVERCLOCKED (3.0x)</strong>'
-          : '● Active (1.0x)';
-      }
-
-      // Small spark feedback
-      spawnZ7Particles(window.innerWidth / 2, window.innerHeight / 2, 12);
-    }
-
-    /* ─── 4. MATRIX MATH RAIN (SILLY TOY) ─── */
-    let matrixInterval = null;
-    let matrixActive = false;
-
-    function toggleMatrixRain() {
-      const canvas = document.getElementById('z7MatrixCanvas');
-      const btn = document.getElementById('z7MatrixBtn');
-      if (!canvas) return;
-
-      matrixActive = !matrixActive;
-
-      if (!matrixActive) {
-        canvas.style.display = 'none';
-        if (matrixInterval) clearInterval(matrixInterval);
-        if (btn) btn.innerHTML = '<i class="ti ti-sparkles"></i> Matrix Math Rain';
-        return;
-      }
-
-      canvas.style.display = 'block';
-      if (btn) btn.innerHTML = '<i class="ti ti-circle-x"></i> Stop Matrix Rain';
-
-      const ctx = canvas.getContext('2d');
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+    if (mCanvas && splash) {
+      const mctx = mCanvas.getContext('2d');
+      mCanvas.width = window.innerWidth;
+      mCanvas.height = window.innerHeight;
 
       const fontSize = 16;
-      const columns = Math.floor(canvas.width / fontSize);
+      const columns = Math.floor(mCanvas.width / fontSize);
       const drops = Array(columns).fill(1);
-      const mathGlyphs = ['\u03C0', '\u2211', '\u222B', '\u2207', '\u03BB', 'Z7', 'e', '\u2202x', 'f(x)', '\u221E', 'O(1)', 'dx', '\u03C3', '\u03B8'];
+      const mathGlyphs = ['\u03C0', '\u2211', '\u222B', '\u2207', '\u03BB', 'Z7', 'e', '\u2202x', 'f(x)', '\u221E', 'O(1)', 'dx', '\u03C3', '\u03B8', '\u2248', '\u2200x'];
 
-      if (matrixInterval) clearInterval(matrixInterval);
+      mInterval = setInterval(() => {
+        mctx.fillStyle = 'rgba(6, 9, 14, 0.15)';
+        mctx.fillRect(0, 0, mCanvas.width, mCanvas.height);
 
-      matrixInterval = setInterval(() => {
-        ctx.fillStyle = 'rgba(7, 10, 16, 0.12)';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-        ctx.fillStyle = '#10b981';
-        ctx.font = fontSize + 'px monospace';
+        mctx.fillStyle = '#10b981';
+        mctx.font = '600 ' + fontSize + 'px monospace';
 
         for (let i = 0; i < drops.length; i++) {
           const text = mathGlyphs[Math.floor(Math.random() * mathGlyphs.length)];
-          ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+          mctx.fillText(text, i * fontSize, drops[i] * fontSize);
 
-          if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          if (drops[i] * fontSize > mCanvas.height && Math.random() > 0.975) {
             drops[i] = 0;
           }
           drops[i]++;
         }
-      }, 45);
+      }, 35);
 
-      // Auto stop after 9 seconds so it does not distract forever
-      setTimeout(() => {
-        if (matrixActive) toggleMatrixRain();
-      }, 9000);
+      // Auto fade-out after 1.25 seconds ("shows for a second then revealing what's under it")
+      setTimeout(closeSplash, 1250);
+
+      // Allow click or key to dismiss instantly
+      splash.addEventListener('click', closeSplash);
+      window.addEventListener('keydown', closeSplash, { once: true });
     }
-
-    function toggleFakeProof() {
-      const box = document.getElementById('z7ProofBox');
-      if (!box) return;
-      box.style.display = box.style.display === 'none' || !box.style.display ? 'block' : 'none';
-    }
-
-    // Escape key closes modal & stops matrix
-    window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        closeZ7Modal();
-        if (matrixActive) toggleMatrixRain();
-      }
-    });
   </script>
 
 </body>
