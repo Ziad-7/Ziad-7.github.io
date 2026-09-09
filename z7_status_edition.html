@@ -429,7 +429,7 @@
       background: rgba(0, 0, 0, 0.32);
       border: 1px solid var(--border-subtle);
       cursor: crosshair;
-      margin-bottom: 0.85rem;
+      margin-bottom: 0;
       transition: border-color 0.2s ease;
     }
 
@@ -506,17 +506,7 @@
       color: var(--text-muted);
       display: inline-flex;
       align-items: center;
-      gap: 0.45rem;
       letter-spacing: 0.02em;
-    }
-
-    .focus-live-pip {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 8px var(--accent);
-      display: inline-block;
     }
 
     .status-drag-tip {
@@ -600,113 +590,6 @@
 
     .float-title {
       white-space: nowrap;
-    }
-
-    /* ─── FUN & SIMPLE LIVE CONTROLS (SPLASH & VIBE CHECK) ─── */
-    .status-interactive-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.5rem;
-      border-top: 1px solid var(--border-subtle);
-      padding-top: 0.75rem;
-      min-width: 0;
-    }
-
-    .status-btn-group {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    .status-action-btn {
-      background: rgba(16, 185, 129, 0.12);
-      color: var(--accent);
-      border: 1px solid rgba(16, 185, 129, 0.28);
-      padding: 0.32rem 0.65rem;
-      border-radius: var(--radius-sm);
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.03em;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      cursor: pointer;
-      flex-shrink: 0;
-      user-select: none;
-      transition: all 0.15s ease;
-    }
-
-    .status-action-btn:hover {
-      background: rgba(16, 185, 129, 0.22);
-      border-color: var(--accent);
-      transform: translateY(-1px);
-    }
-
-    .status-action-btn:active {
-      transform: translateY(0);
-    }
-
-    .status-reset-btn {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      color: var(--text-dim);
-      padding: 0.32rem 0.55rem;
-      border-radius: var(--radius-sm);
-      font-family: var(--font-mono);
-      font-size: 0.68rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.3rem;
-      cursor: pointer;
-      user-select: none;
-      transition: all 0.15s ease;
-    }
-
-    .status-reset-btn:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-      background: var(--bg-elevated);
-    }
-
-    .status-vibe-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      padding: 0.3rem 0.65rem;
-      border-radius: 9999px;
-      background: rgba(56, 189, 248, 0.08);
-      border: 1px solid rgba(56, 189, 248, 0.25);
-      color: var(--text-muted);
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      font-weight: 600;
-      cursor: pointer;
-      user-select: none;
-      transition: all 0.15s ease;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      max-width: 190px;
-    }
-
-    .status-vibe-pill:hover {
-      background: rgba(56, 189, 248, 0.16);
-      border-color: #38bdf8;
-      color: var(--text);
-      transform: translateY(-1px);
-    }
-
-    body.light .status-vibe-pill {
-      background: rgba(2, 132, 199, 0.08);
-      border-color: rgba(2, 132, 199, 0.25);
-      color: #334155;
-    }
-
-    body.light .status-vibe-pill:hover {
-      background: rgba(2, 132, 199, 0.14);
-      color: #0284c7;
     }
 
     /* ─── SECTION COMMONS ─── */
@@ -2175,7 +2058,7 @@
         <!-- 1. Header: strictly "Live Status" -->
         <div class="status-card-header">
           <span class="status-title">
-            <span class="ticker-live-dot" title="Live status active"></span>
+            <span class="ticker-live-dot"></span>
             Live Status
           </span>
           <span class="live-clock" id="cairoTime">--:--:-- GMT+3</span>
@@ -2183,15 +2066,12 @@
 
         <!-- 2. Focus Lead: "Currently working on:" + Drag Hint -->
         <div class="status-focus-bar">
-          <span class="status-focus-label">
-            <span class="focus-live-pip"></span>
-            Currently working on:
-          </span>
-          <span class="status-drag-tip" title="Click and drag any chip to move it across the water"><i class="ti ti-hand-grab"></i> drag to move</span>
+          <span class="status-focus-label">Currently working on:</span>
+          <span class="status-drag-tip"><i class="ti ti-hand-grab"></i> drag to move</span>
         </div>
 
         <!-- 3. Harmonic Wave Stage with Movable Floating Workings -->
-        <div class="status-wave-container" id="statusWaveStage" title="Drag the boxes or move cursor to perturb waves">
+        <div class="status-wave-container" id="statusWaveStage">
           <!-- Background Harmonic Canvas -->
           <canvas id="statusWaveCanvas" class="status-wave-canvas" height="160"></canvas>
 
@@ -2202,32 +2082,14 @@
           <div class="wave-formula-tag">&psi;(x,t) = &sum; A<sub>k</sub> sin(&omega;<sub>k</sub>t + kx)</div>
 
           <!-- Floating Workings: Clean topic boxes, draggable, riding the waves! -->
-          <div class="wave-float-item chip-ai-research" id="floatChip1" title="Drag me anywhere!">
+          <div class="wave-float-item chip-ai-research" id="floatChip1">
             <i class="ti ti-brain float-icon" style="color:var(--accent);"></i>
             <span class="float-title">AI Research</span>
           </div>
 
-          <div class="wave-float-item chip-ml-scratch" id="floatChip2" title="Drag me anywhere!">
+          <div class="wave-float-item chip-ml-scratch" id="floatChip2">
             <i class="ti ti-binary-tree float-icon" style="color:#38bdf8;"></i>
             <span class="float-title">ml-from-scratch</span>
-          </div>
-        </div>
-
-        <!-- 4. Fun & Simple Interactive Bar (Splash Wave, Reset Buoys, Vibe Check) -->
-        <div class="status-interactive-bar">
-          <div class="status-btn-group">
-            <button class="status-action-btn" onclick="splashWave()" title="Click to send a shockwave through the water!">
-              <i class="ti ti-droplet-filled"></i>
-              <span>Splash</span>
-            </button>
-            <button class="status-reset-btn" onclick="resetChips()" title="Reset boxes to original resting spots">
-              <i class="ti ti-rotate"></i> Reset
-            </button>
-          </div>
-
-          <div class="status-vibe-pill" id="vibePill" onclick="cycleFunVibe()" title="Click to shuffle engineering vibe!">
-            <span id="vibeIcon">☕</span>
-            <span id="vibeText">Espresso &amp; NumPy</span>
           </div>
         </div>
       </aside>
@@ -4598,13 +4460,18 @@
         isHovering = false;
       });
 
-      // Clicking on water creates ripple splash
+      // Clicking on water creates ripple splash; double-clicking resets chip buoys
       statusWaveStage.addEventListener('click', (e) => {
         if (e.target.closest('.wave-float-item')) return;
         const rect = statusWaveCanvas.getBoundingClientRect();
         const clickX = e.clientX - rect.left;
         const clickY = e.clientY - rect.top;
         triggerWaterSplash(clickX, clickY, 22);
+      });
+
+      statusWaveStage.addEventListener('dblclick', (e) => {
+        if (e.target.closest('.wave-float-item')) return;
+        resetChips();
       });
 
       function drawStatusWave() {
@@ -4712,41 +4579,6 @@
       }
       requestAnimationFrame(drawStatusWave);
     }
-
-    /* ─── 3. FUN & SIMPLE STATUS VIBE CHECK (CASUAL & RELATABLE) ─── */
-    const funVibes = [
-      { icon: '☕', text: 'Espresso & NumPy' },
-      { icon: '🎧', text: 'Synthwave & Gradients' },
-      { icon: '🌙', text: 'Night Owl: 2 AM' },
-      { icon: '🧠', text: 'Deriving on Whiteboard' },
-      { icon: '⚡', text: 'Loss didn\'t explode!' },
-      { icon: '🏎️', text: 'Vectorizing in O(1)' },
-      { icon: '✨', text: 'Seed = 42' },
-      { icon: '🌊', text: 'Harmonic Flow State' }
-    ];
-
-    let currentVibeIdx = 0;
-
-    window.cycleFunVibe = function() {
-      const iconEl = document.getElementById('vibeIcon');
-      const textEl = document.getElementById('vibeText');
-      const pill = document.getElementById('vibePill');
-      if (!textEl) return;
-
-      if (pill) {
-        pill.style.transform = 'scale(0.94)';
-        setTimeout(() => { pill.style.transform = 'scale(1)'; }, 140);
-      }
-
-      currentVibeIdx = (currentVibeIdx + 1) % funVibes.length;
-      const v = funVibes[currentVibeIdx];
-
-      if (iconEl) iconEl.textContent = v.icon;
-      textEl.textContent = v.text;
-
-      // Also create a micro splash in the water for tactile feedback!
-      splashWave();
-    };
 
     /* ─── 4. INTRO: MATRIX SYMBOLS WIPE BLACK SCREEN INTO PORTFOLIO ─── */
     const mCanvas = document.getElementById('z7MatrixCanvas');
