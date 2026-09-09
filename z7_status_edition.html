@@ -309,6 +309,7 @@
 
     /* ─── HERO SECTION ─── */
     .hero {
+      position: relative;
       padding: 4.5rem 0 3.5rem;
       display: grid;
       grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.9fr);
@@ -1731,6 +1732,74 @@
       display: inline-block;
     }
 
+    /* ─── AMBIENT MATHEMATICAL WATERMARKS (CALCULUS & AI FOUNDATIONS) ─── */
+    #work, #experience, #education {
+      position: relative;
+    }
+
+    .math-watermark {
+      position: absolute;
+      pointer-events: none;
+      user-select: none;
+      font-family: 'Cambria Math', 'STIX Two Math', 'Times New Roman', Georgia, serif;
+      font-style: italic;
+      font-weight: 300;
+      line-height: 0.85;
+      color: var(--accent);
+      opacity: 0.042;
+      z-index: 0;
+      transition: opacity 0.25s ease, color 0.25s ease;
+    }
+
+    body.light .math-watermark {
+      color: var(--accent);
+      opacity: 0.065;
+    }
+
+    .wm-integral {
+      top: -30px;
+      left: 47%;
+      font-size: 27rem;
+      transform: translateX(-50%) rotate(-3deg);
+      filter: drop-shadow(0 0 60px rgba(16, 185, 129, 0.15));
+    }
+
+    .wm-nabla {
+      top: 20px;
+      right: 1%;
+      font-size: 15rem;
+      transform: rotate(6deg);
+      opacity: 0.032;
+    }
+
+    .wm-contour {
+      top: 60px;
+      left: 0%;
+      font-size: 17rem;
+      transform: rotate(-5deg);
+      opacity: 0.032;
+    }
+
+    .wm-partial {
+      bottom: 20px;
+      right: 1%;
+      font-size: 15rem;
+      transform: rotate(8deg);
+      opacity: 0.032;
+    }
+
+    @media (max-width: 900px) {
+      .wm-integral {
+        font-size: 18rem;
+        left: 72%;
+        top: 0px;
+        opacity: 0.032;
+      }
+      .wm-nabla, .wm-contour, .wm-partial {
+        display: none;
+      }
+    }
+
     /* Math Sparkles Burst on Click */
     .math-sparkle {
       position: fixed;
@@ -2007,7 +2076,8 @@
 
     <!-- ─── HERO SECTION (Human & Grounded) ─── -->
     <section class="hero">
-      <div>
+      <div class="math-watermark wm-integral" aria-hidden="true">&int;</div>
+      <div style="position: relative; z-index: 1;">
         <h1 class="hero-title">
           Ziad Ahmed Rabie.<br />
           <span style="color:var(--accent);">AI Systems Engineer.</span>
@@ -2032,7 +2102,7 @@
       </div>
 
       <!-- ─── LIVE STATUS: HARMONIC WAVE WITH FLOATING WORKINGS ─── -->
-      <aside class="status-card" id="statusCard">
+      <aside class="status-card" id="statusCard" style="position: relative; z-index: 1;">
         <!-- 1. Header: strictly "Live Status" -->
         <div class="status-card-header">
           <span class="status-title">
@@ -2295,14 +2365,15 @@
 
     <!-- ─── SELECTED WORK SECTION ─── -->
     <section id="work">
-      <div class="section-header">
+      <div class="math-watermark wm-nabla" aria-hidden="true">&nabla;</div>
+      <div class="section-header" style="position: relative; z-index: 1;">
         <div>
           <div class="section-label"><i class="ti ti-briefcase"></i> Selected Projects</div>
           <h2 class="section-title">Things I've Built</h2>
         </div>
       </div>
 
-      <div class="work-grid">
+      <div class="work-grid" style="position: relative; z-index: 1;">
 
         <!-- Project 1: MathGPT -->
         <article class="work-item">
@@ -2433,14 +2504,15 @@
 
     <!-- ─── EXPERIENCE, TRAINING & CERTIFICATIONS ─── -->
     <section id="experience">
-      <div class="section-header">
+      <div class="math-watermark wm-contour" aria-hidden="true">&#8750;</div>
+      <div class="section-header" style="position: relative; z-index: 1;">
         <div>
           <div class="section-label"><i class="ti ti-award"></i> Verified Credentials</div>
           <h2 class="section-title">Experience, Training &amp; Certifications</h2>
         </div>
       </div>
 
-      <div class="cred-grid">
+      <div class="cred-grid" style="position: relative; z-index: 1;">
 
         <!-- 1. DEPI -->
         <div class="cred-card" onclick="openCertModal(0)">
@@ -2668,14 +2740,15 @@
 
     <!-- ─── EDUCATION & FOUNDATIONS ─── -->
     <section id="education">
-      <div class="section-header">
+      <div class="math-watermark wm-partial" aria-hidden="true">&part;</div>
+      <div class="section-header" style="position: relative; z-index: 1;">
         <div>
           <div class="section-label"><i class="ti ti-school"></i> Academic Background</div>
           <h2 class="section-title">Education &amp; Foundations</h2>
         </div>
       </div>
 
-      <div class="edu-card">
+      <div class="edu-card" style="position: relative; z-index: 1;">
         <div class="edu-grid">
           <!-- Left: Degree info, colored metrics, and coursework -->
           <div class="edu-info">
