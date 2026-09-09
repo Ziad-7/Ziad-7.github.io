@@ -175,7 +175,9 @@
       border: 1px solid #a7f3d0;
     }
 
-    *, *::before, *::after {
+    *,
+    *::before,
+    *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
@@ -684,8 +686,15 @@
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(4px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(4px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     /* Interactive Graph Canvas */
@@ -1340,8 +1349,27 @@
       animation: modalSlideUp 0.22s ease-out;
     }
 
-    @keyframes modalFadeIn { from { opacity: 0; } to { opacity: 1; } }
-    @keyframes modalSlideUp { from { transform: translateY(16px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    @keyframes modalFadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes modalSlideUp {
+      from {
+        transform: translateY(16px);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
 
     .modal-close-btn {
       position: absolute;
@@ -1706,18 +1734,22 @@
       .wrapper {
         padding: 0 1.25rem;
       }
+
       .hero {
         grid-template-columns: 1fr;
         padding-top: 2.5rem;
       }
+
       .work-grid {
         grid-template-columns: 1fr;
       }
-      .about-grid, .math-sim-grid {
+
+      .about-grid,
+      .math-sim-grid {
         grid-template-columns: 1fr;
       }
     }
-  
+
     /* ─── Z7 BRANDING & NAVBAR STYLING ─── */
     .z7-tag {
       background: #047857;
@@ -1739,7 +1771,9 @@
        - To rotate: tweak 'transform: rotate(..deg)'
        - To fade in/out: tweak 'opacity' (e.g. 0.02 to 0.08)
        ═══════════════════════════════════════════════════════════════ */
-    #work, #experience, #education {
+    #work,
+    #experience,
+    #education {
       position: relative;
     }
 
@@ -1764,10 +1798,10 @@
 
     /* 1. Hero Section: The Leibniz Integral (∫) */
     .wm-integral {
-      top: -30px;
-      left: 47%;
-      font-size: 27rem;
-      transform: translateX(-50%) rotate(-3deg);
+      top: 130px;
+      left: -22%;
+      font-size: 26rem;
+      transform: translateX(-50%) rotate(-11deg);
       filter: drop-shadow(0 0 60px rgba(16, 185, 129, 0.15));
     }
 
@@ -1805,7 +1839,10 @@
         top: 0px;
         opacity: 0.032;
       }
-      .wm-aleph, .wm-sigma, .wm-partial {
+
+      .wm-aleph,
+      .wm-sigma,
+      .wm-partial {
         display: none;
       }
     }
@@ -1827,10 +1864,12 @@
         opacity: 1;
         transform: translate(-50%, -50%) scale(0.6) rotate(0deg);
       }
+
       40% {
         opacity: 0.95;
         transform: translate(calc(-50% + var(--vx) * 0.7), calc(-50% + var(--vy) * 0.7 - 15px)) scale(1.15) rotate(var(--rot));
       }
+
       100% {
         opacity: 0;
         transform: translate(calc(-50% + var(--vx) * 1.4), calc(-50% + var(--vy) * 1.6 - 35px)) scale(0.85) rotate(var(--rot));
@@ -1896,8 +1935,17 @@
     }
 
     @keyframes tickerPulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.45; transform: scale(0.85); }
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.45;
+        transform: scale(0.85);
+      }
     }
 
     body.light .ticker-live-dot {
@@ -2093,9 +2141,10 @@
           <span style="color:var(--accent);">AI Systems Engineer.</span>
         </h1>
         <p class="hero-text">
-          I'm a Computer Engineering student specializing in applied AI systems. 
-          I build software across computer vision, NLP, RL, and agentic architectures, 
-          with a focus on understanding the mathematical principles behind models rather than treating them as black boxes. 
+          I'm a Computer Engineering student specializing in applied AI systems.
+          I build software across computer vision, NLP, RL, and agentic architectures,
+          with a focus on understanding the mathematical principles behind models rather than treating them as black
+          boxes.
           I care about writing dependable, well-architected engineering code that works in the real world.
         </p>
         <div class="hero-links">
@@ -2204,7 +2253,8 @@
           </div>
 
           <div class="graph-status-text" id="graphStatus">
-            <i class="ti ti-info-circle"></i> Click any two users to find their degree of separation via Breadth-First Search (BFS).
+            <i class="ti ti-info-circle"></i> Click any two users to find their degree of separation via Breadth-First
+            Search (BFS).
           </div>
         </div>
 
@@ -2223,11 +2273,13 @@
               <div class="drawing-pad-wrap">
                 <canvas id="mathDrawCanvas"></canvas>
                 <div class="drawing-tools">
-                  <span style="font-family:var(--font-mono); font-size:0.72rem; color:var(--text-dim);" id="mathDrawInfo">
+                  <span style="font-family:var(--font-mono); font-size:0.72rem; color:var(--text-dim);"
+                    id="mathDrawInfo">
                     <i class="ti ti-pencil"></i> Draw with mouse/touch or type in the formula bar below
                   </span>
                   <div>
-                    <button class="graph-tool-btn" onclick="clearMathCanvas()" style="padding:0.2rem 0.6rem; font-size:0.72rem;">
+                    <button class="graph-tool-btn" onclick="clearMathCanvas()"
+                      style="padding:0.2rem 0.6rem; font-size:0.72rem;">
                       <i class="ti ti-eraser"></i> Clear
                     </button>
                   </div>
@@ -2235,13 +2287,17 @@
               </div>
 
               <div style="margin-bottom:0.75rem;">
-                <div style="font-family:var(--font-mono); font-size:0.72rem; color:var(--text-dim); margin-bottom:0.25rem;">
+                <div
+                  style="font-family:var(--font-mono); font-size:0.72rem; color:var(--text-dim); margin-bottom:0.25rem;">
                   Active Formula (Recognized from Ink or Custom Input):
                 </div>
-                <input type="text" id="mathFormulaInput" class="math-input-bar" value="2x² - 8x + 6 = 0" oninput="onMathFormulaInput()" onkeydown="if(event.key==='Enter') runMathSolve()" placeholder="e.g. 2x² - 8x + 6 = 0 or 4x + 8 = 24 or d/dx [ sin(x) · eˣ ]" />
+                <input type="text" id="mathFormulaInput" class="math-input-bar" value="2x² - 8x + 6 = 0"
+                  oninput="onMathFormulaInput()" onkeydown="if(event.key==='Enter') runMathSolve()"
+                  placeholder="e.g. 2x² - 8x + 6 = 0 or 4x + 8 = 24 or d/dx [ sin(x) · eˣ ]" />
               </div>
 
-              <button class="btn-nav-action" onclick="runMathSolve()" style="background:var(--accent); color:#04140e; border:none; cursor:pointer; width:100%; justify-content:center;">
+              <button class="btn-nav-action" onclick="runMathSolve()"
+                style="background:var(--accent); color:#04140e; border:none; cursor:pointer; width:100%; justify-content:center;">
                 <i class="ti ti-scan"></i> Run OpenCV &amp; SymPy Pipeline
               </button>
             </div>
@@ -2249,12 +2305,16 @@
             <div class="math-sim-card">
               <div class="sim-label">2. Deterministic AI Pipeline Breakdown</div>
               <div class="sim-result-box" id="eqResultDisplay">
-                <div style="color:var(--accent); font-weight:700; font-size:1.02rem; margin-bottom:0.4rem;">Roots: x = 1, x = 3</div>
+                <div style="color:var(--accent); font-weight:700; font-size:1.02rem; margin-bottom:0.4rem;">Roots: x =
+                  1, x = 3</div>
                 <div style="font-size:0.78rem; color:var(--text-muted); line-height:1.65;">
-                  <strong>• [OpenCV Segmentation]:</strong> Detected 10 symbol contours with dynamic bounding padding.<br />
-                  <strong>• [CNN Tokenizer]:</strong> Extracted tokens: <code>["2","x²","-","8","x","+","6","=","0"]</code> (98.8% confidence).<br />
+                  <strong>• [OpenCV Segmentation]:</strong> Detected 10 symbol contours with dynamic bounding
+                  padding.<br />
+                  <strong>• [CNN Tokenizer]:</strong> Extracted tokens:
+                  <code>["2","x²","-","8","x","+","6","=","0"]</code> (98.8% confidence).<br />
                   <strong>• [Standard Form]:</strong> 2x² - 8x + 6 = 0<br />
-                  <strong>• [Discriminant]:</strong> Δ = b² - 4ac = (-8)² - 4(2)(6) = <strong>16</strong> (Δ &gt; 0, two real roots)<br />
+                  <strong>• [Discriminant]:</strong> Δ = b² - 4ac = (-8)² - 4(2)(6) = <strong>16</strong> (Δ &gt; 0, two
+                  real roots)<br />
                   <strong>• [Quadratic Formula]:</strong> x = (8 ± √16) / 4 ➔ x = (8 ± 4) / 4<br />
                   <strong>• [Exact Factorization]:</strong> 2(x - 1)(x - 3) = 0<br />
                   <span style="color:var(--accent);">✓ Exact algebraic evaluation (Zero LLM arithmetic error)</span>
@@ -2270,12 +2330,15 @@
             <!-- Left: Sliders -->
             <div class="math-sim-card">
               <div class="sim-label">1. Choose Capital Division (% of Portfolio)</div>
-              
+
               <!-- Quick Presets -->
               <div class="equation-picker" style="margin-bottom:1.2rem;">
-                <button class="eq-chip active" id="chipStockAi" onclick="applyStockPreset('ai')">⭐ AI Tangency (Max Sharpe)</button>
-                <button class="eq-chip" id="chipStockCons" onclick="applyStockPreset('conservative')">🛡️ Capital Preservation</button>
-                <button class="eq-chip" id="chipStockGrowth" onclick="applyStockPreset('growth')">🚀 Aggressive Growth</button>
+                <button class="eq-chip active" id="chipStockAi" onclick="applyStockPreset('ai')">⭐ AI Tangency (Max
+                  Sharpe)</button>
+                <button class="eq-chip" id="chipStockCons" onclick="applyStockPreset('conservative')">🛡️ Capital
+                  Preservation</button>
+                <button class="eq-chip" id="chipStockGrowth" onclick="applyStockPreset('growth')">🚀 Aggressive
+                  Growth</button>
               </div>
 
               <!-- EGX100 -->
@@ -2284,7 +2347,8 @@
                   <span class="asset-name">EGX100 (Broader Equities)</span>
                   <span class="asset-val" id="valEgx100">56%</span>
                 </div>
-                <input type="range" class="stock-slider" id="sliderEgx100" min="0" max="100" value="56" oninput="handleStockSliderChange('sliderEgx100')" />
+                <input type="range" class="stock-slider" id="sliderEgx100" min="0" max="100" value="56"
+                  oninput="handleStockSliderChange('sliderEgx100')" />
               </div>
 
               <!-- Gold -->
@@ -2293,7 +2357,8 @@
                   <span class="asset-name">Egyptian Gold (Hedge)</span>
                   <span class="asset-val" id="valGold">40%</span>
                 </div>
-                <input type="range" class="stock-slider" id="sliderGold" min="0" max="100" value="40" oninput="handleStockSliderChange('sliderGold')" />
+                <input type="range" class="stock-slider" id="sliderGold" min="0" max="100" value="40"
+                  oninput="handleStockSliderChange('sliderGold')" />
               </div>
 
               <!-- EGX30 -->
@@ -2302,7 +2367,8 @@
                   <span class="asset-name">EGX30 (Blue-Chips)</span>
                   <span class="asset-val" id="valEgx30">4%</span>
                 </div>
-                <input type="range" class="stock-slider" id="sliderEgx30" min="0" max="100" value="4" oninput="handleStockSliderChange('sliderEgx30')" />
+                <input type="range" class="stock-slider" id="sliderEgx30" min="0" max="100" value="4"
+                  oninput="handleStockSliderChange('sliderEgx30')" />
               </div>
 
               <!-- T-Bills -->
@@ -2311,7 +2377,8 @@
                   <span class="asset-name">Treasury Bills (Risk-Free)</span>
                   <span class="asset-val" id="valTBills">0%</span>
                 </div>
-                <input type="range" class="stock-slider" id="sliderTBills" min="0" max="100" value="0" oninput="handleStockSliderChange('sliderTBills')" />
+                <input type="range" class="stock-slider" id="sliderTBills" min="0" max="100" value="0"
+                  oninput="handleStockSliderChange('sliderTBills')" />
               </div>
 
               <!-- Real Estate -->
@@ -2320,16 +2387,18 @@
                   <span class="asset-name">Egyptians Real Estate Fund</span>
                   <span class="asset-val" id="valRef">0%</span>
                 </div>
-                <input type="range" class="stock-slider" id="sliderRef" min="0" max="100" value="0" oninput="handleStockSliderChange('sliderRef')" />
+                <input type="range" class="stock-slider" id="sliderRef" min="0" max="100" value="0"
+                  oninput="handleStockSliderChange('sliderRef')" />
               </div>
             </div>
 
             <!-- Right: Performance Metrics -->
             <div class="math-sim-card">
               <div class="sim-label">2. Real-Time Portfolio Performance &amp; Risk</div>
-              
+
               <!-- Allocation Distribution Bar -->
-              <div style="font-family:var(--font-mono); font-size:0.75rem; color:var(--text-dim); margin-bottom:0.4rem;">
+              <div
+                style="font-family:var(--font-mono); font-size:0.75rem; color:var(--text-dim); margin-bottom:0.4rem;">
                 Asset Weight Breakdown:
               </div>
               <div class="allocation-bar" id="allocBar">
@@ -2362,7 +2431,9 @@
                   ⭐ Optimal Tangency Frontier Match
                 </div>
                 <div style="font-size:0.78rem; color:var(--text-muted); line-height:1.6;">
-                  This division mirrors the unconstrained Markowitz tangency portfolio trained on post-2022 EGX macroeconomic regime data. By balancing EGX100 growth with an Egyptian Gold inflation buffer, it maximizes risk-adjusted return (Sharpe: 1.27).
+                  This division mirrors the unconstrained Markowitz tangency portfolio trained on post-2022 EGX
+                  macroeconomic regime data. By balancing EGX100 growth with an Egyptian Gold inflation buffer, it
+                  maximizes risk-adjusted return (Sharpe: 1.27).
                 </div>
               </div>
 
@@ -2375,7 +2446,8 @@
 
     <!-- ─── SELECTED WORK SECTION ─── -->
     <section id="work">
-      <div class="math-watermark wm-aleph" aria-hidden="true">&#8501;<sub style="font-size:0.52em; vertical-align:-0.18em; font-style:normal;">0</sub></div>
+      <div class="math-watermark wm-aleph" aria-hidden="true">&#8501;<sub
+          style="font-size:0.52em; vertical-align:-0.18em; font-style:normal;">0</sub></div>
       <div class="section-header" style="position: relative; z-index: 1;">
         <div>
           <div class="section-label"><i class="ti ti-briefcase"></i> Selected Projects</div>
@@ -2391,8 +2463,10 @@
             <div class="work-tag">Computer Vision &amp; Symbolic Math</div>
             <h3 class="work-title">MathGPT: Handwritten Math Solver</h3>
             <p class="work-desc">
-              Allows students and engineers to take a photo of handwritten math equations and get an instant, verified step-by-step solution. 
-              Instead of trusting an AI model with calculations (which often hallucinates arithmetic), it uses a custom PyTorch CNN to recognize characters and delegates the exact math to <strong>SymPy</strong>.
+              Allows students and engineers to take a photo of handwritten math equations and get an instant, verified
+              step-by-step solution.
+              Instead of trusting an AI model with calculations (which often hallucinates arithmetic), it uses a custom
+              PyTorch CNN to recognize characters and delegates the exact math to <strong>SymPy</strong>.
             </p>
             <div class="work-tech-pills">
               <span class="tech-pill">PyTorch CNN</span>
@@ -2423,7 +2497,9 @@
             <div class="work-tag">Mathematical AI Foundations</div>
             <h3 class="work-title">ML-From-Scratch: Core Models</h3>
             <p class="work-desc">
-              Implementation of foundational machine learning algorithms from mathematical first principles in pure Python and NumPy without high-level abstractions like scikit-learn. Focuses on gradient descent derivations, loss surfaces, polynomial features, and L2 Ridge regularization.
+              Implementation of foundational machine learning algorithms from mathematical first principles in pure
+              Python and NumPy without high-level abstractions like scikit-learn. Focuses on gradient descent
+              derivations, loss surfaces, polynomial features, and L2 Ridge regularization.
             </p>
             <div class="work-tech-pills">
               <span class="tech-pill">Python</span>
@@ -2454,7 +2530,8 @@
             <div class="work-tag">Machine Learning &amp; FinTech</div>
             <h3 class="work-title">Egyptian Stock AI Portfolio Optimizer</h3>
             <p class="work-desc">
-              Analyzes Egyptian Stock Exchange (EGX) companies, forecasts price trends using machine learning (XGBoost), and runs 10,000 Monte Carlo stochastic simulations to recommend the optimal risk-balanced portfolio.
+              Analyzes Egyptian Stock Exchange (EGX) companies, forecasts price trends using machine learning (XGBoost),
+              and runs 10,000 Monte Carlo stochastic simulations to recommend the optimal risk-balanced portfolio.
             </p>
             <div class="work-tech-pills">
               <span class="tech-pill">Python</span>
@@ -2464,7 +2541,8 @@
               <span class="tech-pill">Power BI</span>
             </div>
             <div class="work-links">
-              <a href="https://github.com/Ziad-7/Egypt-Multi-Asset-AI-Portfolio-Optimization-System" target="_blank" class="work-link">
+              <a href="https://github.com/Ziad-7/Egypt-Multi-Asset-AI-Portfolio-Optimization-System" target="_blank"
+                class="work-link">
                 <i class="ti ti-brand-github"></i> GitHub Code &nearr;
               </a>
             </div>
@@ -2485,7 +2563,9 @@
             <div class="work-tag">C++ &amp; Python Systems</div>
             <h3 class="work-title">Warsha Hub: Graph-Based Social Platform</h3>
             <p class="work-desc">
-              A desktop social platform built in C++ and Python with a real-time interactive friend graph, smart connection recommendations (combining Jaccard and Cosine similarity), and instant Trie search autocomplete.
+              A desktop social platform built in C++ and Python with a real-time interactive friend graph, smart
+              connection recommendations (combining Jaccard and Cosine similarity), and instant Trie search
+              autocomplete.
             </p>
             <div class="work-tech-pills">
               <span class="tech-pill">C++ Backend</span>
@@ -2536,9 +2616,11 @@
                 <div class="cred-title">Microsoft Machine Learning Engineering</div>
                 <span class="cred-badge badge-training">Training</span>
               </div>
-              <div class="cred-org"><i class="ti ti-building"></i> Digital Egypt Pioneers Initiative (DEPI) • Round 4</div>
+              <div class="cred-org"><i class="ti ti-building"></i> Digital Egypt Pioneers Initiative (DEPI) • Round 4
+              </div>
               <p class="cred-desc">
-                MCIT &amp; Microsoft scholarship specializing in production machine learning pipelines, deep learning architectures, and cloud deployment.
+                MCIT &amp; Microsoft scholarship specializing in production machine learning pipelines, deep learning
+                architectures, and cloud deployment.
               </p>
             </div>
           </div>
@@ -2547,7 +2629,8 @@
         <!-- 2. ITI AI -->
         <div class="cred-card" onclick="openCertModal(1)">
           <div class="cred-thumb-wrap">
-            <img src="assets/certificates/in_progress_badge_v3.png" alt="ITI AI Specialization" class="cred-thumb-img" />
+            <img src="assets/certificates/in_progress_badge_v3.png" alt="ITI AI Specialization"
+              class="cred-thumb-img" />
             <div class="cred-expand-hint"><i class="ti ti-zoom-in"></i> View Details</div>
           </div>
           <div class="cred-body">
@@ -2558,7 +2641,8 @@
               </div>
               <div class="cred-org"><i class="ti ti-school"></i> Information Technology Institute (ITI)</div>
               <p class="cred-desc">
-                Intensive applied AI specialization spanning CNN &amp; YOLO computer vision, full NLP pipelines, vector databases, LangChain RAG, and agentic workflows.
+                Intensive applied AI specialization spanning CNN &amp; YOLO computer vision, full NLP pipelines, vector
+                databases, LangChain RAG, and agentic workflows.
               </p>
             </div>
           </div>
@@ -2578,7 +2662,8 @@
               </div>
               <div class="cred-org"><i class="ti ti-briefcase"></i> NAID (Summer 2025) • Project InSync</div>
               <p class="cred-desc">
-                Engineered real-time assistive vision (InSync) aiding ALS patients: high-frequency eye-gaze tracking and offline edge LLM communication.
+                Engineered real-time assistive vision (InSync) aiding ALS patients: high-frequency eye-gaze tracking and
+                offline edge LLM communication.
               </p>
             </div>
           </div>
@@ -2598,7 +2683,8 @@
               </div>
               <div class="cred-org"><i class="ti ti-bolt"></i> AI Sprint National Hackathon • Briefly</div>
               <p class="cred-desc">
-                Built Briefly—a multi-modal agentic platform transforming video, audio, and documents into structured summaries and knowledge graphs in 48 hours.
+                Built Briefly—a multi-modal agentic platform transforming video, audio, and documents into structured
+                summaries and knowledge graphs in 48 hours.
               </p>
             </div>
           </div>
@@ -2607,7 +2693,8 @@
         <!-- 5. ML Course -->
         <div class="cred-card" onclick="openCertModal(4)">
           <div class="cred-thumb-wrap">
-            <img src="assets/certificates/deeplearning_ai.png" alt="DeepLearning.AI Machine Learning" class="cred-thumb-img" />
+            <img src="assets/certificates/deeplearning_ai.png" alt="DeepLearning.AI Machine Learning"
+              class="cred-thumb-img" />
             <div class="cred-expand-hint"><i class="ti ti-zoom-in"></i> View Details</div>
           </div>
           <div class="cred-body">
@@ -2616,9 +2703,11 @@
                 <div class="cred-title">Supervised Machine Learning</div>
                 <span class="cred-badge badge-cert">Stanford Online</span>
               </div>
-              <div class="cred-org"><i class="ti ti-certificate"></i> DeepLearning.AI &amp; Stanford Online • Andrew Ng</div>
+              <div class="cred-org"><i class="ti ti-certificate"></i> DeepLearning.AI &amp; Stanford Online • Andrew Ng
+              </div>
               <p class="cred-desc">
-                Foundational ML from first principles under Andrew Ng: gradient descent optimization, cost surface derivations, and polynomial regularization.
+                Foundational ML from first principles under Andrew Ng: gradient descent optimization, cost surface
+                derivations, and polynomial regularization.
               </p>
             </div>
           </div>
@@ -2627,7 +2716,8 @@
         <!-- 6. ITI Embedded -->
         <div class="cred-card" onclick="openCertModal(5)">
           <div class="cred-thumb-wrap">
-            <img src="assets/certificates/iti_embedded_cert.jpg" alt="ITI Embedded Systems Certificate" class="cred-thumb-img" />
+            <img src="assets/certificates/iti_embedded_cert.jpg" alt="ITI Embedded Systems Certificate"
+              class="cred-thumb-img" />
             <div class="cred-expand-hint"><i class="ti ti-zoom-in"></i> View Details</div>
           </div>
           <div class="cred-body">
@@ -2638,7 +2728,8 @@
               </div>
               <div class="cred-org"><i class="ti ti-cpu"></i> Information Technology Institute (ITI) • Summer 2025</div>
               <p class="cred-desc">
-                162-hour hardware and firmware specialization in bare-metal C, Atmega32 architecture, timers, interrupts, and UART/SPI/I2C protocols.
+                162-hour hardware and firmware specialization in bare-metal C, Atmega32 architecture, timers,
+                interrupts, and UART/SPI/I2C protocols.
               </p>
             </div>
           </div>
@@ -2647,7 +2738,8 @@
         <!-- 7. ITIDA GIGS -->
         <div class="cred-card" onclick="openCertModal(6)">
           <div class="cred-thumb-wrap">
-            <img src="assets/certificates/itida_gigs_cert.jpg" alt="ITIDA GIGS Freelancing Certificate" class="cred-thumb-img" />
+            <img src="assets/certificates/itida_gigs_cert.jpg" alt="ITIDA GIGS Freelancing Certificate"
+              class="cred-thumb-img" />
             <div class="cred-expand-hint"><i class="ti ti-zoom-in"></i> View Details</div>
           </div>
           <div class="cred-body">
@@ -2658,7 +2750,8 @@
               </div>
               <div class="cred-org"><i class="ti ti-world"></i> ITIDA GIGS Freelancing Initiative</div>
               <p class="cred-desc">
-                National freelancing qualification program, delivering production fullstack web solutions and end-to-end client milestone execution.
+                National freelancing qualification program, delivering production fullstack web solutions and end-to-end
+                client milestone execution.
               </p>
             </div>
           </div>
@@ -2678,7 +2771,8 @@
               </div>
               <div class="cred-org"><i class="ti ti-trophy"></i> Egyptian Collegiate Programming Contest (ECPC)</div>
               <p class="cred-desc">
-                14th Place in 2024 &amp; 2025 ECPC Qualifiers and HackerRank Problem Solving. Specialized in graph algorithms, dynamic programming, and number theory.
+                14th Place in 2024 &amp; 2025 ECPC Qualifiers and HackerRank Problem Solving. Specialized in graph
+                algorithms, dynamic programming, and number theory.
               </p>
             </div>
           </div>
@@ -2698,7 +2792,8 @@
               </div>
               <div class="cred-org"><i class="ti ti-users"></i> iMath Club • Egypt University of Informatics</div>
               <p class="cred-desc">
-                Co-founded iMath Club at EUI, mentoring fellow engineering students in calculus, linear algebra, and competitive algorithmic thinking.
+                Co-founded iMath Club at EUI, mentoring fellow engineering students in calculus, linear algebra, and
+                competitive algorithmic thinking.
               </p>
             </div>
           </div>
@@ -2716,9 +2811,11 @@
                 <div class="cred-title">Conference Organizer — DSC MENA 2024</div>
                 <span class="cred-badge badge-conference">Conference</span>
               </div>
-              <div class="cred-org"><i class="ti ti-calendar-event"></i> Data Science Conference MENA (DSC MENA 2024)</div>
+              <div class="cred-org"><i class="ti ti-calendar-event"></i> Data Science Conference MENA (DSC MENA 2024)
+              </div>
               <p class="cred-desc">
-                Organized session tracks and operations for the premier regional Data Science &amp; AI Conference, hosting industry leaders and researchers.
+                Organized session tracks and operations for the premier regional Data Science &amp; AI Conference,
+                hosting industry leaders and researchers.
               </p>
             </div>
           </div>
@@ -2785,7 +2882,10 @@
             </div>
 
             <p class="edu-narrative">
-              Studying Computer Engineering at EUI (Oct 2023 – Present) on a full national merit scholarship awarded for ranking among Egypt's top Thanaweya Amma graduates with a score of 96.6% (Math Track). Focused on mathematical foundations, computer hardware &amp; digital systems, and engineering reliable applied AI software.
+              Studying Computer Engineering at EUI (Oct 2023 – Present) on a full national merit scholarship awarded for
+              ranking among Egypt's top Thanaweya Amma graduates with a score of 96.6% (Math Track). Focused on
+              mathematical foundations, computer hardware &amp; digital systems, and engineering reliable applied AI
+              software.
             </p>
 
             <div class="edu-coursework-box">
@@ -2812,7 +2912,8 @@
           <!-- Right: Certificate Showcase -->
           <div class="edu-cert-preview">
             <div class="edu-cert-frame" onclick="openCertModal('dean')">
-              <img src="assets/certificates/dean_list.png" alt="Dean's List Certificate of Academic Excellence" class="edu-cert-img" />
+              <img src="assets/certificates/dean_list.png" alt="Dean's List Certificate of Academic Excellence"
+                class="edu-cert-img" />
               <div class="edu-cert-overlay">
                 <i class="ti ti-zoom-in"></i> View Certificate
               </div>
@@ -2829,7 +2930,8 @@
     <section class="contact-cta" id="contact">
       <h2 class="contact-cta-title">Let's Build Something Together</h2>
       <p class="contact-cta-desc">
-        Always open to building new AI projects, collaborating on research, or tackling interesting engineering problems.
+        Always open to building new AI projects, collaborating on research, or tackling interesting engineering
+        problems.
       </p>
 
       <div class="contact-btn-group" style="justify-content:center;">
@@ -2843,9 +2945,18 @@
     <footer>
       <span>Ziad Ahmed Rabie • Cairo, Egypt</span>
       <div style="display:flex; align-items:center; gap:1.2rem;">
-        <a href="https://github.com/Ziad-7" target="_blank" style="color:var(--text-muted); text-decoration:none; display:inline-flex; align-items:center; gap:0.35rem;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'"><i class="ti ti-brand-github"></i> GitHub</a>
-        <a href="https://linkedin.com/in/ziadahmedrabie" target="_blank" style="color:var(--text-muted); text-decoration:none; display:inline-flex; align-items:center; gap:0.35rem;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'"><i class="ti ti-brand-linkedin"></i> LinkedIn</a>
-        <a href="Ziad_Ahmed_Rabie_Resume.pdf" target="_blank" style="color:var(--text-muted); text-decoration:none; display:inline-flex; align-items:center; gap:0.35rem;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'"><i class="ti ti-file-text"></i> Resume</a>
+        <a href="https://github.com/Ziad-7" target="_blank"
+          style="color:var(--text-muted); text-decoration:none; display:inline-flex; align-items:center; gap:0.35rem;"
+          onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'"><i
+            class="ti ti-brand-github"></i> GitHub</a>
+        <a href="https://linkedin.com/in/ziadahmedrabie" target="_blank"
+          style="color:var(--text-muted); text-decoration:none; display:inline-flex; align-items:center; gap:0.35rem;"
+          onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'"><i
+            class="ti ti-brand-linkedin"></i> LinkedIn</a>
+        <a href="Ziad_Ahmed_Rabie_Resume.pdf" target="_blank"
+          style="color:var(--text-muted); text-decoration:none; display:inline-flex; align-items:center; gap:0.35rem;"
+          onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'"><i
+            class="ti ti-file-text"></i> Resume</a>
       </div>
       <span>Built with vanilla HTML, CSS &amp; JavaScript</span>
     </footer>
@@ -3418,7 +3529,7 @@
               <strong>• [Intermediate Simplification]:</strong> ${clean} ➔ <strong>${valFmt}</strong><br />
               <strong>• [Exact Evaluation]:</strong> Exact rational computation with zero arithmetic rounding error.`
           };
-        } catch (e) {}
+        } catch (e) { }
       }
 
       // 2. Quadratic Equation: ax² + bx + c = d
@@ -3668,7 +3779,7 @@
 
           if (overlapX > -18 && minW > 0 && overlapX / minW > -0.2) {
             // Two parallel horizontal strokes -> '='
-            if (w1 > h1 * 1.3 && w2 > h2 * 1.3 && Math.abs((s1.minX + s1.maxX)/2 - (s2.minX + s2.maxX)/2) < 32) {
+            if (w1 > h1 * 1.3 && w2 > h2 * 1.3 && Math.abs((s1.minX + s1.maxX) / 2 - (s2.minX + s2.maxX) / 2) < 32) {
               used.add(i);
               used.add(j);
               glyphs.push({
@@ -3900,10 +4011,10 @@
        ────────────────────────────────────────────────────────── */
     const assetProfiles = {
       egx100: { name: 'EGX100', meanReturn: 32.4, vol: 18.2, color: '#38bdf8' },
-      gold:   { name: 'Gold', meanReturn: 24.1, vol: 14.8, color: '#f59e0b' },
-      egx30:  { name: 'EGX30', meanReturn: 28.6, vol: 19.5, color: '#818cf8' },
+      gold: { name: 'Gold', meanReturn: 24.1, vol: 14.8, color: '#f59e0b' },
+      egx30: { name: 'EGX30', meanReturn: 28.6, vol: 19.5, color: '#818cf8' },
       tbills: { name: 'TBills', meanReturn: 22.0, vol: 1.2, color: '#10b981' },
-      ref:    { name: 'REF', meanReturn: 26.5, vol: 15.5, color: '#ec4899' }
+      ref: { name: 'REF', meanReturn: 26.5, vol: 15.5, color: '#ec4899' }
     };
 
     let activeStockPreset = 'ai';
@@ -3984,16 +4095,16 @@
 
     function updateStockSim() {
       const sliderEgx100 = document.getElementById('sliderEgx100');
-      const sliderGold   = document.getElementById('sliderGold');
-      const sliderEgx30  = document.getElementById('sliderEgx30');
+      const sliderGold = document.getElementById('sliderGold');
+      const sliderEgx30 = document.getElementById('sliderEgx30');
       const sliderTBills = document.getElementById('sliderTBills');
-      const sliderRef    = document.getElementById('sliderRef');
+      const sliderRef = document.getElementById('sliderRef');
 
-      const p100  = Math.max(0, Math.round(parseFloat(sliderEgx100?.value || 0)));
+      const p100 = Math.max(0, Math.round(parseFloat(sliderEgx100?.value || 0)));
       const pGold = Math.max(0, Math.round(parseFloat(sliderGold?.value || 0)));
-      const p30   = Math.max(0, Math.round(parseFloat(sliderEgx30?.value || 0)));
-      const pTB   = Math.max(0, Math.round(parseFloat(sliderTBills?.value || 0)));
-      const pRef  = Math.max(0, Math.round(parseFloat(sliderRef?.value || 0)));
+      const p30 = Math.max(0, Math.round(parseFloat(sliderEgx30?.value || 0)));
+      const pTB = Math.max(0, Math.round(parseFloat(sliderTBills?.value || 0)));
+      const pRef = Math.max(0, Math.round(parseFloat(sliderRef?.value || 0)));
 
       // Update Labels
       document.getElementById('valEgx100').textContent = `${p100}%`;
@@ -4017,18 +4128,18 @@
       document.getElementById('barRef').style.width = `${pRef}%`;
 
       const wEgx100 = p100 / 100;
-      const wGold   = pGold / 100;
-      const wEgx30  = p30 / 100;
+      const wGold = pGold / 100;
+      const wEgx30 = p30 / 100;
       const wTBills = pTB / 100;
-      const wRef    = pRef / 100;
+      const wRef = pRef / 100;
 
       // Expected Annual Return
       const expectedReturn = (
         wEgx100 * assetProfiles.egx100.meanReturn +
-        wGold   * assetProfiles.gold.meanReturn +
-        wEgx30  * assetProfiles.egx30.meanReturn +
+        wGold * assetProfiles.gold.meanReturn +
+        wEgx30 * assetProfiles.egx30.meanReturn +
         wTBills * assetProfiles.tbills.meanReturn +
-        wRef    * assetProfiles.ref.meanReturn
+        wRef * assetProfiles.ref.meanReturn
       );
 
       // Annualized Portfolio Volatility (with correlation benefits)
@@ -4412,7 +4523,7 @@
     }
 
     // Interactive Button: Splash Wave
-    window.splashWave = function() {
+    window.splashWave = function () {
       if (!statusWaveCanvas) return;
       const sw = statusWaveCanvas.width || 380;
       const sh = statusWaveCanvas.height || 160;
@@ -4423,7 +4534,7 @@
     };
 
     // Interactive Button: Reset Chip Buoys
-    window.resetChips = function() {
+    window.resetChips = function () {
       initChipPositions();
       chips.forEach(c => {
         c.splashImpulse = -14;
@@ -4441,7 +4552,7 @@
         e.preventDefault();
         chip.isDragging = true;
         chip.el.classList.add('is-dragging');
-        try { chip.el.setPointerCapture(e.pointerId); } catch(err) {}
+        try { chip.el.setPointerCapture(e.pointerId); } catch (err) { }
 
         const stageRect = statusWaveStage.getBoundingClientRect();
         chip.dragOffsetX = e.clientX - stageRect.left - chip.x;
@@ -4474,7 +4585,7 @@
         if (!chip.isDragging) return;
         chip.isDragging = false;
         chip.el.classList.remove('is-dragging');
-        try { chip.el.releasePointerCapture(e.pointerId); } catch(err) {}
+        try { chip.el.releasePointerCapture(e.pointerId); } catch (err) { }
 
         triggerWaterSplash(chip.x + chip.el.offsetWidth / 2, chip.y + chip.el.offsetHeight / 2, 20);
         chip.splashImpulse = 4; // realistic drop settling bounce
@@ -4663,8 +4774,8 @@
       const fontSize = 22;
       const columns = Math.ceil(w / fontSize);
       const mathGlyphs = [
-        '\u03C0', '\u2211', '\u222B', '\u2207', '\u03BB', '\u221E', 'f(x)', 
-        '\u2202x', 'O(1)', 'dx', '\u03C3', '\u03B8', '\u2248', '\u2297', '\u2200x', 
+        '\u03C0', '\u2211', '\u222B', '\u2207', '\u03BB', '\u221E', 'f(x)',
+        '\u2202x', 'O(1)', 'dx', '\u03C3', '\u03B8', '\u2248', '\u2297', '\u2200x',
         'e', '\u2208', '\u221A', '\u2260', '\u2205'
       ];
 
@@ -4787,8 +4898,8 @@
                   mctx.shadowBlur = 0;
                 } else {
                   const alpha = Math.max(0, 1 - (j - 4) / (d.tailLength - 4));
-                  mctx.fillStyle = j % 2 === 0 
-                    ? `rgba(4, 120, 87, ${alpha * 0.90})` 
+                  mctx.fillStyle = j % 2 === 0
+                    ? `rgba(4, 120, 87, ${alpha * 0.90})`
                     : `rgba(2, 132, 199, ${alpha * 0.85})`;
                   mctx.shadowBlur = 0;
                 }
@@ -4809,8 +4920,8 @@
                   mctx.shadowBlur = 0;
                 } else {
                   const alpha = Math.max(0, 1 - (j - 4) / (d.tailLength - 4));
-                  mctx.fillStyle = j % 2 === 0 
-                    ? `rgba(16, 185, 129, ${alpha * 0.85})` 
+                  mctx.fillStyle = j % 2 === 0
+                    ? `rgba(16, 185, 129, ${alpha * 0.85})`
                     : `rgba(56, 189, 248, ${alpha * 0.75})`;
                   mctx.shadowBlur = 0;
                 }
