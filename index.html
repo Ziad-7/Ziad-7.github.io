@@ -1765,11 +1765,11 @@
     }
 
     /* ═══════════════════════════════════════════════════════════════
-       AMBIENT MATHEMATICAL WATERMARKS (CUSTOMIZE PLACEMENTS HERE)
-       - To reposition: tweak 'top', 'bottom', 'left', or 'right'
-       - To resize: tweak 'font-size' (e.g. 15rem, 20rem, 25rem)
-       - To rotate: tweak 'transform: rotate(..deg)'
-       - To fade in/out: tweak 'opacity' (e.g. 0.02 to 0.08)
+       AMBIENT MATHEMATICAL WATERMARKS (EMPTY FLANK PLACEMENTS)
+       - Placed in the outer left/right gutters so they are clearly
+         visible and never obscured behind cards or content.
+       - Alternating rhythm: Hero (Left ∫) ➔ Work (Right ℵ₀) ➔
+         Experience (Left ∑) ➔ Education (Right ∂).
        ═══════════════════════════════════════════════════════════════ */
     #work,
     #experience,
@@ -1786,58 +1786,89 @@
       font-weight: 300;
       line-height: 0.85;
       color: var(--accent);
-      opacity: 0.042;
+      opacity: 0.075;
       z-index: 0;
       transition: opacity 0.25s ease, color 0.25s ease;
     }
 
     body.light .math-watermark {
-      color: var(--accent);
-      opacity: 0.065;
+      color: #047857;
+      opacity: 0.09;
     }
 
-    /* 1. Hero Section: The Leibniz Integral (∫) */
+    /* 1. Hero Section: The Leibniz Integral (∫) — Signature Brand Motif */
     .wm-integral {
-      top: 130px;
-      left: -22%;
-      font-size: 26rem;
-      transform: translateX(-50%) rotate(-11deg);
-      filter: drop-shadow(0 0 60px rgba(16, 185, 129, 0.15));
+      top: -20px;
+      left: -110px;
+      font-size: 29rem;
+      transform: rotate(-3.5deg);
+      opacity: 0.085;
+      filter: drop-shadow(0 0 45px rgba(16, 185, 129, 0.22));
     }
 
-    /* 2. Projects Section (#work): Aleph Null (ℵ₀) */
+    /* 2. Projects Section (#work): Aleph Null (ℵ₀) — Flanking Right */
     .wm-aleph {
-      top: 15px;
-      right: 2%;
+      top: -25px;
+      right: -130px;
       font-size: 15rem;
-      transform: rotate(4deg);
-      opacity: 0.035;
+      transform: rotate(5deg);
+      opacity: 0.075;
+      filter: drop-shadow(0 0 35px rgba(16, 185, 129, 0.16));
     }
 
-    /* 3. Experience Section (#experience): Capital Sigma (∑) */
+    /* 3. Experience Section (#experience): Capital Sigma (∑) — Flanking Left */
     .wm-sigma {
-      top: 50px;
-      left: 1%;
-      font-size: 17rem;
-      transform: rotate(-4deg);
-      opacity: 0.035;
+      top: -20px;
+      left: -135px;
+      font-size: 16.5rem;
+      transform: rotate(-3deg);
+      opacity: 0.075;
+      filter: drop-shadow(0 0 35px rgba(16, 185, 129, 0.16));
     }
 
-    /* 4. Education Section (#education): Partial Derivative (∂) */
+    /* 4. Education Section (#education): Partial Derivative (∂) — Flanking Right */
     .wm-partial {
-      bottom: 20px;
-      right: 2%;
-      font-size: 15rem;
-      transform: rotate(8deg);
-      opacity: 0.032;
+      top: -20px;
+      bottom: auto;
+      right: -125px;
+      font-size: 17rem;
+      transform: rotate(6deg);
+      opacity: 0.075;
+      filter: drop-shadow(0 0 35px rgba(16, 185, 129, 0.16));
     }
 
-    @media (max-width: 900px) {
+    /* Medium screens (1100px - 1380px): gracefully scale and tuck */
+    @media (max-width: 1380px) {
+      .wm-integral {
+        left: -85px;
+        font-size: 25rem;
+      }
+      .wm-aleph {
+        right: -95px;
+        font-size: 13rem;
+        top: -15px;
+      }
+      .wm-sigma {
+        left: -95px;
+        font-size: 14rem;
+        top: -15px;
+      }
+      .wm-partial {
+        right: -90px;
+        font-size: 14.5rem;
+        top: -15px;
+      }
+    }
+
+    /* Small screens / Mobile (<= 1024px): fade or tuck gracefully */
+    @media (max-width: 1024px) {
       .wm-integral {
         font-size: 18rem;
-        left: 72%;
-        top: 0px;
-        opacity: 0.032;
+        left: auto;
+        right: 4%;
+        top: -10px;
+        opacity: 0.035;
+        transform: rotate(-3deg);
       }
 
       .wm-aleph,
