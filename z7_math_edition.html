@@ -4290,13 +4290,14 @@
 
       function drawWipeFrame() {
         const elapsed = performance.now() - wipeStartTime;
+        const isLight = document.body.classList.contains('light');
 
-        // 1. Fill entire canvas with solid dark background
+        // 1. Fill entire canvas with veil background (light slate for light mode, dark for dark mode)
         mctx.globalCompositeOperation = 'source-over';
-        mctx.fillStyle = '#06090e';
+        mctx.fillStyle = isLight ? '#f0f3f7' : '#06090e';
         mctx.fillRect(0, 0, w, h);
 
-        // 2. Draw glowing Z7 brand emblem and subtitle in the center of the black screen
+        // 2. Draw glowing Z7 brand emblem and subtitle in the center of the screen
         const centerX = w / 2;
         const centerY = h / 2;
 
@@ -4309,9 +4310,15 @@
 
         // Bold blocky Z7 with explicit spacing between Z and 7
         mctx.font = '900 5.2rem "Plus Jakarta Sans", -apple-system, sans-serif';
-        mctx.fillStyle = '#10b981';
-        mctx.shadowColor = `rgba(16, 185, 129, ${0.78 * glowFactor})`;
-        mctx.shadowBlur = 38 * glowFactor;
+        if (isLight) {
+          mctx.fillStyle = '#047857';
+          mctx.shadowColor = `rgba(4, 120, 87, ${0.38 * glowFactor})`;
+          mctx.shadowBlur = 24 * glowFactor;
+        } else {
+          mctx.fillStyle = '#10b981';
+          mctx.shadowColor = `rgba(16, 185, 129, ${0.78 * glowFactor})`;
+          mctx.shadowBlur = 38 * glowFactor;
+        }
 
         const zWidth = mctx.measureText('Z').width;
         const sevenWidth = mctx.measureText('7').width;
@@ -4323,9 +4330,15 @@
 
         // Subtitle: INITIALIZING MATHEMATICAL ARCHITECTURE
         mctx.font = '700 0.82rem "JetBrains Mono", monospace';
-        mctx.fillStyle = '#38bdf8';
-        mctx.shadowColor = `rgba(56, 189, 248, ${0.55 * glowFactor})`;
-        mctx.shadowBlur = 18;
+        if (isLight) {
+          mctx.fillStyle = '#0284c7';
+          mctx.shadowColor = `rgba(2, 132, 199, ${0.28 * glowFactor})`;
+          mctx.shadowBlur = 14;
+        } else {
+          mctx.fillStyle = '#38bdf8';
+          mctx.shadowColor = `rgba(56, 189, 248, ${0.55 * glowFactor})`;
+          mctx.shadowBlur = 18;
+        }
         const subText = 'INITIALIZING MATHEMATICAL ARCHITECTURE';
         if ('letterSpacing' in mctx) {
           mctx.letterSpacing = '5px';
@@ -4344,8 +4357,8 @@
         }
         mctx.restore();
 
-        // 3. WIPE AWAY: Erase black background GRADUALLY starting ~4 symbols behind the head
-        // The first 4 symbols fall strictly against solid black (zero clash with portfolio text!)
+        // 3. WIPE AWAY: Erase veil background GRADUALLY starting ~4 symbols behind the head
+        // The first 4 symbols fall strictly against solid veil (zero clash with portfolio text!)
         // Transparency begins dissolving at (d.y - 4.2 * fontSize) and reaches 100% by (d.y - 8.5 * fontSize)
         mctx.globalCompositeOperation = 'destination-out';
         let anyActive = false;
@@ -4370,7 +4383,7 @@
             if (drawBottom > drawTop) {
               const grad = mctx.createLinearGradient(0, fullRevealY, 0, startRevealY);
               grad.addColorStop(0, 'rgba(0, 0, 0, 1)'); // 100% transparent portfolio reveal
-              grad.addColorStop(1, 'rgba(0, 0, 0, 0)'); // 0% reveal (solid black veil below)
+              grad.addColorStop(1, 'rgba(0, 0, 0, 0)'); // 0% reveal (solid veil below)
               mctx.fillStyle = grad;
               mctx.fillRect(d.x, drawTop, fontSize + 2, drawBottom - drawTop);
             }
@@ -4382,7 +4395,7 @@
           }
         }
 
-        // 4. DRAW MATH SYMBOLS: First 4 symbols fall on 100% solid black (zero clashing with page text)
+        // 4. DRAW MATH SYMBOLS: First 4 symbols fall on 100% solid veil (zero clashing with page text)
         // Upper tail softly dissolves in the gradient veil
         mctx.globalCompositeOperation = 'source-over';
         mctx.font = '700 ' + fontSize + 'px "JetBrains Mono", monospace';
@@ -4396,32 +4409,58 @@
             const charY = d.y - j * fontSize;
             if (charY >= 0 && charY <= h + fontSize) {
               const char = d.glyphs[(glyphPhase + j) % d.glyphs.length];
-              if (j === 0) {
-                // Leading head: pure bright glowing white on solid black
-                mctx.fillStyle = '#ffffff';
-                mctx.shadowColor = '#10b981';
-                mctx.shadowBlur = 18;
-              } else if (j === 1) {
-                // Ultra-bright mint on solid black
-                mctx.fillStyle = '#a7f3d0';
-                mctx.shadowColor = '#34d399';
-                mctx.shadowBlur = 10;
-              } else if (j === 2) {
-                // High-contrast emerald on solid black
-                mctx.fillStyle = '#34d399';
-                mctx.shadowBlur = 0;
-              } else if (j <= 4) {
-                // Symbols 3 and 4: rich emerald on solid black
-                mctx.fillStyle = '#10b981';
-                mctx.shadowBlur = 0;
+              if (isLight) {
+                // Light mode palette: crisp, deep forest emeralds and sapphires on light veil
+                if (j === 0) {
+                  mctx.fillStyle = '#064e3b'; // Deep forest emerald head
+                  mctx.shadowColor = 'rgba(4, 120, 87, 0.45)';
+                  mctx.shadowBlur = 10;
+                } else if (j === 1) {
+                  mctx.fillStyle = '#047857'; // Deep emerald
+                  mctx.shadowColor = 'rgba(4, 120, 87, 0.30)';
+                  mctx.shadowBlur = 6;
+                } else if (j === 2) {
+                  mctx.fillStyle = '#059669'; // Vivid emerald
+                  mctx.shadowBlur = 0;
+                } else if (j <= 4) {
+                  mctx.fillStyle = '#0284c7'; // Deep sapphire cyan
+                  mctx.shadowBlur = 0;
+                } else {
+                  // Symbols 5 to 8: softly fading out inside the dissolving gradient veil
+                  const alpha = Math.max(0, 1 - (j - 4) / 4.5);
+                  mctx.fillStyle = j % 2 === 0 
+                    ? `rgba(4, 120, 87, ${alpha * 0.88})` 
+                    : `rgba(2, 132, 199, ${alpha * 0.80})`;
+                  mctx.shadowBlur = 0;
+                }
               } else {
-                // Symbols 5 to 8: softly fading out inside the dissolving gradient veil
-                // They disappear completely before reaching the fully revealed portfolio!
-                const alpha = Math.max(0, 1 - (j - 4) / 4.5);
-                mctx.fillStyle = j % 2 === 0 
-                  ? `rgba(16, 185, 129, ${alpha * 0.85})` 
-                  : `rgba(56, 189, 248, ${alpha * 0.75})`;
-                mctx.shadowBlur = 0;
+                // Dark mode palette: bright glowing emeralds and cyans on black veil
+                if (j === 0) {
+                  // Leading head: pure bright glowing white on solid black
+                  mctx.fillStyle = '#ffffff';
+                  mctx.shadowColor = '#10b981';
+                  mctx.shadowBlur = 18;
+                } else if (j === 1) {
+                  // Ultra-bright mint on solid black
+                  mctx.fillStyle = '#a7f3d0';
+                  mctx.shadowColor = '#34d399';
+                  mctx.shadowBlur = 10;
+                } else if (j === 2) {
+                  // High-contrast emerald on solid black
+                  mctx.fillStyle = '#34d399';
+                  mctx.shadowBlur = 0;
+                } else if (j <= 4) {
+                  // Symbols 3 and 4: rich emerald on solid black
+                  mctx.fillStyle = '#10b981';
+                  mctx.shadowBlur = 0;
+                } else {
+                  // Symbols 5 to 8: softly fading out inside the dissolving gradient veil
+                  const alpha = Math.max(0, 1 - (j - 4) / 4.5);
+                  mctx.fillStyle = j % 2 === 0 
+                    ? `rgba(16, 185, 129, ${alpha * 0.85})` 
+                    : `rgba(56, 189, 248, ${alpha * 0.75})`;
+                  mctx.shadowBlur = 0;
+                }
               }
               mctx.fillText(char, d.x, charY);
             }
