@@ -1598,153 +1598,171 @@
       }
     }
 
-    /* ─── REPOSITIONED HARMONIC WAVE RIBBON & BOLD BLOCKY Z7 CORE ─── */
-    .z7-wave-ribbon-wrap {
-      margin: 2.5rem 0 1.8rem;
-      position: relative;
-      border-radius: var(--radius-md);
-      background: var(--bg-elevated);
-      border: 1px solid var(--border);
-      overflow: hidden;
-      box-shadow: var(--shadow-sm);
-      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    /* ─── OPTION 2: SLEEK QUANT / TERMINAL TICKER (44PX PRECISION BAR) ─── */
+    .z7-quant-ticker-wrap {
+      margin: 2rem 0 1.8rem;
+      width: 100%;
     }
 
-    .z7-wave-ribbon-wrap:hover {
-      border-color: rgba(16, 185, 129, 0.5);
-      box-shadow: 0 4px 20px rgba(16, 185, 129, 0.08);
-    }
-
-    .z7-wave-header {
-      padding: 0.65rem 1.2rem;
+    .z7-quant-ticker {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      border-bottom: 1px solid var(--border-subtle);
+      justify-content: space-between;
+      gap: 0.85rem;
+      min-height: 44px;
+      height: 44px;
+      padding: 0 1rem;
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .z7-quant-ticker:hover {
+      border-color: rgba(16, 185, 129, 0.45);
+      box-shadow: 0 4px 18px rgba(16, 185, 129, 0.08);
+    }
+
+    body.light .z7-quant-ticker {
+      background: #ffffff;
+      border-color: rgba(0, 0, 0, 0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    body.light .z7-quant-ticker:hover {
+      border-color: rgba(4, 120, 87, 0.35);
+      box-shadow: 0 4px 14px rgba(4, 120, 87, 0.06);
+    }
+
+    .ticker-lead {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      flex-shrink: 0;
+      user-select: none;
+    }
+
+    .ticker-live-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 8px #10b981;
+      animation: tickerPulse 2s infinite ease-in-out;
+    }
+
+    @keyframes tickerPulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.45; transform: scale(0.85); }
+    }
+
+    body.light .ticker-live-dot {
+      background: #047857;
+      box-shadow: 0 0 6px rgba(4, 120, 87, 0.5);
+    }
+
+    .ticker-brand {
       font-family: var(--font-mono);
       font-size: 0.72rem;
-      color: var(--text-dim);
-      background: rgba(0,0,0,0.02);
-    }
-
-    body.light .z7-wave-header {
-      background: rgba(0,0,0,0.015);
-    }
-
-    /* Wave Stage with Centered Bold Blocky Z7 Block */
-    .z7-wave-stage {
-      position: relative;
-      width: 100%;
-      height: 125px;
-      overflow: hidden;
-      background: transparent;
-    }
-
-    .z7-core-block {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-      user-select: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 1;
-    }
-
-    /* Bold, blocky font with natural letter-spacing (no gluing) */
-    .z7-core-text {
-      font-family: var(--font-heading), 'Plus Jakarta Sans', -apple-system, sans-serif;
-      font-size: 4.6rem;
-      font-weight: 900;
-      letter-spacing: 0.08em;
-      color: rgba(16, 185, 129, 0.15);
-      text-shadow: 0 0 35px rgba(16, 185, 129, 0.22), 0 0 75px rgba(56, 189, 248, 0.14);
-      transition: color 0.3s ease, text-shadow 0.3s ease;
-      line-height: 1;
-    }
-
-    .z7-wave-ribbon-wrap:hover .z7-core-text {
-      color: rgba(16, 185, 129, 0.26);
-      text-shadow: 0 0 45px rgba(16, 185, 129, 0.45), 0 0 90px rgba(56, 189, 248, 0.25);
-    }
-
-    body.light .z7-core-text {
-      color: rgba(4, 120, 87, 0.12);
-      text-shadow: 0 0 35px rgba(4, 120, 87, 0.14);
-    }
-
-    body.light .z7-wave-ribbon-wrap:hover .z7-core-text {
-      color: rgba(4, 120, 87, 0.22);
-      text-shadow: 0 0 40px rgba(4, 120, 87, 0.24);
-    }
-
-    .z7-wave-canvas {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 125px;
-      display: block;
-      z-index: 2;
-      cursor: crosshair;
-      background: transparent;
-    }
-
-    /* ─── UNDER THE WAVES: Z7 FACTS STRIP ─── */
-    .z7-facts-strip {
-      border-top: 1px solid var(--border-subtle);
-      background: var(--bg-surface);
-      padding: 0.75rem 1.2rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      position: relative;
-      z-index: 3;
-    }
-
-    .z7-facts-label {
-      display: flex;
-      align-items: center;
-      flex-shrink: 0;
-    }
-
-    .z7-facts-pill {
-      font-family: var(--font-mono);
-      font-size: 0.68rem;
       font-weight: 800;
       letter-spacing: 0.08em;
       color: var(--accent);
-      background: rgba(16, 185, 129, 0.12);
-      border: 1px solid rgba(16, 185, 129, 0.28);
+    }
+
+    .ticker-sep {
+      color: var(--border);
+      font-size: 0.75rem;
+      user-select: none;
+      opacity: 0.6;
+    }
+
+    .ticker-formula {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--text-dim);
+      opacity: 0.85;
+    }
+
+    /* Mini Oscilloscope Wave */
+    .ticker-wave-box {
+      display: flex;
+      align-items: center;
+      height: 32px;
+      width: 150px;
+      flex-shrink: 0;
+      position: relative;
+      cursor: crosshair;
+      border-left: 1px solid var(--border-subtle);
+      border-right: 1px solid var(--border-subtle);
+      padding: 0 0.4rem;
+    }
+
+    .ticker-wave-canvas {
+      width: 100%;
+      height: 32px;
+      display: block;
+    }
+
+    /* Live Axiom Stream */
+    .ticker-truth-box {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      min-width: 0;
+      cursor: pointer;
+      user-select: none;
+      padding: 0 0.5rem;
+    }
+
+    .ticker-truth-quote {
+      font-family: var(--font-heading);
+      font-size: 0.86rem;
+      font-style: italic;
+      color: var(--text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      transition: opacity 0.15s ease, transform 0.15s ease, color 0.15s ease;
+    }
+
+    .ticker-truth-box:hover .ticker-truth-quote {
+      color: var(--accent);
+    }
+
+    /* Actions */
+    .ticker-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      flex-shrink: 0;
+    }
+
+    .ticker-btn {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text-dim);
       padding: 0.22rem 0.6rem;
       border-radius: var(--radius-sm);
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      font-weight: 600;
       display: inline-flex;
       align-items: center;
       gap: 0.35rem;
-      user-select: none;
-      transition: all 0.15s ease;
       cursor: pointer;
-    }
-    .z7-facts-pill:hover {
-      background: rgba(16, 185, 129, 0.22);
-      border-color: var(--accent);
-      transform: translateY(-1px);
+      transition: all 0.15s ease;
+      user-select: none;
     }
 
-    .z7-facts-body {
-      font-family: var(--font-heading);
-      font-size: 0.95rem;
-      font-style: italic;
-      color: var(--text);
-      line-height: 1.45;
-      flex: 1;
-      cursor: pointer;
-      transition: opacity 0.15s ease, transform 0.15s ease;
-      user-select: none;
+    .ticker-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--bg-elevated);
     }
 
     .z7-facts-body:hover {
@@ -1804,9 +1822,9 @@
       <span onclick="replayMatrixSplash()" style="background:#10b981; color:#052e16; font-size:0.65rem; font-weight:800; padding:0.18rem 0.55rem; border-radius:3px; letter-spacing:0.04em; cursor:pointer;" title="Click to replay Matrix Math Rain Wipe">⚡ REPLAY WIPE</span>
       <span style="color:#64748b; font-size:0.7rem;">| PREVIEWS:</span>
       <a href="z7_hero_edition.html" style="color:#94a3b8; text-decoration:none; padding:0.15rem 0.5rem; border:1px solid #334155; border-radius:3px; font-size:0.7rem; transition:all 0.15s ease;" onmouseover="this.style.color='#38bdf8';this.style.borderColor='#38bdf8'" onmouseout="this.style.color='#94a3b8';this.style.borderColor='#334155'">○ Option 1: Hero Signature</a>
-      <a href="z7_ticker_edition.html" style="color:#94a3b8; text-decoration:none; padding:0.15rem 0.5rem; border:1px solid #334155; border-radius:3px; font-size:0.7rem; transition:all 0.15s ease;" onmouseover="this.style.color='#38bdf8';this.style.borderColor='#38bdf8'" onmouseout="this.style.color='#94a3b8';this.style.borderColor='#334155'">○ Option 2: Quant Ticker</a>
+      <span style="background:rgba(16, 185, 129, 0.2); color:#34d399; border:1px solid #10b981; font-weight:700; padding:0.15rem 0.5rem; border-radius:3px; font-size:0.7rem;">● Option 2: Quant Ticker (Active)</span>
       <a href="z7_lab_edition.html" style="color:#94a3b8; text-decoration:none; padding:0.15rem 0.5rem; border:1px solid #334155; border-radius:3px; font-size:0.7rem; transition:all 0.15s ease;" onmouseover="this.style.color='#38bdf8';this.style.borderColor='#38bdf8'" onmouseout="this.style.color='#94a3b8';this.style.borderColor='#334155'">○ Option 3: Lab Sandbox</a>
-      <span style="background:rgba(245, 158, 11, 0.2); color:#fbbf24; border:1px solid #f59e0b; font-weight:700; padding:0.15rem 0.5rem; border-radius:3px; font-size:0.7rem;">● Original</span>
+      <a href="z7_math_edition.html" style="color:#94a3b8; text-decoration:none; padding:0.15rem 0.5rem; border:1px solid #334155; border-radius:3px; font-size:0.7rem; transition:all 0.15s ease;" onmouseover="this.style.color='#38bdf8';this.style.borderColor='#38bdf8'" onmouseout="this.style.color='#94a3b8';this.style.borderColor='#334155'">○ Original</a>
     </div>
     <div>
       <a href="index.html" style="color:#38bdf8; font-weight:600; text-decoration:none; padding:0.2rem 0.4rem; font-size:0.72rem;">← Main Portfolio</a>
@@ -1898,37 +1916,34 @@
 
     <!-- ─── INTERACTIVE LAB (TACTILE DEMOS & SANDBOXES) ─── -->
     
-    <!-- ─── Z7 MATHEMATICAL RESONANCE FIELD & AXIOMS ─── -->
-    <div class="z7-wave-ribbon-wrap" id="z7WaveRibbonSection">
-      <div class="z7-wave-header">
-        <div style="display:flex; align-items:center; gap:0.55rem;">
-          <span style="color:var(--accent); font-weight:800; letter-spacing:0.04em;">&fnof; Z7 HARMONIC RESONANCE FIELD</span>
-          <span style="color:var(--text-dim); opacity:0.8;">&bull; &psi;(x,t) = &sum; A<sub>k</sub> sin(&omega;<sub>k</sub>t + kx)</span>
+    <!-- ─── OPTION 2: SLEEK QUANT / TERMINAL TICKER (44PX PRECISION BAR) ─── -->
+    <div class="z7-quant-ticker-wrap">
+      <div class="z7-quant-ticker">
+        <!-- Left: Telemetry & Live Pulse -->
+        <div class="ticker-lead">
+          <span class="ticker-live-dot" title="Live Resonance Active"></span>
+          <span class="ticker-brand">Z7 TELEMETRY</span>
+          <span class="ticker-sep">/</span>
+          <span class="ticker-formula">&psi;(x,t)</span>
         </div>
-        <div style="display:flex; align-items:center; gap:0.8rem;">
-          <span style="color:var(--text-dim);">&bull; Move mouse across ribbon to perturb harmonics</span>
-        </div>
-      </div>
 
-      <!-- Wave canvas container with central glowing Z7 block -->
-      <div class="z7-wave-stage">
-        <div class="z7-core-block" aria-hidden="true">
-          <span class="z7-core-text">Z7</span>
+        <!-- Center-Left: Mini Harmonic Wave Oscilloscope (32px) -->
+        <div class="ticker-wave-box" id="tickerWaveBox" title="Move cursor across wave to induce real-time packet perturbation">
+          <canvas id="z7MiniWaveCanvas" class="ticker-wave-canvas" height="32" width="150"></canvas>
         </div>
-        <canvas id="z7WaveRibbonCanvas" class="z7-wave-canvas" height="125"></canvas>
-      </div>
 
-      <!-- Under the waves: Z7 Facts / Axioms -->
-      <div class="z7-facts-strip">
-        <div class="z7-facts-label">
-          <span class="z7-facts-pill" onclick="replayMatrixSplash()" style="cursor:pointer;" title="Click to replay Matrix Math Rain"><i class="ti ti-terminal-2"></i> Z7 AXIOMS</span>
+        <span class="ticker-sep">/</span>
+
+        <!-- Center: Live Z7 Axiom Stream -->
+        <div class="ticker-truth-box" onclick="nextZ7Fact()" title="Click to cycle next truth">
+          <span class="ticker-truth-quote" id="z7FactDisplay">"I don't debug code, it's correct"</span>
         </div>
-        <div class="z7-facts-body" id="z7FactDisplay" onclick="nextZ7Fact()" title="Click for next Z7 fact">
-          "I don't debug code, it's correct"
-        </div>
-        <div class="z7-facts-nav">
-          <button class="z7-fact-btn" onclick="nextZ7Fact()" title="Next Z7 Fact">
-            <i class="ti ti-refresh"></i> Next Truth
+
+        <!-- Right: Actions -->
+        <div class="ticker-actions">
+          <button class="ticker-btn" onclick="nextZ7Fact()" title="Next Axiom">
+            <i class="ti ti-arrows-shuffle"></i>
+            <span>Next</span>
           </button>
         </div>
       </div>
@@ -4124,98 +4139,99 @@
       }
     }
 
-    /* ─── 2. REPOSITIONED HARMONIC WAVE RIBBON WITH Z7 CORE ─── */
-    const ribbonCanvas = document.getElementById('z7WaveRibbonCanvas');
+    /* ─── 2. SLEEK QUANT TICKER MINI OSCILLOSCOPE WAVE ─── */
+    const miniCanvas = document.getElementById('z7MiniWaveCanvas');
+    const tickerWrap = document.querySelector('.z7-quant-ticker');
 
-    if (ribbonCanvas) {
-      const rctx = ribbonCanvas.getContext('2d');
-      let rw = 1160;
-      let rh = 125;
-      let rTime = 0;
+    if (miniCanvas) {
+      const mctx = miniCanvas.getContext('2d');
+      let mw = 150;
+      let mh = 32;
+      let mTime = 0;
       let mouseX = -9999;
       let mouseY = -9999;
       let isHovering = false;
 
-      function resizeRibbon() {
-        if (!ribbonCanvas) return;
-        const rect = ribbonCanvas.getBoundingClientRect();
-        rw = ribbonCanvas.width = Math.floor(rect.width || ribbonCanvas.offsetWidth || 1160);
-        rh = ribbonCanvas.height = 125;
+      function resizeMiniWave() {
+        if (!miniCanvas) return;
+        const rect = miniCanvas.getBoundingClientRect();
+        mw = miniCanvas.width = Math.floor(rect.width || 150);
+        mh = miniCanvas.height = 32;
       }
-      window.addEventListener('resize', resizeRibbon);
-      resizeRibbon();
+      window.addEventListener('resize', resizeMiniWave);
+      resizeMiniWave();
 
-      ribbonCanvas.addEventListener('mousemove', (e) => {
-        const rect = ribbonCanvas.getBoundingClientRect();
+      const hoverTarget = tickerWrap || miniCanvas;
+      hoverTarget.addEventListener('mousemove', (e) => {
+        const rect = miniCanvas.getBoundingClientRect();
         mouseX = e.clientX - rect.left;
         mouseY = e.clientY - rect.top;
         isHovering = true;
       });
 
-      ribbonCanvas.addEventListener('mouseleave', () => {
+      hoverTarget.addEventListener('mouseleave', () => {
         mouseX = -9999;
         mouseY = -9999;
         isHovering = false;
       });
 
-      function drawWaveRibbon() {
-        requestAnimationFrame(drawWaveRibbon);
-        if (!rctx) return;
-        if (!rw || !rh || rw < 20) {
-          resizeRibbon();
+      function drawMiniWave() {
+        requestAnimationFrame(drawMiniWave);
+        if (!mctx) return;
+        if (!mw || !mh) {
+          resizeMiniWave();
           return;
         }
 
-        rctx.clearRect(0, 0, rw, rh);
+        mctx.clearRect(0, 0, mw, mh);
         const isLight = document.body.classList.contains('light');
 
-        rTime += 0.024;
+        mTime += 0.038;
 
-        // Subtle Center Harmonic Axis
-        rctx.strokeStyle = isLight ? 'rgba(0,0,0,0.06)' : 'rgba(255,255,255,0.05)';
-        rctx.lineWidth = 1;
-        rctx.beginPath();
-        rctx.moveTo(0, rh / 2);
-        rctx.lineTo(rw, rh / 2);
-        rctx.stroke();
+        // Subtle Center Harmonic Line
+        mctx.strokeStyle = isLight ? 'rgba(0,0,0,0.06)' : 'rgba(255,255,255,0.06)';
+        mctx.lineWidth = 1;
+        mctx.beginPath();
+        mctx.moveTo(0, mh / 2);
+        mctx.lineTo(mw, mh / 2);
+        mctx.stroke();
 
-        // 3 Layered Harmonic Waves (Emerald, Cyan, Purple)
+        // 2 Crisp Oscilloscope Harmonic Waves (Emerald & Cyan)
         const waves = [
-          { freq: 0.0055, amp: rh * 0.28, phase: rTime * 1.1, color: isLight ? '#047857' : '#10b981', width: 2.4 },
-          { freq: 0.0090, amp: rh * 0.20, phase: rTime * 0.85 + 1.2, color: isLight ? '#0284c7' : '#38bdf8', width: 1.8 },
-          { freq: 0.0038, amp: rh * 0.34, phase: rTime * 1.4 + 2.5, color: isLight ? '#7c3aed' : '#a855f7', width: 1.3 }
+          { freq: 0.038, amp: mh * 0.32, phase: mTime * 1.2, color: isLight ? '#047857' : '#10b981', width: 1.8 },
+          { freq: 0.062, amp: mh * 0.22, phase: mTime * 0.9 + 1.4, color: isLight ? '#0284c7' : '#38bdf8', width: 1.2 }
         ];
 
         waves.forEach((w) => {
-          rctx.beginPath();
-          const cy = rh / 2;
+          mctx.beginPath();
+          const cy = mh / 2;
 
-          for (let x = 0; x <= rw; x += 4) {
+          for (let x = 0; x <= mw; x += 2) {
             let ripple = 0;
-            if (isHovering && mouseX >= 0) {
-              const dist = Math.hypot(x - mouseX, cy - mouseY);
-              const mouseEffect = Math.max(0, 1 - dist / 220);
-              ripple = Math.sin(dist * 0.075 - rTime * 4.5) * 18 * mouseEffect;
+            if (isHovering && mouseX >= -20 && mouseX <= mw + 20) {
+              const dist = Math.abs(x - mouseX);
+              const mouseEffect = Math.max(0, 1 - dist / 50);
+              ripple = Math.sin(dist * 0.2 - mTime * 5.5) * 6 * mouseEffect;
             }
 
             const y = cy + Math.sin(x * w.freq + w.phase) * w.amp + ripple;
-            if (x === 0) rctx.moveTo(x, y);
-            else rctx.lineTo(x, y);
+            if (x === 0) mctx.moveTo(x, y);
+            else mctx.lineTo(x, y);
           }
-          rctx.strokeStyle = w.color;
-          rctx.lineWidth = w.width;
-          rctx.stroke();
+          mctx.strokeStyle = w.color;
+          mctx.lineWidth = w.width;
+          mctx.stroke();
         });
 
-        // Mouse perturbation glow dot
-        if (isHovering && mouseX >= 0 && mouseX <= rw) {
-          rctx.beginPath();
-          rctx.arc(mouseX, rh / 2, 4.5, 0, Math.PI * 2);
-          rctx.fillStyle = isLight ? '#047857' : '#10b981';
-          rctx.fill();
+        // Glowing perturbation dot
+        if (isHovering && mouseX >= 0 && mouseX <= mw) {
+          mctx.beginPath();
+          mctx.arc(mouseX, mh / 2, 3, 0, Math.PI * 2);
+          mctx.fillStyle = isLight ? '#047857' : '#10b981';
+          mctx.fill();
         }
       }
-      requestAnimationFrame(drawWaveRibbon);
+      requestAnimationFrame(drawMiniWave);
     }
 
     /* ─── 3. UNDER THE WAVES: Z7 AXIOMS / FACTS ─── */
