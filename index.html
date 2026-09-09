@@ -46,21 +46,133 @@
     }
 
     body.light {
-      --bg: #fafafa;
+      --bg: #f0f3f7;
       --bg-elevated: #ffffff;
-      --bg-hover: #f1f3f7;
-      --border: #e2e5eb;
-      --border-subtle: rgba(0, 0, 0, 0.06);
-      --border-focus: #b0b7c7;
-      --accent: #059669;
-      --accent-subtle: rgba(5, 150, 105, 0.1);
-      --accent-hover: #047857;
-      --blue: #0284c7;
+      --bg-hover: #e8ecf2;
+      --border: #e2e8f0;
+      --border-subtle: rgba(15, 23, 42, 0.08);
+      --border-focus: #94a3b8;
+      --accent: #047857;
+      --accent-subtle: #ecfdf5;
+      --accent-hover: #065f46;
+      --blue: #0369a1;
       --text: #0f172a;
-      --text-muted: #475569;
-      --text-dim: #64748b;
-      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
-      --shadow-md: 0 12px 28px rgba(0, 0, 0, 0.08);
+      --text-muted: #1e293b;
+      --text-dim: #475569;
+      --shadow-sm: 0 2px 8px -1px rgba(15, 23, 42, 0.07), 0 1px 3px -1px rgba(15, 23, 42, 0.05);
+      --shadow-md: 0 12px 28px -4px rgba(15, 23, 42, 0.09), 0 4px 10px -2px rgba(15, 23, 42, 0.05);
+    }
+
+    body.light nav {
+      background: rgba(240, 243, 247, 0.92);
+      border-bottom-color: var(--border);
+    }
+
+    body.light .status-card,
+    body.light .lab-box,
+    body.light .work-item,
+    body.light .cred-card,
+    body.light .edu-card,
+    body.light .modal-dialog {
+      box-shadow: var(--shadow-sm);
+      border-color: var(--border);
+      background: #ffffff;
+    }
+
+    body.light .modal-dialog {
+      box-shadow: var(--shadow-md);
+    }
+
+    body.light .tech-pill {
+      background: #e9eef5;
+      border: 1px solid #cbd5e1;
+      color: #0f172a;
+      font-weight: 500;
+    }
+
+    body.light .canvas-caption {
+      background: rgba(255, 255, 255, 0.95);
+      color: #0f172a;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06);
+    }
+
+    body.light .graph-status-text {
+      background: #ecfdf5;
+      border-color: #a7f3d0;
+      color: #047857;
+    }
+
+    body.light .sim-result-box {
+      background: #f8fafc;
+      border-color: var(--border);
+    }
+
+    body.light .equation-picker .eq-chip {
+      background: #e9eef5;
+      border-color: var(--border);
+      color: #1e293b;
+    }
+
+    body.light .equation-picker .eq-chip.active {
+      background: #047857;
+      border-color: #047857;
+      color: #ffffff;
+    }
+
+    body.light .metric-card {
+      background: #f8fafc;
+      border-color: var(--border);
+    }
+
+    body.light .math-input-bar {
+      background: #ffffff;
+      border-color: #cbd5e1;
+      color: #0f172a;
+    }
+
+    body.light .drawing-pad-wrap {
+      border-color: #cbd5e1;
+    }
+
+    body.light .work-visual {
+      background: #f8fafc;
+      border-color: var(--border);
+    }
+
+    body.light .work-visual-badge {
+      background: #ecfdf5;
+      color: #047857;
+      border: 1px solid #a7f3d0;
+    }
+
+    body.light .edu-stat-item {
+      background: #f8fafc;
+      border-color: var(--border);
+    }
+
+    body.light .badge-training {
+      background: #eff6ff;
+      color: #1d4ed8;
+      border: 1px solid #bfdbfe;
+    }
+
+    body.light .badge-internship {
+      background: #fdf4ff;
+      color: #a21caf;
+      border: 1px solid #f5d0fe;
+    }
+
+    body.light .badge-hackathon {
+      background: #fffbeb;
+      color: #b45309;
+      border: 1px solid #fde68a;
+    }
+
+    body.light .badge-leadership {
+      background: #ecfdf5;
+      color: #047857;
+      border: 1px solid #a7f3d0;
     }
 
     *, *::before, *::after {
@@ -102,9 +214,6 @@
       transition: background-color 0.2s ease;
     }
 
-    body.light nav {
-      background: rgba(250, 250, 250, 0.88);
-    }
 
     .nav-inner {
       display: flex;
