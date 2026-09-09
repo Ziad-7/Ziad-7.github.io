@@ -2026,7 +2026,116 @@
     </section>
 
     <!-- ─── SELECTED WORK SECTION ─── -->
-    <section id="work">
+    
+  <!-- ══════════════════════════════════════════════════════════════════════ -->
+  <!-- MATHEMATICAL FIRST PRINCIPLES SHOWCASE (EDITION 1)                    -->
+  <!-- ══════════════════════════════════════════════════════════════════════ -->
+  <section class="section-container" id="mathematical-principles" style="padding-top:2rem;">
+    <div class="math-showcase-wrap">
+      <div class="math-showcase-header">
+        <div>
+          <div class="math-quote-badge">
+            <i class="ti ti-math-function"></i> MATHEMATICAL FIRST PRINCIPLES
+          </div>
+          <div class="math-manifesto-quote">
+            "Most people view AI as API endpoints and neural Python packages. I view AI as high-dimensional linear algebra, multivariable optimization, and probability distributions brought to life by algorithms."
+          </div>
+        </div>
+        <div style="font-family:var(--font-mono); font-size:0.75rem; color:var(--text-dim); text-align:right;">
+          <span style="color:var(--accent); font-weight:700;">Thanaweya Math Track: 96.6%</span><br>
+          Founder & Mentor, EUI iMath Club
+        </div>
+      </div>
+
+      <div class="theorem-bento-grid">
+        <!-- THEOREM 1: Gradient Vector Flow -->
+        <div class="theorem-card">
+          <div>
+            <div class="theorem-card-header">
+              <span class="theorem-title">Gradient Descent & Loss Surfaces</span>
+              <span class="theorem-formula-badge">&theta;<sub>t+1</sub> = &theta;<sub>t</sub> - &eta;&nabla;L(&theta;)</span>
+            </div>
+            <p class="theorem-card-desc">
+              Why backpropagation works: neural parameters descend the steepest negative gradient of the empirical risk landscape. Drag or click the canvas to drop a parameter and watch it descend the loss basin.
+            </p>
+          </div>
+          <div class="theorem-interactive-canvas-wrap">
+            <canvas id="lossBasinCanvas" class="theorem-canvas" width="400" height="140"></canvas>
+            <div class="theorem-control-row">
+              <span>&eta; (Learning Rate): <strong id="lrVal" style="color:var(--accent);">0.08</strong></span>
+              <input type="range" id="sliderLR" class="theorem-slider" min="0.01" max="0.2" step="0.01" value="0.08" />
+              <button onclick="resetLossBall()" style="background:none; border:1px solid var(--border); color:var(--text-muted); font-size:0.7rem; border-radius:3px; padding:0.15rem 0.4rem; cursor:pointer;">Reset</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- THEOREM 2: Gaussian & Central Limit Theorem -->
+        <div class="theorem-card">
+          <div>
+            <div class="theorem-card-header">
+              <span class="theorem-title">The Gaussian Normal Law & CLT</span>
+              <span class="theorem-formula-badge">N(&mu;, &sigma;&sup2;) &sim; &radic;(2&pi;&sigma;&sup2;)<sup>-1</sup> e<sup>-(x-&mu;)&sup2;/2&sigma;&sup2;</sup></span>
+            </div>
+            <p class="theorem-card-desc">
+              The analytical bedrock of probability distribution research (with Dr. Herzallah). The Central Limit Theorem guarantees that microscopic independent noise converges into macroscopic bell-curve order.
+            </p>
+          </div>
+          <div class="theorem-interactive-canvas-wrap">
+            <canvas id="gaussianCanvas" class="theorem-canvas" width="400" height="140"></canvas>
+            <div class="theorem-control-row">
+              <span>&sigma; (Spread): <strong id="sigmaVal" style="color:var(--accent);">1.20</strong></span>
+              <input type="range" id="sliderSigma" class="theorem-slider" min="0.4" max="3.0" step="0.1" value="1.2" oninput="updateGaussianSim(this.value)" />
+              <span>68.2% in [&mu;&plusmn;&sigma;]</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- THEOREM 3: Euler's Rotation & Rotary Position Embeddings (RoPE) -->
+        <div class="theorem-card">
+          <div>
+            <div class="theorem-card-header">
+              <span class="theorem-title">Euler's Rotation & RoPE in LLMs</span>
+              <span class="theorem-formula-badge">e<sup>i&theta;</sup> = cos &theta; + i sin &theta;</span>
+            </div>
+            <p class="theorem-card-desc">
+              Euler's identity is the most beautiful equation in mathematics. Modern Transformer LLMs (Llama 3, Mistral) inject relative word positions by multiplying query-key vectors with complex 2D rotation matrices.
+            </p>
+          </div>
+          <div class="theorem-interactive-canvas-wrap">
+            <canvas id="ropeCanvas" class="theorem-canvas" width="400" height="140"></canvas>
+            <div class="theorem-control-row">
+              <span>Token Pos <strong style="color:var(--blue);">&Delta;m</strong>: <strong id="ropeAngleVal" style="color:var(--accent);">45&deg;</strong></span>
+              <input type="range" id="sliderRope" class="theorem-slider" min="0" max="360" step="5" value="45" oninput="updateRopeSim(this.value)" />
+              <span id="ropeCoord">[0.71, 0.71i]</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- THEOREM 4: Singular Value Decomposition (SVD) -->
+        <div class="theorem-card">
+          <div>
+            <div class="theorem-card-header">
+              <span class="theorem-title">Singular Value Decomposition (SVD)</span>
+              <span class="theorem-formula-badge">A = U &Sigma; V<sup>T</sup></span>
+            </div>
+            <p class="theorem-card-desc">
+              The fundamental theorem of linear algebra: any matrix transformation factors into rotation (V), scaling (&Sigma;), and reflection/rotation (U). The mathematical heart of PCA, latent embeddings, and LoRA fine-tuning.
+            </p>
+          </div>
+          <div class="theorem-interactive-canvas-wrap">
+            <canvas id="svdCanvas" class="theorem-canvas" width="400" height="140"></canvas>
+            <div class="theorem-control-row">
+              <span>Compression Rank: <strong id="svdRankVal" style="color:var(--accent);">k = 2</strong></span>
+              <input type="range" id="sliderSVD" class="theorem-slider" min="1" max="4" step="1" value="2" oninput="updateSVDSim(this.value)" />
+              <span id="svdEnergy">88.4% Energy Retained</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="work">
       <div class="section-header">
         <div>
           <div class="section-label"><i class="ti ti-briefcase"></i> Selected Projects</div>
