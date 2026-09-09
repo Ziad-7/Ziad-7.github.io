@@ -1669,7 +1669,7 @@
                   <span class="asset-name">EGX100 (Broader Equities)</span>
                   <span class="asset-val" id="valEgx100">56%</span>
                 </div>
-                <input type="range" class="stock-slider" id="sliderEgx100" min="0" max="100" value="56" oninput="updateStockSim()" />
+                <input type="range" class="stock-slider" id="sliderEgx100" min="0" max="100" value="56" oninput="handleStockSliderChange('sliderEgx100')" />
               </div>
 
               <!-- Gold -->
@@ -1678,7 +1678,7 @@
                   <span class="asset-name">Egyptian Gold (Hedge)</span>
                   <span class="asset-val" id="valGold">40%</span>
                 </div>
-                <input type="range" class="stock-slider" id="sliderGold" min="0" max="100" value="40" oninput="updateStockSim()" />
+                <input type="range" class="stock-slider" id="sliderGold" min="0" max="100" value="40" oninput="handleStockSliderChange('sliderGold')" />
               </div>
 
               <!-- EGX30 -->
@@ -1687,7 +1687,7 @@
                   <span class="asset-name">EGX30 (Blue-Chips)</span>
                   <span class="asset-val" id="valEgx30">4%</span>
                 </div>
-                <input type="range" class="stock-slider" id="sliderEgx30" min="0" max="100" value="4" oninput="updateStockSim()" />
+                <input type="range" class="stock-slider" id="sliderEgx30" min="0" max="100" value="4" oninput="handleStockSliderChange('sliderEgx30')" />
               </div>
 
               <!-- T-Bills -->
@@ -1696,7 +1696,7 @@
                   <span class="asset-name">Treasury Bills (Risk-Free)</span>
                   <span class="asset-val" id="valTBills">0%</span>
                 </div>
-                <input type="range" class="stock-slider" id="sliderTBills" min="0" max="100" value="0" oninput="updateStockSim()" />
+                <input type="range" class="stock-slider" id="sliderTBills" min="0" max="100" value="0" oninput="handleStockSliderChange('sliderTBills')" />
               </div>
 
               <!-- Real Estate -->
@@ -1705,7 +1705,7 @@
                   <span class="asset-name">Egyptians Real Estate Fund</span>
                   <span class="asset-val" id="valRef">0%</span>
                 </div>
-                <input type="range" class="stock-slider" id="sliderRef" min="0" max="100" value="0" oninput="updateStockSim()" />
+                <input type="range" class="stock-slider" id="sliderRef" min="0" max="100" value="0" oninput="handleStockSliderChange('sliderRef')" />
               </div>
             </div>
 
@@ -3094,25 +3094,81 @@
       slider.style.background = `linear-gradient(to right, ${color} 0%, ${color} ${pct}%, ${trackBg} ${pct}%, ${trackBg} 100%)`;
     }
 
+    function handleStockSliderChange(changedId) {
+      activeStockPreset = 'custom';
+      document.querySelectorAll('#chipStockAi, #chipStockCons, #chipStockGrowth').forEach(c => c.classList.remove('active'));
+
+      const sliderIds = ['sliderEgx100', 'sliderGold', 'sliderEgx30', 'sliderTBills', 'sliderRef'];
+      const changedEl = document.getElementById(changedId);
+      if (!changedEl) return;
+
+      const newVal = Math.max(0, Math.min(100, Math.round(parseFloat(changedEl.value) || 0)));
+      changedEl.value = newVal;
+      const rem = 100 - newVal;
+      const others = sliderIds.filter(id => id !== changedId);
+      const otherEls = others.map(id => document.getElementById(id));
+
+      let sOld = 0;
+      otherEls.forEach(el => { sOld += Math.max(0, parseFloat(el?.value || 0)); });
+
+      if (sOld > 0) {
+        let allocated = 0;
+        const newVals = {};
+        for (let i = 0; i < others.length - 1; i++) {
+          const id = others[i];
+          const el = otherEls[i];
+          const cur = Math.max(0, parseFloat(el?.value || 0));
+          const v = Math.max(0, Math.round((cur / sOld) * rem));
+          newVals[id] = v;
+          allocated += v;
+        }
+        const lastId = others[others.length - 1];
+        newVals[lastId] = Math.max(0, rem - allocated);
+
+        // Fix rounding discrepancy
+        let curSum = 0;
+        others.forEach(id => { curSum += newVals[id]; });
+        const diff = rem - curSum;
+        if (diff !== 0) {
+          let maxId = others[0];
+          let maxVal = -1;
+          others.forEach(id => {
+            if (newVals[id] > maxVal) {
+              maxVal = newVals[id];
+              maxId = id;
+            }
+          });
+          newVals[maxId] = Math.max(0, newVals[maxId] + diff);
+        }
+
+        others.forEach(id => {
+          const el = document.getElementById(id);
+          if (el) el.value = newVals[id];
+        });
+      } else {
+        const per = Math.floor(rem / others.length);
+        const extra = rem % others.length;
+        others.forEach((id, i) => {
+          const el = document.getElementById(id);
+          if (el) el.value = per + (i < extra ? 1 : 0);
+        });
+      }
+
+      updateStockSim();
+    }
+
     function updateStockSim() {
-      const sEgx100 = parseFloat(document.getElementById('sliderEgx100')?.value || 0);
-      const sGold   = parseFloat(document.getElementById('sliderGold')?.value || 0);
-      const sEgx30  = parseFloat(document.getElementById('sliderEgx30')?.value || 0);
-      const sTBills = parseFloat(document.getElementById('sliderTBills')?.value || 0);
-      const sRef    = parseFloat(document.getElementById('sliderRef')?.value || 0);
+      const sliderEgx100 = document.getElementById('sliderEgx100');
+      const sliderGold   = document.getElementById('sliderGold');
+      const sliderEgx30  = document.getElementById('sliderEgx30');
+      const sliderTBills = document.getElementById('sliderTBills');
+      const sliderRef    = document.getElementById('sliderRef');
 
-      const sum = sEgx100 + sGold + sEgx30 + sTBills + sRef;
-      const wEgx100 = sum > 0 ? sEgx100 / sum : 0.2;
-      const wGold   = sum > 0 ? sGold / sum : 0.2;
-      const wEgx30  = sum > 0 ? sEgx30 / sum : 0.2;
-      const wTBills = sum > 0 ? sTBills / sum : 0.2;
-      const wRef    = sum > 0 ? sRef / sum : 0.2;
-
-      const p100 = Math.round(wEgx100 * 100);
-      const pGold = Math.round(wGold * 100);
-      const p30 = Math.round(wEgx30 * 100);
-      const pTB = Math.round(wTBills * 100);
-      const pRef = Math.round(wRef * 100);
+      const p100  = Math.max(0, Math.round(parseFloat(sliderEgx100?.value || 0)));
+      const pGold = Math.max(0, Math.round(parseFloat(sliderGold?.value || 0)));
+      const p30   = Math.max(0, Math.round(parseFloat(sliderEgx30?.value || 0)));
+      const pTB   = Math.max(0, Math.round(parseFloat(sliderTBills?.value || 0)));
+      const pRef  = Math.max(0, Math.round(parseFloat(sliderRef?.value || 0)));
 
       // Update Labels
       document.getElementById('valEgx100').textContent = `${p100}%`;
@@ -3122,18 +3178,24 @@
       document.getElementById('valRef').textContent = `${pRef}%`;
 
       // Update dynamic slider fills based on slider thumb value
-      updateSliderTrack(document.getElementById('sliderEgx100'), '#38bdf8');
-      updateSliderTrack(document.getElementById('sliderGold'), '#f59e0b');
-      updateSliderTrack(document.getElementById('sliderEgx30'), '#818cf8');
-      updateSliderTrack(document.getElementById('sliderTBills'), '#10b981');
-      updateSliderTrack(document.getElementById('sliderRef'), '#ec4899');
+      updateSliderTrack(sliderEgx100, '#38bdf8');
+      updateSliderTrack(sliderGold, '#f59e0b');
+      updateSliderTrack(sliderEgx30, '#818cf8');
+      updateSliderTrack(sliderTBills, '#10b981');
+      updateSliderTrack(sliderRef, '#ec4899');
 
       // Update Allocation Bar
-      document.getElementById('barEgx100').style.width = `${wEgx100 * 100}%`;
-      document.getElementById('barGold').style.width = `${wGold * 100}%`;
-      document.getElementById('barEgx30').style.width = `${wEgx30 * 100}%`;
-      document.getElementById('barTBills').style.width = `${wTBills * 100}%`;
-      document.getElementById('barRef').style.width = `${wRef * 100}%`;
+      document.getElementById('barEgx100').style.width = `${p100}%`;
+      document.getElementById('barGold').style.width = `${pGold}%`;
+      document.getElementById('barEgx30').style.width = `${p30}%`;
+      document.getElementById('barTBills').style.width = `${pTB}%`;
+      document.getElementById('barRef').style.width = `${pRef}%`;
+
+      const wEgx100 = p100 / 100;
+      const wGold   = pGold / 100;
+      const wEgx30  = p30 / 100;
+      const wTBills = pTB / 100;
+      const wRef    = pRef / 100;
 
       // Expected Annual Return
       const expectedReturn = (
@@ -3230,8 +3292,7 @@
       const el = document.getElementById(id);
       if (el) {
         el.addEventListener('input', () => {
-          activeStockPreset = 'custom';
-          document.querySelectorAll('#chipStockAi, #chipStockCons, #chipStockGrowth').forEach(c => c.classList.remove('active'));
+          handleStockSliderChange(id);
         });
       }
     });
