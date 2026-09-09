@@ -4275,7 +4275,7 @@
           x: i * fontSize,
           y: -20 - Math.random() * 95, // Brief pause at top to take in central Z7
           speed: 3.2 + Math.random() * 1.6, // Slower: ~3.2 to 4.8 px/frame (approx 3.6s - 4.0s across screen)
-          tailLength: 15 + Math.floor(Math.random() * 7), // Lush, dense trail of 15-22 math symbols
+          tailLength: 9, // Exactly 9 symbols: 0-4 on solid black, 5-8 fading out during gradient veil
           glyphs: []
         });
       }
@@ -4344,31 +4344,50 @@
         }
         mctx.restore();
 
-        // 3. WIPE AWAY: Erase black background and Z7 above each falling drop's head
+        // 3. WIPE AWAY: Erase black background GRADUALLY starting ~4 symbols behind the head
+        // The first 4 symbols fall strictly against solid black (zero clash with portfolio text!)
+        // Transparency begins dissolving at (d.y - 4.2 * fontSize) and reaches 100% by (d.y - 8.5 * fontSize)
         mctx.globalCompositeOperation = 'destination-out';
-        mctx.fillStyle = '#000000';
         let anyActive = false;
 
         for (let i = 0; i < columns; i++) {
           const d = drops[i];
           d.y += d.speed;
 
-          const topOfWipe = Math.max(0, Math.floor(d.y));
-          if (topOfWipe > 0) {
-            // Cut transparent hole from top (y=0) down to drop's head
-            mctx.fillRect(d.x, 0, fontSize + 2, Math.min(h, topOfWipe));
+          const fullRevealY = Math.floor(d.y - 8.5 * fontSize);
+          const startRevealY = Math.floor(d.y - 4.2 * fontSize);
+
+          // Solid erase (100% revealed portfolio) above fullRevealY
+          if (fullRevealY > 0) {
+            mctx.fillStyle = '#000000';
+            mctx.fillRect(d.x, 0, fontSize + 2, Math.min(h, fullRevealY));
           }
 
-          if (d.y - d.tailLength * fontSize < h) {
+          // Smooth gradient dissolve between fullRevealY and startRevealY
+          if (startRevealY > 0 && fullRevealY < h) {
+            const drawTop = Math.max(0, fullRevealY);
+            const drawBottom = Math.min(h, startRevealY);
+            if (drawBottom > drawTop) {
+              const grad = mctx.createLinearGradient(0, fullRevealY, 0, startRevealY);
+              grad.addColorStop(0, 'rgba(0, 0, 0, 1)'); // 100% transparent portfolio reveal
+              grad.addColorStop(1, 'rgba(0, 0, 0, 0)'); // 0% reveal (solid black veil below)
+              mctx.fillStyle = grad;
+              mctx.fillRect(d.x, drawTop, fontSize + 2, drawBottom - drawTop);
+            }
+          }
+
+          // Column is active until full transparency reaches the bottom of the screen
+          if (fullRevealY < h) {
             anyActive = true;
           }
         }
 
-        // 4. DRAW MATH SYMBOLS: Cascading right on wipe boundary and trailing into revealed site
+        // 4. DRAW MATH SYMBOLS: First 4 symbols fall on 100% solid black (zero clashing with page text)
+        // Upper tail softly dissolves in the gradient veil
         mctx.globalCompositeOperation = 'source-over';
         mctx.font = '700 ' + fontSize + 'px "JetBrains Mono", monospace';
 
-        // Slower glyph mutation (every 260ms) so symbols stay stable and clearly readable as they fall
+        // Slower glyph mutation (every 260ms) so symbols stay stable and clearly readable
         const glyphPhase = Math.floor(elapsed / 260);
 
         for (let i = 0; i < columns; i++) {
@@ -4378,25 +4397,30 @@
             if (charY >= 0 && charY <= h + fontSize) {
               const char = d.glyphs[(glyphPhase + j) % d.glyphs.length];
               if (j === 0) {
-                // Leading head wiping the black away: pure bright glowing white
+                // Leading head: pure bright glowing white on solid black
                 mctx.fillStyle = '#ffffff';
                 mctx.shadowColor = '#10b981';
                 mctx.shadowBlur = 18;
               } else if (j === 1) {
-                // Ultra-bright mint following the head
+                // Ultra-bright mint on solid black
                 mctx.fillStyle = '#a7f3d0';
                 mctx.shadowColor = '#34d399';
                 mctx.shadowBlur = 10;
               } else if (j === 2) {
-                // High-contrast emerald
+                // High-contrast emerald on solid black
                 mctx.fillStyle = '#34d399';
                 mctx.shadowBlur = 0;
+              } else if (j <= 4) {
+                // Symbols 3 and 4: rich emerald on solid black
+                mctx.fillStyle = '#10b981';
+                mctx.shadowBlur = 0;
               } else {
-                // Trailing glyphs above: legible gradient into revealed portfolio
-                const alpha = Math.max(0.12, 1 - j / d.tailLength);
+                // Symbols 5 to 8: softly fading out inside the dissolving gradient veil
+                // They disappear completely before reaching the fully revealed portfolio!
+                const alpha = Math.max(0, 1 - (j - 4) / 4.5);
                 mctx.fillStyle = j % 2 === 0 
-                  ? `rgba(16, 185, 129, ${alpha * 0.95})` 
-                  : `rgba(56, 189, 248, ${alpha * 0.90})`;
+                  ? `rgba(16, 185, 129, ${alpha * 0.85})` 
+                  : `rgba(56, 189, 248, ${alpha * 0.75})`;
                 mctx.shadowBlur = 0;
               }
               mctx.fillText(char, d.x, charY);
