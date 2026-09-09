@@ -4258,28 +4258,30 @@
       const w = mCanvas.width = window.innerWidth;
       const h = mCanvas.height = window.innerHeight;
 
-      const fontSize = 18;
+      // Prominent font size so mathematical symbols are clearly noticeable and readable
+      const fontSize = 22;
       const columns = Math.ceil(w / fontSize);
       const mathGlyphs = [
-        '\u03C0', '\u2211', '\u222B', '\u2207', '\u03BB', 'Z7', 'e', '\u2202x', 
-        'f(x)', '\u221E', 'O(1)', 'dx', '\u03C3', '\u03B8', '\u2248', '\u2200x', '\u2297'
+        '\u03C0', '\u2211', '\u222B', '\u2207', '\u03BB', '\u221E', 'f(x)', 
+        '\u2202x', 'O(1)', 'dx', '\u03C3', '\u03B8', '\u2248', '\u2297', '\u2200x', 
+        'e', '\u2208', '\u221A', '\u2260', '\u2205'
       ];
 
-      // Slower, smooth cinematic cascade (~2.0s - 2.3s)
-      // Drops start staggered above top to create initial moment of central Z7 emblem
+      // Slower, graceful cascade (~3.5s - 4.0s) so viewer clearly reads and appreciates symbols
+      // Drops start slightly staggered above the top of the viewport
       const drops = [];
       for (let i = 0; i < columns; i++) {
         drops.push({
           x: i * fontSize,
-          y: -25 - Math.random() * 85, // Brief pause at top
-          speed: 6.8 + Math.random() * 3.4, // Slower: ~6.8 to 10.2 px/frame
-          tailLength: 10 + Math.floor(Math.random() * 6), // Dense, lush math tail
+          y: -20 - Math.random() * 95, // Brief pause at top to take in central Z7
+          speed: 3.2 + Math.random() * 1.6, // Slower: ~3.2 to 4.8 px/frame (approx 3.6s - 4.0s across screen)
+          tailLength: 15 + Math.floor(Math.random() * 7), // Lush, dense trail of 15-22 math symbols
           glyphs: []
         });
       }
 
       drops.forEach(d => {
-        for (let j = 0; j < 30; j++) {
+        for (let j = 0; j < 35; j++) {
           d.glyphs.push(mathGlyphs[Math.floor(Math.random() * mathGlyphs.length)]);
         }
       });
@@ -4303,31 +4305,31 @@
         mctx.textBaseline = 'middle';
 
         // Subtle breathing glow on central emblem
-        const glowFactor = 0.85 + 0.15 * Math.sin(elapsed / 180);
+        const glowFactor = 0.85 + 0.15 * Math.sin(elapsed / 220);
 
         // Bold blocky Z7 with explicit spacing between Z and 7
-        mctx.font = '900 4.8rem "Plus Jakarta Sans", -apple-system, sans-serif';
+        mctx.font = '900 5.2rem "Plus Jakarta Sans", -apple-system, sans-serif';
         mctx.fillStyle = '#10b981';
-        mctx.shadowColor = `rgba(16, 185, 129, ${0.75 * glowFactor})`;
-        mctx.shadowBlur = 35 * glowFactor;
+        mctx.shadowColor = `rgba(16, 185, 129, ${0.78 * glowFactor})`;
+        mctx.shadowBlur = 38 * glowFactor;
 
         const zWidth = mctx.measureText('Z').width;
         const sevenWidth = mctx.measureText('7').width;
-        const charGap = 14;
+        const charGap = 16;
         const totalW = zWidth + charGap + sevenWidth;
         const startX = centerX - totalW / 2;
-        mctx.fillText('Z', startX + zWidth / 2, centerY - 14);
-        mctx.fillText('7', startX + zWidth + charGap + sevenWidth / 2, centerY - 14);
+        mctx.fillText('Z', startX + zWidth / 2, centerY - 16);
+        mctx.fillText('7', startX + zWidth + charGap + sevenWidth / 2, centerY - 16);
 
         // Subtitle: INITIALIZING MATHEMATICAL ARCHITECTURE
-        mctx.font = '700 0.76rem "JetBrains Mono", monospace';
+        mctx.font = '700 0.82rem "JetBrains Mono", monospace';
         mctx.fillStyle = '#38bdf8';
         mctx.shadowColor = `rgba(56, 189, 248, ${0.55 * glowFactor})`;
-        mctx.shadowBlur = 16;
+        mctx.shadowBlur = 18;
         const subText = 'INITIALIZING MATHEMATICAL ARCHITECTURE';
         if ('letterSpacing' in mctx) {
           mctx.letterSpacing = '5px';
-          mctx.fillText(subText, centerX, centerY + 34);
+          mctx.fillText(subText, centerX, centerY + 36);
         } else {
           const charSpacing = 5;
           let totalSubW = 0;
@@ -4336,7 +4338,7 @@
           let curX = centerX - totalSubW / 2;
           for (let c of subText) {
             const cw = mctx.measureText(c).width;
-            mctx.fillText(c, curX + cw / 2, centerY + 34);
+            mctx.fillText(c, curX + cw / 2, centerY + 36);
             curX += cw + charSpacing;
           }
         }
@@ -4354,7 +4356,7 @@
           const topOfWipe = Math.max(0, Math.floor(d.y));
           if (topOfWipe > 0) {
             // Cut transparent hole from top (y=0) down to drop's head
-            mctx.fillRect(d.x, 0, fontSize + 1, Math.min(h, topOfWipe));
+            mctx.fillRect(d.x, 0, fontSize + 2, Math.min(h, topOfWipe));
           }
 
           if (d.y - d.tailLength * fontSize < h) {
@@ -4364,25 +4366,37 @@
 
         // 4. DRAW MATH SYMBOLS: Cascading right on wipe boundary and trailing into revealed site
         mctx.globalCompositeOperation = 'source-over';
-        mctx.font = '700 ' + fontSize + 'px monospace';
+        mctx.font = '700 ' + fontSize + 'px "JetBrains Mono", monospace';
+
+        // Slower glyph mutation (every 260ms) so symbols stay stable and clearly readable as they fall
+        const glyphPhase = Math.floor(elapsed / 260);
 
         for (let i = 0; i < columns; i++) {
           const d = drops[i];
           for (let j = 0; j < d.tailLength; j++) {
             const charY = d.y - j * fontSize;
             if (charY >= 0 && charY <= h + fontSize) {
-              const char = d.glyphs[(Math.floor(elapsed / 80) + j) % d.glyphs.length];
+              const char = d.glyphs[(glyphPhase + j) % d.glyphs.length];
               if (j === 0) {
-                // Leading head wiping the black away: bright glowing emerald white
-                mctx.fillStyle = '#f0fdf4';
+                // Leading head wiping the black away: pure bright glowing white
+                mctx.fillStyle = '#ffffff';
                 mctx.shadowColor = '#10b981';
-                mctx.shadowBlur = 14;
+                mctx.shadowBlur = 18;
+              } else if (j === 1) {
+                // Ultra-bright mint following the head
+                mctx.fillStyle = '#a7f3d0';
+                mctx.shadowColor = '#34d399';
+                mctx.shadowBlur = 10;
+              } else if (j === 2) {
+                // High-contrast emerald
+                mctx.fillStyle = '#34d399';
+                mctx.shadowBlur = 0;
               } else {
-                // Trailing glyphs above: fading out into revealed portfolio
-                const alpha = Math.max(0, 1 - j / d.tailLength);
+                // Trailing glyphs above: legible gradient into revealed portfolio
+                const alpha = Math.max(0.12, 1 - j / d.tailLength);
                 mctx.fillStyle = j % 2 === 0 
                   ? `rgba(16, 185, 129, ${alpha * 0.95})` 
-                  : `rgba(56, 189, 248, ${alpha * 0.85})`;
+                  : `rgba(56, 189, 248, ${alpha * 0.90})`;
                 mctx.shadowBlur = 0;
               }
               mctx.fillText(char, d.x, charY);
