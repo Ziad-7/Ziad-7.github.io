@@ -1796,14 +1796,29 @@
       opacity: 0.09;
     }
 
-    /* 1. Hero Section: The Leibniz Integral (∫) — Signature Brand Motif */
+    /* 1. Hero Section: The Leibniz Integral (∫) — Option D: Definite Integral */
     .wm-integral {
       top: -20px;
-      left: -110px;
-      font-size: 29rem;
+      left: -115px;
+      right: auto;
+      font-size: 28rem;
       transform: rotate(-3.5deg);
       opacity: 0.085;
       filter: drop-shadow(0 0 45px rgba(16, 185, 129, 0.22));
+    }
+    .wm-limit-inf {
+      font-size: 0.32em;
+      vertical-align: 1.15em;
+      margin-left: -0.06em;
+      font-family: 'Cambria Math', 'Times New Roman', serif;
+      font-style: normal;
+    }
+    .wm-limit-0 {
+      font-size: 0.32em;
+      vertical-align: -0.45em;
+      margin-left: -0.28em;
+      font-family: 'JetBrains Mono', monospace;
+      font-style: normal;
     }
 
     /* 2. Projects Section (#work): Aleph Null (ℵ₀) — Flanking Right */
@@ -1826,13 +1841,13 @@
       filter: drop-shadow(0 0 35px rgba(16, 185, 129, 0.16));
     }
 
-    /* 4. Education Section (#education): Partial Derivative (∂) — Flanking Right */
-    .wm-partial {
-      top: -20px;
+    /* 4. Education Section (#education): Pi (π) — Flanking Right */
+    .wm-pi {
+      top: 5px;
       bottom: auto;
-      right: -125px;
-      font-size: 17rem;
-      transform: rotate(6deg);
+      right: -115px;
+      font-size: 16.5rem;
+      transform: rotate(4deg);
       opacity: 0.075;
       filter: drop-shadow(0 0 35px rgba(16, 185, 129, 0.16));
     }
@@ -1853,7 +1868,7 @@
         font-size: 14rem;
         top: -15px;
       }
-      .wm-partial {
+      .wm-pi {
         right: -90px;
         font-size: 14.5rem;
         top: -15px;
@@ -1873,7 +1888,7 @@
 
       .wm-aleph,
       .wm-sigma,
-      .wm-partial {
+      .wm-pi {
         display: none;
       }
     }
@@ -2165,7 +2180,7 @@
 
     <!-- ─── HERO SECTION (Human & Grounded) ─── -->
     <section class="hero">
-      <div class="math-watermark wm-integral" aria-hidden="true">&int;</div>
+      <div class="math-watermark wm-integral" aria-hidden="true">&int;<sup class="wm-limit-inf">&infin;</sup><sub class="wm-limit-0">0</sub></div>
       <div style="position: relative; z-index: 1;">
         <h1 class="hero-title">
           Ziad Ahmed Rabie.<br />
@@ -2878,7 +2893,7 @@
 
     <!-- ─── EDUCATION & FOUNDATIONS ─── -->
     <section id="education">
-      <div class="math-watermark wm-partial" aria-hidden="true">&part;</div>
+      <div class="math-watermark wm-pi" aria-hidden="true">&pi;</div>
       <div class="section-header" style="position: relative; z-index: 1;">
         <div>
           <div class="section-label"><i class="ti ti-school"></i> Academic Background</div>
