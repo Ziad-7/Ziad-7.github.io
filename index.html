@@ -175,6 +175,18 @@
       border: 1px solid #a7f3d0;
     }
 
+    body.light .badge-tutoring {
+      background: #f0f9ff;
+      color: #0369a1;
+      border: 1px solid #bae6fd;
+    }
+
+    body.light .badge-media {
+      background: #f0f9ff;
+      color: #0284c7;
+      border: 1px solid #bae6fd;
+    }
+
     *,
     *::before,
     *::after {
@@ -1296,6 +1308,18 @@
       border: 1px solid rgba(168, 85, 247, 0.25);
     }
 
+    .badge-tutoring {
+      background: rgba(56, 189, 248, 0.12);
+      color: var(--blue);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+    }
+
+    .badge-media {
+      background: rgba(14, 165, 233, 0.12);
+      color: #38bdf8;
+      border: 1px solid rgba(14, 165, 233, 0.25);
+    }
+
     .cred-title {
       font-family: var(--font-heading);
       font-size: 1.08rem;
@@ -1316,6 +1340,221 @@
       font-size: 0.86rem;
       color: var(--text-muted);
       line-height: 1.6;
+    }
+
+    /* ─── LEADERSHIP & MENTORSHIP SUB-TIER ─── */
+    .experience-sub-divider {
+      margin-top: 3.5rem;
+      margin-bottom: 1.4rem;
+      position: relative;
+    }
+
+    .sub-divider-line {
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, var(--border) 15%, var(--accent) 50%, var(--border) 85%, transparent 100%);
+      opacity: 0.5;
+      margin-bottom: 2rem;
+    }
+
+    .sub-divider-header {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .sub-divider-title {
+      font-family: var(--font-heading);
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+
+    .sub-divider-subtitle {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      max-width: 760px;
+      line-height: 1.55;
+    }
+
+    body.light .sub-divider-title {
+      color: #0f172a;
+    }
+
+    body.light .sub-divider-subtitle {
+      color: #475569;
+    }
+
+    .leadership-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 1.25rem;
+      margin-top: 1.2rem;
+    }
+
+    .leadership-grid .lead-card:nth-child(1),
+    .leadership-grid .lead-card:nth-child(2),
+    .leadership-grid .lead-card:nth-child(3) {
+      grid-column: span 2;
+    }
+
+    .leadership-grid .lead-card:nth-child(4),
+    .leadership-grid .lead-card:nth-child(5) {
+      grid-column: span 3;
+    }
+
+    @media (max-width: 1024px) {
+      .leadership-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .leadership-grid .lead-card:nth-child(1),
+      .leadership-grid .lead-card:nth-child(2),
+      .leadership-grid .lead-card:nth-child(3),
+      .leadership-grid .lead-card:nth-child(4) {
+        grid-column: span 1;
+      }
+      .leadership-grid .lead-card:nth-child(5) {
+        grid-column: span 2;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .leadership-grid {
+        grid-template-columns: 1fr;
+      }
+      .leadership-grid .lead-card:nth-child(1),
+      .leadership-grid .lead-card:nth-child(2),
+      .leadership-grid .lead-card:nth-child(3),
+      .leadership-grid .lead-card:nth-child(4),
+      .leadership-grid .lead-card:nth-child(5) {
+        grid-column: span 1;
+      }
+    }
+
+    .lead-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1.35rem;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .lead-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: transparent;
+      transition: background 0.25s ease;
+    }
+
+    .lead-card:hover {
+      border-color: rgba(16, 185, 129, 0.4);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .lead-card:hover::before {
+      background: var(--accent);
+    }
+
+    body.light .lead-card {
+      background: #ffffff;
+      border-color: #e2e8f0;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    body.light .lead-card:hover {
+      border-color: #047857;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+    }
+
+    .lead-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.95rem;
+    }
+
+    .lead-icon-box {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+    }
+
+    .lead-card-title {
+      font-family: var(--font-heading);
+      font-size: 1.08rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.3rem;
+      line-height: 1.3;
+    }
+
+    body.light .lead-card-title {
+      color: #0f172a;
+    }
+
+    .lead-card-org {
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      color: var(--text-dim);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    body.light .lead-card-org {
+      color: #64748b;
+    }
+
+    .lead-card-desc {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 1.1rem;
+    }
+
+    body.light .lead-card-desc {
+      color: #334155;
+    }
+
+    .lead-card-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: auto;
+    }
+
+    .lead-pill {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      padding: 0.22rem 0.55rem;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      border-radius: 4px;
+      color: var(--text-dim);
+      letter-spacing: 0.02em;
+    }
+
+    body.light .lead-pill {
+      background: #f1f5f9;
+      border-color: #e2e8f0;
+      color: #475569;
     }
 
     /* Modal Overlay & Dialog */
@@ -2815,46 +3054,135 @@
           </div>
         </div>
 
-        <!-- 9. iMath Club & Mentorship -->
-        <div class="cred-card" onclick="openCertModal(8)">
-          <div class="cred-thumb-wrap">
-            <img src="assets/certificates/imath_sticker.png" alt="iMath Club & Mentorship" class="cred-thumb-img" />
-            <div class="cred-expand-hint"><i class="ti ti-zoom-in"></i> View Details</div>
-          </div>
-          <div class="cred-body">
-            <div>
-              <div class="cred-header">
-                <div class="cred-title">iMath Club &amp; Algorithmic Mentorship</div>
-                <span class="cred-badge badge-leadership">Leadership</span>
+      </div>
+
+      <!-- ─── SUB-SECTION BARRIER: ACADEMIC LEADERSHIP, MENTORSHIP & INITIATIVE ─── -->
+      <div class="experience-sub-divider" style="position: relative; z-index: 1;">
+        <div class="sub-divider-line"></div>
+        <div class="sub-divider-header">
+          <div class="section-label"><i class="ti ti-users-group"></i> Academic Leadership &amp; Community Impact</div>
+          <h3 class="sub-divider-title">Leadership, Mentorship &amp; Initiative</h3>
+          <p class="sub-divider-subtitle">
+            Co-founding mathematical communities, coaching competitive algorithmic thinkers, and driving student engineering outreach.
+          </p>
+        </div>
+      </div>
+
+      <!-- 5 "Little Pieces" Compact Leadership Grid -->
+      <div class="leadership-grid" style="position: relative; z-index: 1;">
+
+        <!-- 1. iMath Club Co-Founder -->
+        <div class="lead-card" onclick="openCertModal(8)">
+          <div>
+            <div class="lead-card-top">
+              <div class="lead-icon-box" style="background: rgba(16, 185, 129, 0.1); color: var(--accent); border: 1px solid rgba(16, 185, 129, 0.25);">
+                <i class="ti ti-math-symbols"></i>
               </div>
-              <div class="cred-org"><i class="ti ti-users"></i> iMath Club • Egypt University of Informatics</div>
-              <p class="cred-desc">
-                Co-founded iMath Club at EUI, mentoring fellow engineering students in calculus, linear algebra, and
-                competitive algorithmic thinking.
-              </p>
+              <span class="cred-badge badge-leadership">Co-Founder</span>
             </div>
+            <div class="lead-card-title">iMath Club Co-Founder</div>
+            <div class="lead-card-org"><i class="ti ti-school"></i> iMath Club • Egypt University of Informatics</div>
+            <p class="lead-card-desc">
+              Co-founded the campus mathematics society at EUI to help engineering students build deep, first-principles geometric and algebraic intuition through curated workshops and peer problem-solving.
+            </p>
+          </div>
+          <div class="lead-card-pills">
+            <span class="lead-pill">iMath Co-Founder</span>
+            <span class="lead-pill">Calculus</span>
+            <span class="lead-pill">Linear Algebra</span>
+            <span class="lead-pill">First Principles</span>
           </div>
         </div>
 
-        <!-- 10. DSC MENA 2024 -->
-        <div class="cred-card" onclick="openCertModal(9)">
-          <div class="cred-thumb-wrap">
-            <img src="assets/certificates/dsc_mena_cert.png" alt="DSC MENA 2024 Organizer" class="cred-thumb-img" />
-            <div class="cred-expand-hint"><i class="ti ti-zoom-in"></i> View Details</div>
-          </div>
-          <div class="cred-body">
-            <div>
-              <div class="cred-header">
-                <div class="cred-title">Conference Organizer — DSC MENA 2024</div>
-                <span class="cred-badge badge-conference">Conference</span>
+        <!-- 2. Math & Physics Tutor -->
+        <div class="lead-card" onclick="openCertModal(9)">
+          <div>
+            <div class="lead-card-top">
+              <div class="lead-icon-box" style="background: rgba(56, 189, 248, 0.1); color: var(--blue); border: 1px solid rgba(56, 189, 248, 0.25);">
+                <i class="ti ti-bulb"></i>
               </div>
-              <div class="cred-org"><i class="ti ti-calendar-event"></i> Data Science Conference MENA (DSC MENA 2024)
-              </div>
-              <p class="cred-desc">
-                Organized session tracks and operations for the premier regional Data Science &amp; AI Conference,
-                hosting industry leaders and researchers.
-              </p>
+              <span class="cred-badge badge-tutoring">Academic Tutor</span>
             </div>
+            <div class="lead-card-title">Math &amp; Physics Tutor</div>
+            <div class="lead-card-org"><i class="ti ti-book-2"></i> University Level • Calculus &amp; Electrical Physics</div>
+            <p class="lead-card-desc">
+              Conducted peer tutoring in university-level Calculus (differential, integral, multivariable) and Classical Physics (Electricity, Magnetism &amp; Circuits), emphasizing analytical problem solving and rigorous derivations.
+            </p>
+          </div>
+          <div class="lead-card-pills">
+            <span class="lead-pill">Calculus I &amp; II</span>
+            <span class="lead-pill">Electricity &amp; Magnetism</span>
+            <span class="lead-pill">Circuits</span>
+            <span class="lead-pill">Peer Tutoring</span>
+          </div>
+        </div>
+
+        <!-- 3. ICPC Algorithmic Mentor -->
+        <div class="lead-card" onclick="openCertModal(10)">
+          <div>
+            <div class="lead-card-top">
+              <div class="lead-icon-box" style="background: rgba(234, 179, 8, 0.1); color: #eab308; border: 1px solid rgba(234, 179, 8, 0.25);">
+                <i class="ti ti-code"></i>
+              </div>
+              <span class="cred-badge badge-contest">Mentorship</span>
+            </div>
+            <div class="lead-card-title">ICPC Algorithmic Mentor</div>
+            <div class="lead-card-org"><i class="ti ti-trophy"></i> EUI ICPC Community • Competitive Programming</div>
+            <p class="lead-card-desc">
+              Mentored junior engineering competitors in the EUI ICPC Club, teaching graph traversals (BFS/DFS, Dijkstra), dynamic programming, number theory, and time-complexity optimization under tight 1.0s constraints.
+            </p>
+          </div>
+          <div class="lead-card-pills">
+            <span class="lead-pill">Competitive Programming</span>
+            <span class="lead-pill">Graph Theory</span>
+            <span class="lead-pill">Dynamic Programming</span>
+            <span class="lead-pill">ECPC Mentorship</span>
+          </div>
+        </div>
+
+        <!-- 4. DSC MENA 2024 Organizer -->
+        <div class="lead-card" onclick="openCertModal(11)">
+          <div>
+            <div class="lead-card-top">
+              <div class="lead-icon-box" style="background: rgba(168, 85, 247, 0.1); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.25);">
+                <i class="ti ti-calendar-event"></i>
+              </div>
+              <span class="cred-badge badge-conference">Conference</span>
+            </div>
+            <div class="lead-card-title">Conference Organizer — DSC MENA 2024</div>
+            <div class="lead-card-org"><i class="ti ti-building"></i> Data Science Conference MENA</div>
+            <p class="lead-card-desc">
+              Organized technical session tracks, speaker logistics, and attendee operations for the premier regional Data Science &amp; AI Conference, hosting industry leaders, AI researchers, and delegates.
+            </p>
+          </div>
+          <div class="lead-card-pills">
+            <span class="lead-pill">Conference Organizer</span>
+            <span class="lead-pill">DSC MENA 2024</span>
+            <span class="lead-pill">Operations</span>
+            <span class="lead-pill">AI Community</span>
+          </div>
+        </div>
+
+        <!-- 5. LinkedIn Manager — IEEE EUI -->
+        <div class="lead-card" onclick="openCertModal(12)">
+          <div>
+            <div class="lead-card-top">
+              <div class="lead-icon-box" style="background: rgba(14, 165, 233, 0.1); color: #38bdf8; border: 1px solid rgba(14, 165, 233, 0.25);">
+                <i class="ti ti-brand-linkedin"></i>
+              </div>
+              <span class="cred-badge badge-media">LinkedIn Manager</span>
+            </div>
+            <div class="lead-card-title">LinkedIn Manager — IEEE EUI</div>
+            <div class="lead-card-org"><i class="ti ti-world"></i> IEEE EUI Student Branch • Media Committee</div>
+            <p class="lead-card-desc">
+              Managed LinkedIn technical communication, content strategy, and professional outreach for the IEEE EUI Student Branch, promoting hackathons, engineering seminars, and student technical achievements.
+            </p>
+          </div>
+          <div class="lead-card-pills">
+            <span class="lead-pill">LinkedIn Strategy</span>
+            <span class="lead-pill">Technical Content</span>
+            <span class="lead-pill">IEEE Student Branch</span>
+            <span class="lead-pill">Digital Outreach</span>
           </div>
         </div>
 
@@ -4359,13 +4687,31 @@
         pills: ['C++', 'Graph Theory', 'Dynamic Programming', 'ECPC 14th Place', 'HackerRank']
       },
       {
-        title: 'iMath Club & Algorithmic Mentorship',
-        badge: 'Leadership',
+        title: 'iMath Club Co-Founder',
+        badge: 'Co-Founder',
         badgeClass: 'badge-leadership',
         org: 'iMath Club • Egypt University of Informatics',
         img: 'assets/certificates/imath_sticker.png',
-        desc: 'Co-founded iMath Club at EUI to help engineering peers build deep intuition for calculus, linear algebra, and competitive coding logic. Conducted problem-solving workshops and peer tutoring for complex engineering mathematics.',
-        pills: ['iMath Club', 'Calculus & Linear Algebra', 'ICPC Mentorship', 'Peer Tutoring', 'EUI Community']
+        desc: 'Co-founded the university\'s premier mathematics community at EUI to help engineering students build deep, first-principles geometric and algebraic intuition through curated workshops and peer problem-solving.',
+        pills: ['iMath Co-Founder', 'Calculus', 'Linear Algebra', 'First Principles', 'EUI Community']
+      },
+      {
+        title: 'Math & Physics Tutor',
+        badge: 'Academic Tutoring',
+        badgeClass: 'badge-tutoring',
+        org: 'University Level • Calculus & Electrical Physics',
+        img: 'assets/certificates/imath_club.png',
+        desc: 'Conducted peer tutoring in university-level Calculus (differential, integral, multivariable) and Classical Physics (Electricity, Magnetism & Circuits), emphasizing analytical problem solving and rigorous derivations.',
+        pills: ['Calculus I & II', 'Electricity & Magnetism', 'Electric Circuits', 'Analytical Derivations', 'Peer Tutoring']
+      },
+      {
+        title: 'ICPC Algorithmic Mentor',
+        badge: 'Mentorship',
+        badgeClass: 'badge-contest',
+        org: 'EUI ICPC Community • Competitive Programming',
+        img: 'assets/certificates/ecpc_2025.png',
+        desc: 'Mentored junior engineering competitors in the EUI ICPC Club, teaching graph traversals (BFS/DFS, Dijkstra), dynamic programming, number theory, and time-complexity optimization under tight 1.0s constraints.',
+        pills: ['Competitive Programming', 'Graph Theory', 'Dynamic Programming', 'Complexity Bounds', 'ECPC Coaching']
       },
       {
         title: 'Conference Organizer — DSC MENA 2024',
@@ -4373,8 +4719,17 @@
         badgeClass: 'badge-conference',
         org: 'Data Science Conference MENA (DSC MENA 2024)',
         img: 'assets/certificates/dsc_mena_cert.png',
-        desc: 'Coordinated session tracks, speaker logistics, and attendee operations at the premier regional Data Science & AI Conference (DSC MENA 2024), hosting industry leaders, AI researchers, and engineering delegates from across the region.',
-        pills: ['Conference Organizer', 'DSC MENA 2024', 'Operations', 'AI Community']
+        desc: 'Organized technical session tracks, speaker logistics, and attendee operations for the premier regional Data Science & AI Conference (DSC MENA 2024), hosting industry leaders, AI researchers, and engineering delegates.',
+        pills: ['Conference Organizer', 'DSC MENA 2024', 'Operations', 'AI Community', 'Event Logistics']
+      },
+      {
+        title: 'LinkedIn Manager — IEEE EUI',
+        badge: 'LinkedIn Manager',
+        badgeClass: 'badge-media',
+        org: 'IEEE EUI Student Branch • Media Committee',
+        img: 'assets/certificates/dsc_mena_cert.png',
+        desc: 'Managed LinkedIn technical communication, content strategy, and professional outreach for the IEEE EUI Student Branch, promoting hackathons, engineering seminars, and student technical achievements.',
+        pills: ['LinkedIn Strategy', 'Technical Content', 'IEEE Student Branch', 'Digital Outreach', 'Engagement Growth']
       }
     ];
 
@@ -4394,15 +4749,23 @@
       if (!modal || !item) return;
 
       const img = document.getElementById('modalImg');
+      const imgWrap = document.getElementById('modalImgWrap');
       const title = document.getElementById('modalTitle');
       const badge = document.getElementById('modalBadge');
       const org = document.getElementById('modalOrg');
       const desc = document.getElementById('modalDesc');
       const pillsContainer = document.getElementById('modalPills');
 
-      if (img) {
-        img.src = item.img;
-        img.alt = item.title;
+      if (imgWrap) {
+        if (item.img) {
+          if (img) {
+            img.src = item.img;
+            img.alt = item.title;
+          }
+          imgWrap.style.display = '';
+        } else {
+          imgWrap.style.display = 'none';
+        }
       }
       if (title) title.textContent = item.title;
       if (badge) {
